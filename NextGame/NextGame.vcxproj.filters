@@ -28,6 +28,18 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="float3.cpp">
+      <Filter>Game\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="float4x4.cpp">
+      <Filter>Game\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -60,6 +72,18 @@
     <ClInclude Include="Renderer.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="float3.h">
+      <Filter>Game\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="float4x4.h">
+      <Filter>Game\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">
@@ -76,6 +100,12 @@
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{a51b746f-5fdc-44ef-b279-90333a6c0a74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Math">
+      <UniqueIdentifier>{d4062325-63f0-4e19-a65a-686d7ef806c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics">
+      <UniqueIdentifier>{333650b2-5d70-4bee-ba50-8dc87b857558}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

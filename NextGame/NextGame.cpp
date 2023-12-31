@@ -37,6 +37,15 @@ void Init()
 	testSprite->CreateAnimation(ANIM_RIGHT, speed, { 16,17,18,19,20,21,22,23 });
 	testSprite->CreateAnimation(ANIM_FORWARDS, speed, { 24,25,26,27,28,29,30,31 });
 	testSprite->SetScale(1.0f);
+
+	float4x4 m1 = float4x4::CreateRotation(0,0,180);
+	float4x4 m2 = float4x4::CreateTranslation(float3::One);
+	float4x4 transform = m2*m1;
+
+	float3 position = float3(1, 0, 0);
+	//position = m1 * position;
+	//position = m2 * position;
+	position = transform * position;
 	//------------------------------------------------------------------------
 }
 
