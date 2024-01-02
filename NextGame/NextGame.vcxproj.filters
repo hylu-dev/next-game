@@ -25,9 +25,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Precompilation</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="float3.cpp">
       <Filter>Game\Math</Filter>
     </ClCompile>
@@ -39,6 +36,21 @@
     </ClCompile>
     <ClCompile Include="float4x4.cpp">
       <Filter>Game\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderable.cpp">
+      <Filter>Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Game\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,9 +81,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Precompilation</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="float3.h">
       <Filter>Game\Math</Filter>
     </ClInclude>
@@ -83,6 +92,21 @@
     </ClInclude>
     <ClInclude Include="float4x4.h">
       <Filter>Game\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderable.h">
+      <Filter>Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Game\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +130,9 @@
     </Filter>
     <Filter Include="Game\Graphics">
       <UniqueIdentifier>{333650b2-5d70-4bee-ba50-8dc87b857558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Systems">
+      <UniqueIdentifier>{50b31625-5d98-484f-a569-48e0ce12b1d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

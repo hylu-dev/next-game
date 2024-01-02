@@ -91,6 +91,14 @@ float float3::Dot(const float3& rhs) const {
     return x * rhs.x + y * rhs.y + z * rhs.z;
 }
 
+float3 float3::Cross(const float3& rhs) const {
+    return float3(
+        y * rhs.z - z * rhs.y,
+        z * rhs.x - x * rhs.z,
+        x * rhs.y - y * rhs.x
+    );
+}
+
 float float3::Distance(const float3& rhs) const {
     return (*this - rhs).Length();
 }

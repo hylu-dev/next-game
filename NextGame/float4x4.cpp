@@ -37,28 +37,34 @@ float4x4 float4x4::operator/(const float4x4& rhs) const {
 }
 
 // matrix to vector
-
+// I won't use a 4x1 vector on it's own elsewhere so simplifying with a
+// hacky 4x4 matrix and 3x1 vector multiplication
 float3 float4x4::operator*(const float3& rhs) const {
     float3 result;
-    result.x = m00 * rhs.x + m01 * rhs.y + m02 * rhs.z + m03;
-    result.y = m10 * rhs.x + m11 * rhs.y + m12 * rhs.z + m13;
-    result.z = m20 * rhs.x + m21 * rhs.y + m22 * rhs.z + m23;
+    result.x = m00 * rhs.x + m10 * rhs.y + m20 * rhs.z + m30;
+    result.y = m01 * rhs.x + m11 * rhs.y + m21 * rhs.z + m31;
+    result.z = m02 * rhs.x + m12 * rhs.y + m22 * rhs.z + m32;
+    float w = rhs.x * m03 + rhs.y * m13 + rhs.z * m23 + m33;
+    if (w != 0.0f) {
+        result.x /= w;
+        result.y /= w;
+    }
+
     return result;
 }
 
 // static
 
-float4x4 float4x4::CreateProjection(float fov, float aspectRatio, float near, float far) {
-    float4x4 projectionMatrix;
+float4x4 float4x4::CreateProjection(float fov, float aspectRatio, float nearPlane, float farPlane) {
+    float4x4 projectionMatrix = float4x4::Zero;
 
-    float tanHalfFov = tanf(TO_RAD(fov / 2.0f));
-    float planeRange = far - near;
+    float tanHalfFov = tanf(TO_RAD(fov*0.5f));
 
     projectionMatrix.m00 = 1.0f / (aspectRatio * tanHalfFov);
     projectionMatrix.m11 = 1.0f / tanHalfFov;
-    projectionMatrix.m22 = -(far + near) / planeRange;
-    projectionMatrix.m23 = -1.0f;
-    projectionMatrix.m32 = -(2.0f * far * near) / planeRange;
+    projectionMatrix.m22 = farPlane / (farPlane - nearPlane);
+    projectionMatrix.m23 = 1.0f;
+    projectionMatrix.m32 = (-farPlane * nearPlane) / (farPlane - nearPlane);
     projectionMatrix.m33 = 0.0f;
 
     return projectionMatrix;
@@ -66,21 +72,11 @@ float4x4 float4x4::CreateProjection(float fov, float aspectRatio, float near, fl
 
 float4x4 float4x4::CreateView(float3 camera, float3 target, float3 up) {
     float4x4 viewMatrix;
-
-    float3 forward = { target.x - camera.x, target.y - camera.y, target.z - camera.z };
-    forward = { forward.x / sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z),
-                forward.y / sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z),
-                forward.z / sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z) };
-
-    float3 right = { up.y * forward.z - up.z * forward.y, up.z * forward.x - up.x * forward.z, up.x * forward.y - up.y * forward.x };
-    right = { right.x / sqrtf(right.x * right.x + right.y * right.y + right.z * right.z),
-              right.y / sqrtf(right.x * right.x + right.y * right.y + right.z * right.z),
-              right.z / sqrtf(right.x * right.x + right.y * right.y + right.z * right.z) };
-
-    up = { forward.y * right.z - forward.z * right.y, forward.z * right.x - forward.x * right.z, forward.x * right.y - forward.y * right.x };
-    up = { up.x / sqrtf(up.x * up.x + up.y * up.y + up.z * up.z),
-           up.y / sqrtf(up.x * up.x + up.y * up.y + up.z * up.z),
-           up.z / sqrtf(up.x * up.x + up.y * up.y + up.z * up.z) };
+    float3 forward = target - camera;
+    float3 right = up.Cross(forward);
+    forward.Normalize();
+    right.Normalize();
+    up.Normalize();
 
     viewMatrix.m00 = right.x;
     viewMatrix.m01 = up.x;
