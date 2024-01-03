@@ -1,14 +1,16 @@
 #pragma once
 
+// Technically a float4 but the fourth component will only be used for matrix math
+// Operators treat it as a vector3 with the fourth component set to 1.0;
 union float3 {
 	struct {
-		float x, y, z;
+		float x, y, z, w;
 	};
-	float vec[3];
+	float vec[4];
 
-	float3() : x(0), y(0), z(0) {};
-	float3(float val) : x(val), y(val), z(val) {};
-	float3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {};
+	float3() : x(0.0f), y(0.0f), z(0.0f), w(1.0f) {};
+	float3(float val) : x(val), y(val), z(val), w(1.0f) {};
+	float3(float _x, float _y, float _z) : x(_x), y(_y), z(_z), w(1.0f) {};
 	static float3 Zero;
 	static float3 One;
 

@@ -1,12 +1,16 @@
 #pragma once
 
-#include "Entity.h"
 #include <list>
+
+class Entity;
 
 class Scene
 {
 private:
 	std::list<Entity*> entities;
+	float4x4 view;
+	float4x4 projection;
+
 
 public:
 	void Initialize();
@@ -14,5 +18,9 @@ public:
 	void Update();
 
 	void Destroy();
+
+	Entity* CreateEntity();
+
+	void RemoveEntity(Entity* entity);
 };
 

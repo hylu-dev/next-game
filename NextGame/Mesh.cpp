@@ -5,12 +5,15 @@ void Mesh::Initialize() {
 	Renderable::Initialize();
 }
 
-void Mesh::Update()
-{
+void Mesh::Update() {
+	if (this->parent != nullptr) {
+		matTranslate = float4x4::CreateTranslation(parent->GetTransform().position);
+		matRotate = float4x4::CreateRotation(parent->GetTransform().rotation);
+	}
 }
 
-void Mesh::Destroy()
-{
+void Mesh::Destroy() {
+
 }
 
 void Mesh::LoadMesh() {
@@ -39,31 +42,21 @@ void Mesh::LoadMesh() {
 		{ {1.0f, 0.0f, 1.0f},    {0.0f, 0.0f, 1.0f},    {0.0f, 0.0f, 0.0f} },
 		{ {1.0f, 0.0f, 1.0f},    {0.0f, 0.0f, 0.0f},    {1.0f, 0.0f, 0.0f} },
 	};
+
+	for (auto& tri : tris) {
+		tri.p0 -= float3(0.5);
+		tri.p1 -= float3(0.5);
+		tri.p2 -= float3(0.5);
+	}
 }
 
-void Mesh::Render()
-{
+void Mesh::Render() {
 	for (auto& tri : tris) {
-		Triangle triProj, triTrans;
+		Triangle triProj = tri;
+		triProj.ApplyMatrix(matRotate*matTranslate*matProj);
+		triProj.Normalize();
 
-		triTrans = tri;
-
-		triTrans.p0 = float4x4::CreateRotation(15.0f, 15.0f, 0)*triTrans.p0;
-		triTrans.p1 = float4x4::CreateRotation(15.0f, 15.0f, 0) * triTrans.p1;
-		triTrans.p2 = float4x4::CreateRotation(15.0f, 15.0f, 0) * triTrans.p2;
-
-		triTrans.p0 -= 0.5;
-		triTrans.p1 -= 0.5;
-		triTrans.p2 -= 0.5;
-
-		triTrans.p0.z += 3.0f;
-		triTrans.p1.z += 3.0f;
-		triTrans.p2.z += 3.0f;
-
-		triProj.p0 = matProj * triTrans.p0;
-		triProj.p1 = matProj * triTrans.p1;
-		triProj.p2 = matProj * triTrans.p2;
-
+		// Center origin and scale to screen resolution
 		triProj.p0 += float3(1, 1, 0);
 		triProj.p1 += float3(1, 1, 0);
 		triProj.p2 += float3(1, 1, 0);
@@ -74,17 +67,6 @@ void Mesh::Render()
 		triProj.p2.x *= 0.5f * static_cast<float>(APP_VIRTUAL_WIDTH);
 		triProj.p2.y *= 0.5f * static_cast<float>(APP_VIRTUAL_HEIGHT);
 
-		App::DrawLine(
-			triProj.p0.x, triProj.p0.y,
-			triProj.p1.x, triProj.p1.y
-		);
-		App::DrawLine(
-			triProj.p1.x, triProj.p1.y,
-			triProj.p2.x, triProj.p2.y
-		);
-		App::DrawLine(
-			triProj.p2.x, triProj.p2.y,
-			triProj.p0.x, triProj.p0.y
-		);
+		triProj.Draw();
 	}
 }

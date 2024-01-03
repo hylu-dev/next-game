@@ -6,27 +6,26 @@
 #include <math.h>  
 #include "app\app.h"
 
+#include "Scene.h"
 #include "Mesh.h"
+
+Scene* mainScene = new Scene();
+Entity* player;
 
 //------------------------------------------------------------------------
 // Called before first update. Do any initial setup here.
 //------------------------------------------------------------------------
 void Init()
 {
-	float4x4 m1 = float4x4::CreateRotation(0,0,180);
-	float4x4 m2 = float4x4::CreateTranslation(float3::One);
-	float4x4 transform = m2*m1;
-
-	float3 position = float3(1, 0, 0);
-	//position = m1 * position;
-	//position = m2 * position;
-	position = transform * position;
-	//------------------------------------------------------------------------
-
-	Mesh* cube = new Mesh();
-	cube->Initialize();
-	cube->LoadMesh();
 	Renderer::Get().Initialize();
+	mainScene->Initialize();
+
+	player = mainScene->CreateEntity();
+
+	Mesh* playerMesh = player->AddComponent<Mesh>();
+	playerMesh->LoadMesh();
+
+	player->GetTransform().position.z += 3.0f;
 }
 
 //------------------------------------------------------------------------
@@ -35,7 +34,8 @@ void Init()
 //------------------------------------------------------------------------
 void Update(float deltaTime)
 {
-
+	player->GetTransform().rotation += 1.0f;
+	mainScene->Update();
 }
 
 //------------------------------------------------------------------------
@@ -68,5 +68,5 @@ void Render()
 
 void Shutdown()
 {	
-
+	Renderer::Get().Destroy();
 }

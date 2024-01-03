@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Component.h"
 #include <list>
+
+class Component;
 
 struct Transform {
 	float3 position;
@@ -19,10 +20,25 @@ public:
 	Transform& GetTransform() { return transform; }
 
     template <typename T>
-    T* AddComponent();
+	T* AddComponent() {
+		//static_assert(std::is_base_of<Component, T>::value);
+		Component* newComponent = new T();
+		newComponent->parent = this;
+		components.push_back(newComponent);
+		newComponent->Initialize();
+		return static_cast<T*>(newComponent);
+	};
 
     template <typename T>
-	T* GetComponent();
+	T* GetComponent() {
+		static_assert(std::is_base_of<Component, T>::value);
+		for (Component* component : components) {
+			if (typeid(*component) == typeid(T)) {
+				return static_cast<T*>(component);
+			}
+		}
+		return nullptr;
+	};
 
 	void Initialize();
 

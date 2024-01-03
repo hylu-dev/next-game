@@ -1,26 +1,9 @@
 #include "stdafx.h"
 #include "Entity.h"
-
-template<typename T>
-T* Entity::AddComponent()
-{
-	T* newComponent = new T();
-	components.push_back(newComponent);
-	return newComponent;
-}
-
-template<typename T>
-T* Entity::GetComponent()
-{
-	for (Component* component : components) {
-		if (typeid(*component) == typeid(T)) {
-			return static_cast<T*>(component);
-		}
-	}
-	return nullptr;
-}
+#include "Component.h"
 
 void Entity::Initialize() {
+
 }
 
 void Entity::Update() {

@@ -24,12 +24,15 @@ union float4x4 {
 	float4x4 operator*(const float4x4& rhs) const;
 	float4x4 operator/(const float4x4& rhs) const;
 
+	float4x4 operator*=(const float4x4& rhs);
+
 	float3 operator*(const float3& rhs) const;
 
 	static float4x4 CreateProjection(float fov, float aspectRatio, float near, float far);
 	static float4x4 CreateView(float3 camera, float3 target, float3 up);
-	static float4x4 CreateRotation(float angleX, float angleY, float angleZ);
+	static float4x4 CreateRotation(float3 vec);
 	static float4x4 CreateTranslation(float3 vec);
+	static float4x4 CreateScale(float3 vec);
 
 	static float4x4 Identity;
 	static float4x4 Zero;

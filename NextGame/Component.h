@@ -1,16 +1,16 @@
 #pragma once
 
-class Entity;
+#include "Entity.h"
 
 class Component
 {
 public:
-	Entity* entity = nullptr;
+	Entity* parent = nullptr;
 
-	void Initialize();
+	virtual void Initialize();
 
-	void Update();
+	virtual void Update();
 
-	void Destroy();
+	virtual void Destroy();
 };
 

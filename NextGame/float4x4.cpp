@@ -41,15 +41,10 @@ float4x4 float4x4::operator/(const float4x4& rhs) const {
 // hacky 4x4 matrix and 3x1 vector multiplication
 float3 float4x4::operator*(const float3& rhs) const {
     float3 result;
-    result.x = m00 * rhs.x + m10 * rhs.y + m20 * rhs.z + m30;
-    result.y = m01 * rhs.x + m11 * rhs.y + m21 * rhs.z + m31;
-    result.z = m02 * rhs.x + m12 * rhs.y + m22 * rhs.z + m32;
-    float w = rhs.x * m03 + rhs.y * m13 + rhs.z * m23 + m33;
-    if (w != 0.0f) {
-        result.x /= w;
-        result.y /= w;
-    }
-
+    result.x = m00 * rhs.x + m10 * rhs.y + m20 * rhs.z + rhs.w * m30;
+    result.y = m01 * rhs.x + m11 * rhs.y + m21 * rhs.z + rhs.w * m31;
+    result.z = m02 * rhs.x + m12 * rhs.y + m22 * rhs.z + rhs.w * m32;
+    result.w = m03 * rhs.x + m13 * rhs.y + m23 * rhs.z + rhs.w * m33;
     return result;
 }
 
@@ -101,11 +96,10 @@ float4x4 float4x4::CreateView(float3 camera, float3 target, float3 up) {
     return viewMatrix;
 }
 
-float4x4 float4x4::CreateRotation(float angleX, float angleY, float angleZ) {
-    float4x4 rotationMatrix = float4x4::Identity;
-    float radX = TO_RAD(angleX);
-    float radY = TO_RAD(angleY);
-    float radZ = TO_RAD(angleZ);
+float4x4 float4x4::CreateRotation(float3 vec) {
+    float radX = TO_RAD(vec.x);
+    float radY = TO_RAD(vec.y);
+    float radZ = TO_RAD(vec.z);
     float cosX = cosf(radX);
     float sinX = sinf(radX);
     float cosY = cosf(radY);
@@ -133,16 +127,24 @@ float4x4 float4x4::CreateRotation(float angleX, float angleY, float angleZ) {
     rotationZ.m11 = cosZ;
 
     // Combined rotation
-    rotationMatrix = rotationZ * rotationY * rotationX;
-    return rotationMatrix;
+    return rotationZ * rotationY * rotationX;
 }
 
 float4x4 float4x4::CreateTranslation(float3 vec) {
     float4x4 translationMatrix = float4x4::Identity;
 
-    translationMatrix.m03 = vec.x;
-    translationMatrix.m13 = vec.y;
-    translationMatrix.m23 = vec.z;
+    translationMatrix.m30 = vec.x;
+    translationMatrix.m31 = vec.y;
+    translationMatrix.m32 = vec.z;
 
     return translationMatrix;
+}
+
+float4x4 float4x4::CreateScale(float3 vec) {
+    float4x4 scaleMatrix = float4x4::Identity;
+    scaleMatrix.m00 = vec.x;
+    scaleMatrix.m11 = vec.y;
+    scaleMatrix.m22 = vec.z;
+
+    return scaleMatrix;
 }

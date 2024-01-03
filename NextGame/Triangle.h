@@ -14,5 +14,11 @@ union Triangle
 
 	Triangle() : p0(0), p1(0), p2(0) {};
 	Triangle(const float3& _p0, const float3& _p1, const float3& _p2) : p0(_p0), p1(_p1), p2(_p2) {}
+
+	void Draw();
+
+	void ApplyMatrix(float4x4 matrix);
+
+	void Normalize();
 };
 
