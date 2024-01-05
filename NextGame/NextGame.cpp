@@ -7,63 +7,56 @@
 #include "app\app.h"
 
 #include "Scene.h"
-#include "Mesh.h"
+#include "MeshFilter.h"
+#include "CubeMesh.h"
 
 Scene* mainScene = new Scene();
-Entity* player;
 
-//------------------------------------------------------------------------
-// Called before first update. Do any initial setup here.
-//------------------------------------------------------------------------
+std::list<Entity*> actors;
+float timeTest = 0.0f;
+
 void Init()
 {
 	Renderer::Get().Initialize();
 	mainScene->Initialize();
 
-	player = mainScene->CreateEntity();
+	for (int i = 0; i < 1; i++) {
+		Entity* actor = mainScene->CreateEntity();
+		actors.push_back(actor);
 
-	Mesh* playerMesh = player->AddComponent<Mesh>();
-	playerMesh->LoadMesh();
+		MeshFilter* meshFilter = actor->AddComponent<MeshFilter>();
+		CubeMesh cb(50);
+		meshFilter->LoadMesh(cb);
 
-	player->GetTransform().position.z += 3.0f;
+		meshFilter->setVertexShader([](float3& vertex) {
+			float height = vertex.z;
+			height += 5.0f*sinf(timeTest + (vertex.x +vertex.y)*10.0f);
+			height += 5.0f * sinf(timeTest + vertex.Distance(float3(0, 0, 0)) * 30.0f);
+			vertex.z += height;
+			});
+		
+		actor->GetTransform().scale = float3(100.0f, 100.0f, 1.0f);
+		actor->GetTransform().position.z = 80.0f;
+		actor->GetTransform().rotation = float3(
+			-60.0f,
+			15.0f,
+			0.0f
+		);
+	}
 }
 
-//------------------------------------------------------------------------
-// Update your simulation here. deltaTime is the elapsed time since the last update in ms.
-// This will be called at no greater frequency than the value of APP_MAX_FRAME_RATE
-//------------------------------------------------------------------------
 void Update(float deltaTime)
 {
-	player->GetTransform().rotation += 1.0f;
+	timeTest += 0.05f;
+	for (auto& actor : actors) {
+		actor->GetTransform().rotation.z += 0.2f;
+	}
 	mainScene->Update();
 }
 
-//------------------------------------------------------------------------
-// Add your display calls here (DrawLine,Print, DrawSprite.) 
-// See App.h 
-//------------------------------------------------------------------------
 void Render()
 {	
 	Renderer::Get().Update();
-
-	/*App::Print(100, 100, "Sample Text");
-
-	static float a = 0.0f;
-	float r = 1.0f;
-	float g = 1.0f;
-	float b = 1.0f;
-	a += 0.1f;
-	for (int i = 0; i < 20; i++)
-	{
-
-		float sx = 200 + sinf(a + i * 0.1f)*60.0f;
-		float sy = 200 + cosf(a + i * 0.1f)*60.0f;
-		float ex = 700 - sinf(a + i * 0.1f)*60.0f;
-		float ey = 700 - cosf(a + i * 0.1f)*60.0f;
-		g = (float)i / 20.0f;
-		b = (float)i / 20.0f;
-		App::DrawLine(sx, sy, ex, ey,r,g,b);
-	}*/
 }
 
 void Shutdown()

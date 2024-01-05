@@ -11,6 +11,7 @@ void Renderer::Update() {
 }
 
 void Renderer::Destroy() {
+	renderables.clear();
 }
 
 void Renderer::AddRenderable(Renderable* renderable) {

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Scene.h"
-#include "Mesh.h"
+#include "MeshFilter.h"
 
 void Scene::Initialize() {
 	for (auto& entity : entities) {
@@ -16,6 +16,7 @@ void Scene::Update() {
 
 void Scene::Destroy() {
 	for (auto& entity : entities) {
+		entity->Destroy();
 		delete entity;
 		entity = nullptr;
 	}

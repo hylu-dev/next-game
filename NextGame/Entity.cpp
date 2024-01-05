@@ -14,6 +14,7 @@ void Entity::Update() {
 
 void Entity::Destroy() {
 	for (auto& component : components) {
+		component->Destroy();
 		delete component;
 		component = nullptr;
 	}

@@ -184,10 +184,12 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CubeMesh.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="float4x4.h" />
-    <ClInclude Include="Renderable.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Renderable.h" />
+    <ClInclude Include="MeshFilter.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="stb_image\stb_image.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="float3.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App\app.cpp" />
@@ -203,10 +206,11 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CubeMesh.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="float4x4.cpp" />
     <ClCompile Include="Renderable.cpp" />
-    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshFilter.cpp" />
     <ClCompile Include="NextGame.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -219,6 +223,7 @@
     </ClCompile>
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="float3.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Test.bmp" />

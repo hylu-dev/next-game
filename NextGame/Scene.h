@@ -19,6 +19,8 @@ public:
 
 	void Destroy();
 
+	void CreateCamera() {};
+
 	Entity* CreateEntity();
 
 	void RemoveEntity(Entity* entity);

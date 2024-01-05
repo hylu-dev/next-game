@@ -7,11 +7,10 @@ class Component;
 struct Transform {
 	float3 position;
 	float3 rotation;
-	float scale = 1.0f;
+	float3 scale = float3::One;
 };
 
-class Entity
-{
+class Entity {
 private:
 	std::list<Component*> components;
 	Transform transform;
@@ -21,7 +20,7 @@ public:
 
     template <typename T>
 	T* AddComponent() {
-		//static_assert(std::is_base_of<Component, T>::value);
+		static_assert(std::is_base_of<Component, T>::value);
 		Component* newComponent = new T();
 		newComponent->parent = this;
 		components.push_back(newComponent);

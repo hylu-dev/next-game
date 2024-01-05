@@ -1,29 +1,16 @@
 #pragma once
 
 #include "Triangle.h"
-#include "Component.h"
-#include "Renderable.h"
-#include <vector>
 
-class Mesh : public Component, public Renderable
-{
-private:
+class Mesh {
+protected:
 	std::vector<Triangle> tris;
-
-	float rotation = 0.0f;
-
-	float4x4 matProj = float4x4::CreateProjection(90.0f, APP_VIRTUAL_WIDTH/APP_VIRTUAL_HEIGHT, 0.1f, 1000.0f);
-	float4x4 matRotate = float4x4::CreateRotation(float3::Zero);
-	float4x4 matTranslate = float4x4::CreateTranslation(float3::Zero);
+	unsigned int vertexDensity = 1;
 
 public:
-	void Initialize() override;
+	Mesh() = default;
+	Mesh(unsigned int _density) : vertexDensity(_density) {};
 
-	void Update() override;
-
-	void Destroy() override;
-
-	void LoadMesh();
-
-	void Render() override;
+	virtual std::vector<Triangle> GenerateMesh() = 0;
 };
+

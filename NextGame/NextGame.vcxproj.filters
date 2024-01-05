@@ -28,9 +28,6 @@
     <ClCompile Include="float3.cpp">
       <Filter>Game\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Game\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Triangle.cpp">
       <Filter>Game\Graphics</Filter>
     </ClCompile>
@@ -51,6 +48,15 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Game\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshFilter.cpp">
+      <Filter>Game\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMesh.cpp">
+      <Filter>Game\Meshes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,9 +90,6 @@
     <ClInclude Include="float3.h">
       <Filter>Game\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Game\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Triangle.h">
       <Filter>Game\Graphics</Filter>
     </ClInclude>
@@ -107,6 +110,18 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Game\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshFilter.h">
+      <Filter>Game\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Game\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMesh.h">
+      <Filter>Game\Meshes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +148,12 @@
     </Filter>
     <Filter Include="Game\Systems">
       <UniqueIdentifier>{50b31625-5d98-484f-a569-48e0ce12b1d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Utilities">
+      <UniqueIdentifier>{42d48d73-60f2-4de4-bc48-d91ddf965785}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Meshes">
+      <UniqueIdentifier>{ce64db94-8f51-40aa-9302-7618230c284b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

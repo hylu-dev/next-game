@@ -7,10 +7,10 @@ class Component
 public:
 	Entity* parent = nullptr;
 
-	virtual void Initialize();
+	virtual void Initialize() = 0;
 
-	virtual void Update();
+	virtual void Update() = 0;
 
-	virtual void Destroy();
+	virtual void Destroy() = 0;
 };
 
