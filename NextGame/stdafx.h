@@ -18,8 +18,10 @@
 #include <cmath>
 #include "float3.h"
 #include "float4x4.h"
+#include "Transform.h"
 #include "Utils.h"
 
+#include "Time.h"
 #include "Renderer.h"
 
 #define F_EPSILON std::numeric_limits<float>::epsilon()

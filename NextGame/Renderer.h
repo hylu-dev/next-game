@@ -10,7 +10,7 @@ private:
 
 public:
 	static Renderer& Get() {
-		static Renderer instance; // The singleton instance
+		static Renderer instance;
 		return instance;
 	}
 
@@ -20,11 +20,11 @@ public:
 
 	void Destroy();
 
-	Renderer(const Renderer&) = delete;
-	Renderer& operator=(const Renderer&) = delete;
-
 private:
 	Renderer() = default;
+	~Renderer() = default;
+	Renderer(const Renderer&) = delete;
+	Renderer& operator=(const Renderer&) = delete;
 
 	void AddRenderable(Renderable* renderable);
 

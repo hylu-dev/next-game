@@ -16,6 +16,49 @@ void Triangle::Draw() {
 	);
 }
 
+Triangle Triangle::operator+(const Triangle rhs) const
+{
+	return Triangle(p0+rhs.p0, p1 + rhs.p1, p2 + rhs.p2);
+}
+
+Triangle Triangle::operator-(const Triangle rhs) const
+{
+	return Triangle(p0 - rhs.p0, p1 - rhs.p1, p2 - rhs.p2);
+}
+
+Triangle Triangle::operator*(const Triangle rhs) const
+{
+	return Triangle(p0 * rhs.p0, p1 * rhs.p1, p2 * rhs.p2);
+}
+
+Triangle Triangle::operator/(const Triangle rhs) const
+{
+	return Triangle(p0 / rhs.p0, p1 / rhs.p1, p2 / rhs.p2);
+}
+
+Triangle Triangle::operator+(const float3 rhs) const
+{
+	return Triangle(p0 + rhs, p1 + rhs, p2 + rhs);
+}
+
+Triangle Triangle::operator-(const float3 rhs) const
+{
+	return Triangle(p0 - rhs, p1 - rhs, p2 - rhs);
+}
+
+Triangle Triangle::operator*(const float3 rhs) const
+{
+	return Triangle(p0 * rhs, p1 * rhs, p2 * rhs);
+}
+
+Triangle Triangle::operator/(const float3 rhs) const
+{
+	if (rhs != float3::Zero) {
+		return Triangle(p0 / rhs, p1 / rhs, p2 / rhs);
+	}
+	return *this;
+}
+
 void Triangle::ApplyMatrix(float4x4 matrix) {
 	p0 = matrix * p0;
 	p1 = matrix * p1;
@@ -26,4 +69,9 @@ void Triangle::Normalize() {
 	p0.Normalize();
 	p1.Normalize();
 	p2.Normalize();
+}
+
+float3 Triangle::CalcNormal()
+{
+	return (p1 - p0).Cross(p2 - p1);
 }

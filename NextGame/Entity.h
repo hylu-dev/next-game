@@ -4,12 +4,6 @@
 
 class Component;
 
-struct Transform {
-	float3 position;
-	float3 rotation;
-	float3 scale = float3::One;
-};
-
 class Entity {
 private:
 	std::list<Component*> components;

@@ -31,4 +31,5 @@ Entity* Scene::CreateEntity() {
 }
 
 void Scene::RemoveEntity(Entity* entity) {
+	entities.remove(entity);
 }

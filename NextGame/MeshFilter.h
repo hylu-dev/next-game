@@ -27,7 +27,7 @@ public:
 
 	void LoadMesh(Mesh& mesh);
 
-	void setVertexShader(std::function<void(float3&)> shader) { vertexShader = shader; }
+	void SetVertexShader(std::function<void(float3&)> shader) { vertexShader = shader; }
 
 	void Render() override;
 };

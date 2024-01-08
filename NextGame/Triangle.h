@@ -17,8 +17,21 @@ union Triangle
 
 	void Draw();
 
+	Triangle operator+(const Triangle rhs) const;
+	Triangle operator-(const Triangle rhs) const;
+	Triangle operator*(const Triangle rhs) const;
+	Triangle operator/(const Triangle rhs) const;
+
+	Triangle operator+(const float3 rhs) const;
+	Triangle operator-(const float3 rhs) const;
+	Triangle operator*(const float3 rhs) const;
+	Triangle operator/(const float3 rhs) const;
+
 	void ApplyMatrix(float4x4 matrix);
 
 	void Normalize();
+
+	float3 CalcNormal();
+
 };
 

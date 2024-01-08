@@ -58,6 +58,18 @@
     <ClCompile Include="CubeMesh.cpp">
       <Filter>Game\Meshes</Filter>
     </ClCompile>
+    <ClCompile Include="PlaneMesh.cpp">
+      <Filter>Game\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Prefabs.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Game\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -122,6 +134,24 @@
     </ClInclude>
     <ClInclude Include="CubeMesh.h">
       <Filter>Game\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneMesh.h">
+      <Filter>Game\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Game\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

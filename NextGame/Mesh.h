@@ -5,7 +5,7 @@
 class Mesh {
 protected:
 	std::vector<Triangle> tris;
-	unsigned int vertexDensity = 1;
+	int vertexDensity = 1;
 
 public:
 	Mesh() = default;
