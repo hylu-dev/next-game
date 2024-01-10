@@ -7,7 +7,10 @@ namespace Utils {
 	extern std::mt19937 gen;
 	extern std::uniform_real_distribution<float> dis;
 
-	float randomFloatUniform();
+	float RandomFloatUniform();
 
-	float randomFloat(float min, float max);
+	float RandomFloat(float min, float max);
+
+	float Clamp(float value, float minVal, float maxVal);
+
 }

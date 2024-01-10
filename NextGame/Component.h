@@ -2,10 +2,9 @@
 
 #include "Entity.h"
 
-class Component
-{
+class Component {
 public:
-	Entity* parent = nullptr;
+	Entity* parentEntity = nullptr;
 
 	virtual void Initialize() = 0;
 

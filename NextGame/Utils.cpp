@@ -6,11 +6,15 @@ namespace Utils {
     std::mt19937 gen(rd());
     std::uniform_real_distribution<float> dis(0.0f, 1.0f);
 
-    float randomFloatUniform() {
+    float RandomFloatUniform() {
         return dis(gen);
     }
 
-    float randomFloat(float min, float max) {
+    float RandomFloat(float min, float max) {
         return min + (max - min) * dis(gen);
+    }
+
+    float Clamp(float value, float minVal, float maxVal) {
+        return max(minVal, min(value, maxVal));
     }
 }

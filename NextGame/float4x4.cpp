@@ -53,10 +53,10 @@ float3 float4x4::operator*(const float3& rhs) const {
 float4x4 float4x4::CreateProjection(float fov, float aspectRatio, float nearPlane, float farPlane) {
     float4x4 projectionMatrix = float4x4::Zero;
 
-    float tanHalfFov = tanf(TO_RAD(fov*0.5f));
+    float tanHalfFov = 1.0f / tanf(TO_RAD(fov*0.5f));
 
-    projectionMatrix.m00 = 1.0f / (aspectRatio * tanHalfFov);
-    projectionMatrix.m11 = 1.0f / tanHalfFov;
+    projectionMatrix.m00 = aspectRatio * tanHalfFov;
+    projectionMatrix.m11 = tanHalfFov;
     projectionMatrix.m22 = farPlane / (farPlane - nearPlane);
     projectionMatrix.m23 = 1.0f;
     projectionMatrix.m32 = (-farPlane * nearPlane) / (farPlane - nearPlane);
@@ -68,29 +68,31 @@ float4x4 float4x4::CreateProjection(float fov, float aspectRatio, float nearPlan
 float4x4 float4x4::CreateView(float3 camera, float3 target, float3 up) {
     float4x4 viewMatrix;
     float3 forward = target - camera;
+    float3 pitchedUp = up - forward * up.Dot(forward);
     float3 right = up.Cross(forward);
+
     forward.Normalize();
     right.Normalize();
-    up.Normalize();
+    pitchedUp.Normalize();
 
     viewMatrix.m00 = right.x;
-    viewMatrix.m01 = up.x;
-    viewMatrix.m02 = -forward.x;
+    viewMatrix.m01 = pitchedUp.x;
+    viewMatrix.m02 = forward.x;
     viewMatrix.m03 = 0.0f;
 
     viewMatrix.m10 = right.y;
-    viewMatrix.m11 = up.y;
-    viewMatrix.m12 = -forward.y;
+    viewMatrix.m11 = pitchedUp.y;
+    viewMatrix.m12 = forward.y;
     viewMatrix.m13 = 0.0f;
 
     viewMatrix.m20 = right.z;
-    viewMatrix.m21 = up.z;
-    viewMatrix.m22 = -forward.z;
+    viewMatrix.m21 = pitchedUp.z;
+    viewMatrix.m22 = forward.z;
     viewMatrix.m23 = 0.0f;
 
     viewMatrix.m30 = -right.Dot(camera);
-    viewMatrix.m31 = -up.Dot(camera);
-    viewMatrix.m32 = forward.Dot(camera);
+    viewMatrix.m31 = -pitchedUp.Dot(camera);
+    viewMatrix.m32 = -forward.Dot(camera);
     viewMatrix.m33 = 1.0f;
 
     return viewMatrix;

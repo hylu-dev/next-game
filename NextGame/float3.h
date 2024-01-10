@@ -31,6 +31,7 @@ union float3 {
 	float Length() const;
 	float LengthSquared() const;
 	void Normalize();
+	float3 Normalized();
 	float Dot(const float3& rhs) const;
 	float3 Cross(const float3& rhs) const;
 

@@ -6,7 +6,7 @@
   - Ease-in-out, Ease-in, etc...
 - 3D Rendering
   - Render 3D objects based on blender obj files
-  - Vertex shading
+  - **Vertex shading**
 - Game Structure
   - 3D Cube that rotates with scene changes
   - Camera aims closely at one side which holds the level

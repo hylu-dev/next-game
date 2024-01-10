@@ -87,6 +87,15 @@ void float3::Normalize() {
     }
 }
 
+float3 float3::Normalized()
+{
+    float3 vec = *this;
+    if (vec != Zero) {
+        vec /= vec.Length();
+    }
+    return vec;
+}
+
 float float3::Dot(const float3& rhs) const {
     return x * rhs.x + y * rhs.y + z * rhs.z;
 }

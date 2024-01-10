@@ -1,33 +1,28 @@
 #pragma once
 
 #include <list>
+#include "Camera.h"
 
 class Entity;
-
-struct Camera {
-	float3 position;
-	float3 rotation;
-};
 
 class Scene
 {
 private:
 	std::list<Entity*> entities;
-	float4x4 view;
-	float4x4 projection;
-	Camera camera;
-
+	Camera* camera;
 
 public:
-	void Initialize();
+	void Initialize(float _fov, float _near, float _far);
 
 	void Update();
 
 	void Destroy();
 
-	Camera GetCamera() { return camera; }
+	Camera* GetCamera() { return camera; }
 
 	Entity* CreateEntity();
+
+	//Entity* GetEntity();
 
 	void RemoveEntity(Entity* entity);
 };

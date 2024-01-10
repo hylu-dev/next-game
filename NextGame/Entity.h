@@ -1,6 +1,7 @@
 #pragma once
 
 #include <list>
+#include "Scene.h"
 
 class Component;
 
@@ -10,13 +11,15 @@ private:
 	Transform transform;
 
 public:
+	Scene* parentScene = nullptr;
+
 	Transform& GetTransform() { return transform; }
 
     template <typename T>
 	T* AddComponent() {
 		static_assert(std::is_base_of<Component, T>::value);
 		Component* newComponent = new T();
-		newComponent->parent = this;
+		newComponent->parentEntity = this;
 		components.push_back(newComponent);
 		newComponent->Initialize();
 		return static_cast<T*>(newComponent);

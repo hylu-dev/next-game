@@ -6,14 +6,12 @@
 #include <functional>
 #include <vector>
 
-class MeshFilter : public Renderable
-{
+class MeshFilter : public Renderable {
 private:
 	std::vector<Triangle> tris;
 
 	std::function<void(float3&)> vertexShader = nullptr;
 
-	float4x4 matProj = float4x4::CreateProjection(120.0f, APP_VIRTUAL_WIDTH/APP_VIRTUAL_HEIGHT, 0.1f, 1000.0f);
 	float4x4 matScale = float4x4::CreateScale(float3::One);
 	float4x4 matRotate = float4x4::CreateRotation(float3::Zero);
 	float4x4 matTranslate = float4x4::CreateTranslation(float3::Zero);

@@ -70,6 +70,9 @@
     <ClCompile Include="Time.cpp">
       <Filter>Game\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -153,6 +156,9 @@
     <ClInclude Include="Transform.h">
       <Filter>Game\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">
@@ -184,6 +190,9 @@
     </Filter>
     <Filter Include="Game\Meshes">
       <UniqueIdentifier>{ce64db94-8f51-40aa-9302-7618230c284b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Components">
+      <UniqueIdentifier>{66ae9e77-5cf6-4f35-aac3-a24fa104e0c4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
