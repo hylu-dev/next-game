@@ -40,7 +40,6 @@ void Init() {
 	));
 }
 
-// Ignoring deltaTime parameter as I'm using my own implementation
 void Update(float deltaTime) {
 	float frameTime = deltaTime * 0.001;
 	// Enforce realistic frametimes during debugging
