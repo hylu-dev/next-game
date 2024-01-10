@@ -7,9 +7,6 @@
 #include "app\app.h"
 
 #include "Scene.h"
-#include "MeshFilter.h"
-#include "CubeMesh.h"
-#include "PlaneMesh.h"
 #include "Prefabs.h"
 
 #include <string>
@@ -25,17 +22,23 @@ void Init() {
 	Renderer::Get().Initialize();
 	mainScene->Initialize(90.0f, 0.1f, 1000.0f);
 
-	Prefabs::PlayerCamera(mainScene);
+	Prefabs::PlayerCamera(mainScene, Transform());
+
+	Prefabs::Pillar(mainScene, Transform(
+		float3(100, -20.0f, 100.0f),
+		float3(),
+		float3(50.0f, 1.0f, 50.0f)
+	));
 
 	Prefabs::RippleCube(mainScene, Transform(
 		float3(0.0f, 30.0f, 70.0f),
 		float3(70.0f, 40.0f, 0.0f),
 		float3(30.0f)
 	));
-	Prefabs::RipplePlane(mainScene, Transform(
-		float3(0, -20.0f, 70.0f),
+	Prefabs::Checker(mainScene, Transform(
+		float3(0, -20.0f, 100.0f),
 		float3(30.0f, 0.0f, 0.0f),
-		float3(50.0f, 1.0f, 50.0f)
+		float3(80.0f, 1.0f, 80.0f)
 	));
 }
 

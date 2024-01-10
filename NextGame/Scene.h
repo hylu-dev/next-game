@@ -20,7 +20,7 @@ public:
 
 	Camera* GetCamera() { return camera; }
 
-	Entity* CreateEntity();
+	Entity* CreateEntity(std::string name);
 
 	//Entity* GetEntity();
 

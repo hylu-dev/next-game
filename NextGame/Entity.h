@@ -12,7 +12,6 @@ private:
 
 public:
 	Scene* parentScene = nullptr;
-
 	Transform& GetTransform() { return transform; }
 
     template <typename T>
