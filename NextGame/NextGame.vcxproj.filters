@@ -58,9 +58,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Game\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>Game\Hierarchy</Filter>
-    </ClCompile>
     <ClCompile Include="CameraController.cpp">
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
@@ -84,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="SphereCollider.cpp">
       <Filter>Game\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Game\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

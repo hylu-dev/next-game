@@ -15,8 +15,6 @@ Scene* mainScene = new Scene();
 
 std::vector<Entity*> actors;
 
-float dtime = 0;
-
 void Init() {
 	Time::Get().Initialize();
 	Renderer::Get().Initialize();
@@ -44,8 +42,12 @@ void Init() {
 
 // Ignoring deltaTime parameter as I'm using my own implementation
 void Update(float deltaTime) {
-	dtime = deltaTime/1000;
-	Time::Get().Update();
+	float frameTime = deltaTime * 0.001;
+	// Enforce realistic frametimes during debugging
+	#ifdef _DEBUG
+	frameTime = Utils::Clamp(frameTime, 0.005, 0.05);
+	#endif
+	Time::Get().Update(frameTime);
 	mainScene->Update();
 }
 
@@ -54,7 +56,8 @@ void Render() {
 	App::Print(0.0f, 480.0f, std::to_string(mainScene->GetCamera()->transform.position.y).c_str());
 	App::Print(0.0f, 460.0f, std::to_string(mainScene->GetCamera()->transform.position.z).c_str());
 	
-	App::Print(0.0f, 600.0f, std::to_string(dtime).c_str());
+	App::Print(0.0f, 600.0f, std::to_string(Time::Get().DeltaTime()).c_str());
+	App::Print(0.0f, 700.0f, std::to_string(Time::Get().Elapsed()).c_str());
 	Renderer::Get().Update();
 }
 

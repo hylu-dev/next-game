@@ -21,3 +21,11 @@ void CollisionManager::Destroy() {
 	}
 	colliders.clear();
 }
+
+void CollisionManager::AddCollider(Collider* collider)
+{
+}
+
+void CollisionManager::RemoveCollider(Collider* collider)
+{
+}

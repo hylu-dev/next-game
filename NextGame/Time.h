@@ -1,13 +1,9 @@
 #pragma once
 
-#include <chrono>
-
 class Time {
 private:
-	std::chrono::duration<float> deltaTime = std::chrono::duration<float>(0.0f);
-	std::chrono::duration<float> elapsedSeconds = std::chrono::duration<float>(0.0f);
-	std::chrono::time_point<std::chrono::system_clock> beginTime;
-	std::chrono::time_point<std::chrono::system_clock> endTime;
+	float deltaTime;
+	float elapsedSeconds;
 
 public:
 	static Time& Get() {
@@ -15,12 +11,12 @@ public:
 		return instance;
 	}
 
-	float DeltaTime() { return deltaTime.count(); };
-	float Elapsed() { return elapsedSeconds.count(); };
+	float DeltaTime() { return deltaTime; };
+	float Elapsed() { return elapsedSeconds; };
 
 	void Initialize();
 
-	void Update();
+	void Update(float frameTime);
 
 	void Destroy();
 
