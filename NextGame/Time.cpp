@@ -5,8 +5,8 @@ void Time::Initialize() {
 }
 
 void Time::Update(float frameTime) {
-	deltaTime = frameTime;
-	elapsedSeconds += frameTime;
+	deltaTime = frameTime * timeScale;
+	elapsedSeconds += deltaTime;
 }
 
 void Time::Destroy() {

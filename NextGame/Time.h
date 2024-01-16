@@ -2,8 +2,9 @@
 
 class Time {
 private:
-	float deltaTime;
-	float elapsedSeconds;
+	float deltaTime = 0.0f;
+	float elapsedSeconds = 0.0f;
+	float timeScale = 1.0f;
 
 public:
 	static Time& Get() {
