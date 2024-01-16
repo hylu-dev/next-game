@@ -4,15 +4,18 @@
 void Triangle::Draw() {
 	App::DrawLine(
 		p0.x, p0.y,
-		p1.x, p1.y
+		p1.x, p1.y,
+		color.x, color.y, color.z
 	);
 	App::DrawLine(
 		p1.x, p1.y,
-		p2.x, p2.y
+		p2.x, p2.y,
+		color.x, color.y, color.z
 	);
 	App::DrawLine(
 		p2.x, p2.y,
-		p0.x, p0.y
+		p0.x, p0.y,
+		color.x, color.y, color.z
 	);
 }
 

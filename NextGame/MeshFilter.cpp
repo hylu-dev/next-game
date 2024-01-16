@@ -57,6 +57,7 @@ void MeshFilter::Render() {
 			triTransformed.p2.x *= static_cast<float>(APP_VIRTUAL_WIDTH);
 			triTransformed.p2.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
 
+			triTransformed.color = color;
 			triTransformed.Draw();
 		}
 	}

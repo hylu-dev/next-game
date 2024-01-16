@@ -17,4 +17,7 @@ namespace Utils {
     float Clamp(float value, float minVal, float maxVal) {
         return max(minVal, min(value, maxVal));
     }
+    bool IsInRange(float value, float minVal, float maxVal) {
+        return value >= minVal && value <= maxVal;
+    }
 }

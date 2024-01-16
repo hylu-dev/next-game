@@ -13,4 +13,6 @@ namespace Utils {
 
 	float Clamp(float value, float minVal, float maxVal);
 
+	bool IsInRange(float value, float minVal, float maxVal);
+
 }

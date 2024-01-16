@@ -17,6 +17,9 @@
 class Entity;
 
 namespace Prefabs {
+	DEFINE_PREFAB(PlayerCube);
+	DEFINE_PREFAB(Wall);
+
 	DEFINE_PREFAB(RipplePlane);
 	DEFINE_PREFAB(Checker);
 	DEFINE_PREFAB(Pillar);

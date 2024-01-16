@@ -8,12 +8,13 @@ union Triangle
 		float3 p0;
 		float3 p1;
 		float3 p2;
+		float3 color;
 	};
 
-	float3 p[3];
+	float3 p[4];
 
-	Triangle() : p0(0), p1(0), p2(0) {};
-	Triangle(const float3& _p0, const float3& _p1, const float3& _p2) : p0(_p0), p1(_p1), p2(_p2) {}
+	Triangle() : p0(0), p1(0), p2(0), color(float3::One) {};
+	Triangle(const float3& _p0, const float3& _p1, const float3& _p2) : p0(_p0), p1(_p1), p2(_p2), color(float3::One) {}
 
 	void Draw();
 

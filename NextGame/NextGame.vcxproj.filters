@@ -76,14 +76,20 @@
     <ClCompile Include="BoxCollider.cpp">
       <Filter>Game\Collisions</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Game\Collisions</Filter>
-    </ClCompile>
     <ClCompile Include="SphereCollider.cpp">
       <Filter>Game\Collisions</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>Game\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Game\Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Game\Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Game\Collisions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +188,12 @@
     </ClInclude>
     <ClInclude Include="SphereCollider.h">
       <Filter>Game\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Game\Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Game\Game Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

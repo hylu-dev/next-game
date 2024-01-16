@@ -7,11 +7,15 @@ class CollisionManager {
 private:
 	friend Collider;
 	std::list<Collider*> colliders;
+	static CollisionManager* instance;
 
 public:
 	static CollisionManager& Get() {
-		static CollisionManager instance;
-		return instance;
+		if (instance == nullptr) {
+			instance = new CollisionManager();
+			instance->Initialize();
+		}
+		return *instance;
 	}
 
 	void Initialize();
@@ -22,7 +26,7 @@ public:
 
 private:
 	CollisionManager() = default;
-	CollisionManager	Renderer(const Renderer&) = delete;
+	CollisionManager Renderer(const CollisionManager&) = delete;
 	CollisionManager& operator=(const CollisionManager&) = delete;
 
 	void AddCollider(Collider* collider);

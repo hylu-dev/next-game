@@ -22,7 +22,6 @@
 #include "Utils.h"
 
 #include "Time.h"
-#include "Renderer.h"
 
 #define F_EPSILON std::numeric_limits<float>::epsilon()
 #define F_PI 3.14159265358979323846f

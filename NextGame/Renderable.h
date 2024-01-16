@@ -8,9 +8,9 @@ public:
 
 	void Initialize() override;
 
-	void Update() override;
+	void Update() = 0;
 
-	void Destroy() override;
+	void Destroy() = 0;
 
 	virtual void Render() = 0;
 };
