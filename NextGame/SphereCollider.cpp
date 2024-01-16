@@ -25,9 +25,8 @@ void SphereCollider::Collide(Collider* other) {
         SphereCollider* collider = static_cast<SphereCollider*>(other);
         float distance = p1.Distance(p2);
         if (distance < (radius + collider->radius)) {
-            parentEntity->GetTransform().position = float3(0, 0, 100);
             if (collisionHook != nullptr) {
-                collisionHook(collider);
+                collisionHook(this, collider);
             }
         }
     }
@@ -46,9 +45,8 @@ void SphereCollider::Collide(Collider* other) {
         float distance = p1.Distance(closestPoint);
 
         if (distance < radius) {
-            parentEntity->GetTransform().position.z += 5.0f * Time::Get().DeltaTime();
             if (collisionHook != nullptr) {
-                collisionHook(collider);
+                collisionHook(this, collider);
             }
         }
     }

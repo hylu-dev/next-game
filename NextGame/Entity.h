@@ -7,12 +7,16 @@ class Component;
 
 class Entity {
 private:
+	friend Scene;
+
 	std::list<Component*> components;
 	Transform transform;
+	std::string name;
 
 public:
 	Scene* parentScene = nullptr;
 	Transform& GetTransform() { return transform; }
+	std::string Name() { return name; }
 
     template <typename T>
 	T* AddComponent() {

@@ -37,12 +37,26 @@ void Init() {
 		float3(70.0f, 40.0f, 0.0f),
 		float3(30.0f)
 	));*/
-
-	Prefabs::Wall(mainScene, Transform(
-		float3(50, 0, 80.0f),
-		0,
-		float3(10, 100, 20)
-	));
+	for (int i = 0; i < 10; i++) {
+		Prefabs::Enemy(mainScene, Transform(
+			float3(
+				Utils::RandomFloat(-100.0f, 100.0f),
+				Utils::RandomFloat(-100.0f, 100.0f),
+				80.0f
+			),
+			0,
+			float3(10.0f)
+		));
+		Prefabs::Wall(mainScene, Transform(
+			float3(
+				Utils::RandomFloat(-100.0f, 100.0f),
+				Utils::RandomFloat(-100.0f, 100.0f),
+				80.0f
+			),
+			0,
+			float3(10.0f)
+		));
+	}
 
 	Prefabs::PlayerCube(mainScene, Transform(
 		float3(0, 0, 80.0f),
@@ -50,11 +64,11 @@ void Init() {
 		float3(10.0f)
 	));
 
-	/*Prefabs::Checker(mainScene, Transform(
-		float3(0, -20.0f, 100.0f),
-		float3(30.0f, 0.0f, 0.0f),
-		float3(80.0f, 1.0f, 80.0f)
-	));*/
+	//Prefabs::Checker(mainScene, Transform(
+	//	float3(0, -20.0f, 100.0f),
+	//	float3(30.0f, 0.0f, 0.0f),
+	//	float3(80.0f, 1.0f, 80.0f)
+	//));
 }
 
 void Update(float deltaTime) {

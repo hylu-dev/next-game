@@ -13,18 +13,49 @@ IMPLEMENT_PREFAB(PlayerCube, {
 	meshFilter->LoadMesh(CubeMesh(4));
 	meshFilter->SetColor(float3(0, 1, 0));
 	entity->AddComponent<PlayerController>();
-	SphereCollider* collider = entity->AddComponent<SphereCollider>();
-	collider->radius = offset.scale.x*0.5;
-	/*BoxCollider* collider = entity->AddComponent<BoxCollider>();
-	collider->dimensions = offset.scale;*/
+	SphereCollider* sCollider = entity->AddComponent<SphereCollider>();
+	sCollider->radius = offset.scale.x*0.5 + 40.0f;
+	});
+
+IMPLEMENT_PREFAB(Enemy, {
+	MeshFilter * meshFilter = entity->AddComponent<MeshFilter>();
+	meshFilter->LoadMesh(CubeMesh(4));
+	meshFilter->SetColor(float3(1.0f, 0, 0));
+	meshFilter->SetVertexShader([](float3& vertex) {
+		float3 displace = vertex;
+		float dist = vertex.Distance(float3(0));
+		displace *= 0.03f * (5.0f - 5.0f * dist) * sinf(20.0f * dist - 5.0f * Time::Get().Elapsed());
+		vertex += displace;
+		});
+	BoxCollider* collider = entity->AddComponent<BoxCollider>();
+	collider->dimensions = offset.scale;
+
+	collider->SetCollisionHook([](Collider* c1, Collider* c2) {
+		float3& p1 = c1->parentEntity->GetTransform().position;
+		float3& p2 = c2->parentEntity->GetTransform().position;
+		if (c2->parentEntity->Name() == "PlayerCube") {
+			float3 direction = (p2 - p1).Normalized();
+			p1 += direction * 10.0f * Time::Get().DeltaTime();
+		}
+		if (c2->parentEntity->Name() == "Wall" || c2->parentEntity->Name() == "Enemy") {
+			float3& p1 = c1->parentEntity->GetTransform().position;
+			float3& p2 = c2->parentEntity->GetTransform().position;
+			float3 direction = (p1 - p2).Normalized();
+			p1 += direction * 10.0f * Time::Get().DeltaTime();
+		}
+		});
 	});
 
 IMPLEMENT_PREFAB(Wall, {
 	MeshFilter* meshFilter = entity->AddComponent<MeshFilter>();
-	meshFilter->LoadMesh(CubeMesh(10));
-	meshFilter->SetColor(float3(1, 0, 0));
-	/*SphereCollider* collider = entity->AddComponent<SphereCollider>();
-	collider->radius = offset.scale.x*0.5;*/
+	meshFilter->LoadMesh(CubeMesh(1));
+	meshFilter->SetColor(float3(0.3f, 0.8f, 1.0f));
+	meshFilter->SetVertexShader([](float3& vertex) {
+		float3 displace = vertex;
+		float dist = vertex.Distance(float3(0));
+		displace *= 0.03f * (5.0f - 5.0f * dist) * sinf(20.0f * dist - 5.0f * Time::Get().Elapsed());
+		vertex += displace;
+		});
 	BoxCollider* collider = entity->AddComponent<BoxCollider>();
 	collider->dimensions = offset.scale;
 	});

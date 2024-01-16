@@ -10,7 +10,7 @@ public:
 
 	void Update() = 0;
 
-	void Destroy() = 0;
+	void Destroy() override;
 
 	virtual void Render() = 0;
 };

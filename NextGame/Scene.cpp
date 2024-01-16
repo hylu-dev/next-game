@@ -29,6 +29,7 @@ void Scene::Destroy() {
 
 Entity* Scene::CreateEntity(std::string name) {
 	Entity* newEntity = new Entity();
+	newEntity->name = name;
 	newEntity->parentScene = this;
 	entities.push_back(newEntity);
 	newEntity->Initialize();

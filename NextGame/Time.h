@@ -11,9 +11,10 @@ public:
 		static Time instance;
 		return instance;
 	}
-
-	float DeltaTime() { return deltaTime; };
-	float Elapsed() { return elapsedSeconds; };
+	
+	float& TimeScale() { return timeScale; }
+	float DeltaTime() { return deltaTime; }
+	float Elapsed() { return elapsedSeconds; }
 
 	void Initialize();
 

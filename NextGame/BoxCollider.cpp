@@ -30,9 +30,8 @@ void BoxCollider::Collide(Collider* other) {
         bool isZCollide = std::abs(p1.z - p2.z) < (dimensions.z + collider->dimensions.z) * 0.5;
 
         if (isXCollide && isYCollide && isZCollide) {
-            parentEntity->GetTransform().position.z += 5.0f * Time::Get().DeltaTime();
             if (collisionHook != nullptr) {
-                collisionHook(collider);
+                collisionHook(this, collider);
             }
         }
 
@@ -52,9 +51,8 @@ void BoxCollider::Collide(Collider* other) {
         float distance = p2.Distance(closestPoint);
 
         if (distance < collider->radius) {
-            parentEntity->GetTransform().position.z += 5.0f * Time::Get().DeltaTime();
             if (collisionHook != nullptr) {
-                collisionHook(collider);
+                collisionHook(this, collider);
             }
         }
     }
