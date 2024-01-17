@@ -11,6 +11,8 @@ public:
 		static Time instance;
 		return instance;
 	}
+
+	float temp = 0;
 	
 	float& TimeScale() { return timeScale; }
 	float DeltaTime() { return deltaTime; }

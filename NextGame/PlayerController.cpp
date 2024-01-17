@@ -3,6 +3,7 @@
 #include "BoxCollider.h"
 #include "MeshFilter.h"
 #include "CubeMesh.h"
+#include "TimingFunction.h"
 
 void PlayerController::Initialize() {
 	MeshFilter* meshFilter = parentEntity->AddComponent<MeshFilter>();
@@ -21,15 +22,39 @@ void PlayerController::Initialize() {
 			p1 += direction * 10.0f * Time::Get().DeltaTime();
 		}
 		});
+	animator = parentEntity->AddComponent<Animator>();
 }
 
 void PlayerController::Update() {
 	float3& position = parentEntity->GetTransform().position;
+	float3& rotation = parentEntity->GetTransform().rotation;
+	float3& scale = parentEntity->GetTransform().scale;
 	float speed = 50.0f * Time::Get().DeltaTime();
 
 	if (App::IsKeyPressed(VK_LSHIFT)) {
 		speed *= 2;
 	}
+	if (App::IsKeyPressed(VK_OEM_MINUS)) {
+		if (!minusPressed) {
+			animator->Animate(rotation, rotation + float3(0, 0, 360.0f), 1.0f, new EaseInOut());
+			animator->Animate(scale, scale*0.75f, 1.0f, new EaseInOut());
+		}
+		minusPressed = true;
+	}
+	else {
+		minusPressed = false;
+	}
+	if (App::IsKeyPressed(VK_OEM_PLUS)) {
+		if (!plusPressed) {
+			animator->Animate(rotation, rotation + float3(-180.0f, 180.0f, 0), 1.0f, new EaseInOut());
+			animator->Animate(scale, scale * 1.5f, 1.0f, new EaseInOut());
+		}
+		plusPressed = true;
+	}
+	else {
+		plusPressed = false;
+	}
+
 
 	if (App::IsKeyPressed('F')) {
 		position.x -= speed;

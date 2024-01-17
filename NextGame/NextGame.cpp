@@ -20,10 +20,12 @@ void Init() {
 	Renderer::Get().Initialize();
 	CollisionManager::Get().Initialize();
 	Scene::Get().Initialize(90.0f, 0.1f, 1000.0f);
+	Scene::Get().GetCamera()->transform.position.z -= 80.0f;
 
 	Prefabs::PlayerCamera(Transform());
+
 	Prefabs::Player(Transform(
-		float3(0, 0, 80.0f),
+		0,
 		0,
 		float3(10.0f)
 	));
@@ -33,39 +35,17 @@ void Init() {
 			float3(
 				Utils::RandomFloat(-100.0f, 100.0f),
 				Utils::RandomFloat(-100.0f, 100.0f),
-				80.0f
-			),
-			0,
-			float3(10.0f)
+				0.0f
+			), 0, float3(10.0f)
 		));
 		Prefabs::Wall(Transform(
 			float3(
 				Utils::RandomFloat(-100.0f, 100.0f),
 				Utils::RandomFloat(-100.0f, 100.0f),
-				80.0f
-			),
-			0,
-			float3(10.0f)
+				0.0f
+			), 0, float3(10.0f)
 		));
 	}
-
-	/*Prefabs::Pillar(mainScene, Transform(
-	float3(100, -20.0f, 100.0f),
-	float3(),
-	float3(50.0f, 0.2f, 50.0f)
-	));*/
-
-	/*Prefabs::RippleCube(mainScene, Transform(
-		float3(0.0f, 30.0f, 70.0f),
-		float3(70.0f, 40.0f, 0.0f),
-		float3(30.0f)
-	));*/
-
-	//Prefabs::Checker(mainScene, Transform(
-	//	float3(0, -20.0f, 100.0f),
-	//	float3(30.0f, 0.0f, 0.0f),
-	//	float3(80.0f, 1.0f, 80.0f)
-	//));
 }
 
 void Update(float deltaTime) {
@@ -87,7 +67,8 @@ void Render() {
 	App::Print(0.0f, 460.0f, std::to_string(Scene::Get().GetCamera()->transform.position.z).c_str());
 	
 	App::Print(0.0f, 600.0f, std::to_string(Time::Get().DeltaTime()).c_str());
-	App::Print(0.0f, 700.0f, std::to_string(Time::Get().Elapsed()).c_str());
+	App::Print(0.0f, 650.0f, std::to_string(Time::Get().Elapsed()).c_str());
+	App::Print(0.0f, 700.0f, std::to_string(Time::Get().temp).c_str());
 	Renderer::Get().Render();
 }
 

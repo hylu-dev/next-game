@@ -94,6 +94,15 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Game\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Game\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="TimingFunction.cpp">
+      <Filter>Game\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -201,6 +210,15 @@
     <ClInclude Include="Enemy.h">
       <Filter>Game\Game Elements</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Game\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Game\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="TimingFunction.h">
+      <Filter>Game\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">
@@ -238,6 +256,9 @@
     </Filter>
     <Filter Include="Game\Rendering">
       <UniqueIdentifier>{333650b2-5d70-4bee-ba50-8dc87b857558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Animation">
+      <UniqueIdentifier>{cc3bc9f9-6446-4fc8-b103-d6da86e5233e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

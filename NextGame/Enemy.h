@@ -4,7 +4,7 @@
 class Enemy : public Component {
 	Entity* target = nullptr;
 	float speed = 10.0f;
-	float range = 40.0f;
+	float range = 50.0f;
 
 	void Initialize() override;
 
