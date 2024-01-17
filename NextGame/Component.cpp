@@ -8,4 +8,5 @@ void Component::Update() {
 }
 
 void Component::Destroy() {
+	parentEntity = nullptr;
 }

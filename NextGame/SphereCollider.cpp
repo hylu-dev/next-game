@@ -12,6 +12,7 @@ void SphereCollider::Update() {
 
 void SphereCollider::Destroy() {
     collisionHook = nullptr;
+    Collider::Destroy();
 }
 
 ColliderType SphereCollider::GetType() {

@@ -3,11 +3,11 @@
 #include "Scene.h"
 
 #define DEFINE_PREFAB(name) \
-	void name(Scene* scene, Transform offset);
+	void name(Transform offset);
 
 #define IMPLEMENT_PREFAB(name, implementation) \
-    void Prefabs::name(Scene* scene, Transform offset) { \
-		Entity* entity = scene->CreateEntity(#name); \
+    void Prefabs::name(Transform offset) { \
+		Entity* entity = Scene::Get().CreateEntity(#name); \
 		entity->GetTransform().position += offset.position; \
 		entity->GetTransform().rotation += offset.rotation; \
 		entity->GetTransform().scale *= offset.scale; \
@@ -17,8 +17,8 @@
 class Entity;
 
 namespace Prefabs {
-	DEFINE_PREFAB(PlayerCube);
-	DEFINE_PREFAB(Enemy);
+	DEFINE_PREFAB(Player);
+	DEFINE_PREFAB(EnemyBox);
 	DEFINE_PREFAB(Wall);
 
 	DEFINE_PREFAB(RipplePlane);

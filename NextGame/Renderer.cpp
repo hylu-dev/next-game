@@ -18,10 +18,7 @@ void Renderer::Render() {
 
 void Renderer::Destroy() {
 	renderables.clear();
-	if (instance == nullptr)
-	{
-		delete instance;
-	}
+	delete instance;
 }
 
 void Renderer::AddRenderable(Renderable* renderable) {

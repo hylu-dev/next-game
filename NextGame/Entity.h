@@ -9,14 +9,15 @@ class Entity {
 private:
 	friend Scene;
 
+	unsigned int id = 0;
 	std::list<Component*> components;
 	Transform transform;
-	std::string name;
+	std::string name = "";
 
 public:
-	Scene* parentScene = nullptr;
 	Transform& GetTransform() { return transform; }
 	std::string Name() { return name; }
+	unsigned int Id() { return id; }
 
     template <typename T>
 	T* AddComponent() {

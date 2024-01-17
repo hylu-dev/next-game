@@ -15,7 +15,8 @@ void MeshFilter::Update() {
 }
 
 void MeshFilter::Destroy() {
-
+	vertexShader = nullptr;
+	Renderable::Destroy();
 }
 
 void MeshFilter::LoadMesh(Mesh& mesh) {
@@ -38,11 +39,11 @@ void MeshFilter::Render() {
 		// Backface culling
 		float3 normal = triTransformed.CalcNormal();
 
-		if (normal.Dot(triTransformed.p0 - parentEntity->parentScene->GetCamera()->transform.position) < 0) {
+		if (normal.Dot(triTransformed.p0 - Scene::Get().GetCamera()->transform.position) < 0) {
 			// World -> View
-			triTransformed.ApplyMatrix(parentEntity->parentScene->GetCamera()->GetView());
+			triTransformed.ApplyMatrix(Scene::Get().GetCamera()->GetView());
 			// Project 3D -> 2D 
-			triTransformed.ApplyMatrix(parentEntity->parentScene->GetCamera()->GetProjection());
+			triTransformed.ApplyMatrix(Scene::Get().GetCamera()->GetProjection());
 
 			triTransformed.p0 = triTransformed.p0 / triTransformed.p0.w;
 			triTransformed.p1 = triTransformed.p1 / triTransformed.p1.w;

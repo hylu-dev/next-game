@@ -7,7 +7,7 @@ void CameraController::Initialize() {
 }
 
 void CameraController::Update() {
-	Camera* camera = parentEntity->parentScene->GetCamera();
+	Camera* camera = Scene::Get().GetCamera();
 	float speed = 70.0f * Time::Get().DeltaTime();
 	if (App::IsKeyPressed(VK_RETURN)) {
 		camera->transform.position = float3::Zero;

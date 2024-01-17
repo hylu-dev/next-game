@@ -7,13 +7,13 @@ class Renderer {
 private:
 	friend Renderable;
 	std::list<Renderable*> renderables;
+
 	static Renderer* instance;
 
 public:
 	static Renderer& Get() {
 		if (instance == nullptr) {
 			instance = new Renderer();
-			instance->Initialize();
 		}
 		return *instance;
 	}

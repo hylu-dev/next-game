@@ -91,6 +91,9 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Game\Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Game Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -193,6 +196,9 @@
       <Filter>Game\Game Elements</Filter>
     </ClInclude>
     <ClInclude Include="Wall.h">
+      <Filter>Game\Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Game\Game Elements</Filter>
     </ClInclude>
   </ItemGroup>

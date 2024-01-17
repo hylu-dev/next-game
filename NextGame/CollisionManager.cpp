@@ -25,10 +25,7 @@ void CollisionManager::Update() {
 
 void CollisionManager::Destroy() {
 	colliders.clear();
-	if (instance == nullptr)
-	{
-		delete instance;
-	}
+	delete instance;
 }
 
 void CollisionManager::AddCollider(Collider* collider) {

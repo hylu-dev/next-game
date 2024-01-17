@@ -11,6 +11,7 @@ void BoxCollider::Update() {
 
 void BoxCollider::Destroy() {
     collisionHook = nullptr;
+    Collider::Destroy();
 }
 
 ColliderType BoxCollider::GetType()
