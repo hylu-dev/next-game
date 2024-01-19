@@ -23,6 +23,14 @@ void PlayerController::Initialize() {
 		}
 		});
 	animator = parentEntity->AddComponent<Animator>();
+	emitter = parentEntity->AddComponent<ParticleEmitter>();
+	emitter->burstSize = 10;
+	emitter->frequency = 0.01f;
+	emitter->size = 3;
+	emitter->color = float3(1, 0.5f, 1);
+	emitter->shape = EmissionShape::CONE;
+	emitter->speed = 50.0f;
+	emitter->coneWidth = 30.0f;
 }
 
 void PlayerController::Update() {
@@ -36,8 +44,8 @@ void PlayerController::Update() {
 	}
 	if (App::IsKeyPressed(VK_OEM_MINUS)) {
 		if (!minusPressed) {
-			animator->Animate(rotation, rotation + float3(0, 0, 360.0f), 1.0f, new EaseInOut());
-			animator->Animate(scale, scale*0.75f, 1.0f, new EaseInOut());
+			animator->Animate(rotation, rotation + float3(0, 0, -90.0f), 1.0f, new EaseInOutBack());
+			animator->Animate(scale, scale*0.75f, 1.0f, new EaseInOutBack());
 		}
 		minusPressed = true;
 	}
@@ -46,8 +54,8 @@ void PlayerController::Update() {
 	}
 	if (App::IsKeyPressed(VK_OEM_PLUS)) {
 		if (!plusPressed) {
-			animator->Animate(rotation, rotation + float3(-180.0f, 180.0f, 0), 1.0f, new EaseInOut());
-			animator->Animate(scale, scale * 1.5f, 1.0f, new EaseInOut());
+			animator->Animate(rotation, rotation + float3(-180.0f, 180.0f, 0), 1.0f, new EaseInOutBack());
+			animator->Animate(scale, scale * 1.5f, 1.0f, new EaseInOutBack());
 		}
 		plusPressed = true;
 	}
@@ -58,16 +66,21 @@ void PlayerController::Update() {
 
 	if (App::IsKeyPressed('F')) {
 		position.x -= speed;
+		direction = float3(1.0f, 0, 0);
 	}
 	if (App::IsKeyPressed('H')) {
 		position.x += speed;
+		direction = float3(-1.0f, 0, 0);
 	}
 	if (App::IsKeyPressed('T')) {
 		position.y += speed;
+		direction = float3(0, -1.0, 0);
 	}
 	if (App::IsKeyPressed('G')) {
 		position.y -= speed;
+		direction = float3(0, 1.0f, 0);
 	}
+	emitter->direction = direction;
 }
 
 void PlayerController::Destroy() {

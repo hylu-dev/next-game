@@ -24,6 +24,7 @@ void MeshFilter::LoadMesh(Mesh& mesh) {
 }
 
 void MeshFilter::Render() {
+	float4x4 transformationMatrix = matScale * matRotate * matTranslate;
 	for (auto& tri : tris) {
 		Triangle triTransformed = tri;
 		if (vertexShader != nullptr) {
@@ -33,9 +34,7 @@ void MeshFilter::Render() {
 		}
 
 		// Transform
-		triTransformed.ApplyMatrix(matScale);
-		triTransformed.ApplyMatrix(matRotate);
-		triTransformed.ApplyMatrix(matTranslate);
+		triTransformed.ApplyMatrix(transformationMatrix);
 		// Backface culling
 		float3 normal = triTransformed.CalcNormal();
 

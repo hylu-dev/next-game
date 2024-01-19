@@ -1,10 +1,14 @@
 #pragma once
 #include "Component.h"
 #include "Animator.h"
+#include "ParticleEmitter.h"
 
 class PlayerController : public Component {
-    float speed = 10.0f;
+    float speed = 1.0f;
+    float3 direction;
     Animator* animator = nullptr;
+    ParticleEmitter* emitter = nullptr;
+
     bool minusPressed = false;
     bool plusPressed = false;
 

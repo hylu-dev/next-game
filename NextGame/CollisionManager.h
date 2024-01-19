@@ -8,7 +8,6 @@ private:
 	friend Collider;
 
 	std::list<Collider*> colliders;
-	std::list<std::pair<Collider*, Collider*>> collisions;
 	static CollisionManager* instance;
 
 public:

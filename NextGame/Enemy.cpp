@@ -18,7 +18,7 @@ void Enemy::Initialize() {
 	BoxCollider* collider = parentEntity->AddComponent<BoxCollider>();
 	collider->dimensions = parentEntity->GetTransform().scale;
 	collider->SetCollisionHook([](Collider* c1, Collider* c2) {
-		if (c2->parentEntity->Name() == "Wall" || c2->parentEntity->Name() == "Enemy") {
+		if (c2->parentEntity->Name() == "Wall" || c2->parentEntity->Name() == "EnemyBox") {
 			float3& p1 = c1->parentEntity->GetTransform().position;
 			float3& p2 = c2->parentEntity->GetTransform().position;
 			float3 direction = (p1 - p2).Normalized();

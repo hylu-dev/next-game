@@ -10,17 +10,21 @@
 #include "Prefabs.h"
 #include "Renderer.h"
 #include "CollisionManager.h"
+#include "ParticleSystem.h"
 
 #include <string>
 
 std::vector<Entity*> actors;
 
 void Init() {
+	App::PlaySound("Assets/Music/bg-music.wav", true);
+
 	Time::Get().Initialize();
-	Renderer::Get().Initialize();
 	CollisionManager::Get().Initialize();
+	ParticleSystem::Get().Initialize();
 	Scene::Get().Initialize(90.0f, 0.1f, 1000.0f);
 	Scene::Get().GetCamera()->transform.position.z -= 80.0f;
+	Renderer::Get().Initialize();
 
 	Prefabs::PlayerCamera(Transform());
 
@@ -56,9 +60,10 @@ void Update(float deltaTime) {
 	#endif
 
 	Time::Get().Update(frameTime);
-	Renderer::Get().Update();
 	CollisionManager::Get().Update();
+	ParticleSystem::Get().Update();
 	Scene::Get().Update();
+	Renderer::Get().Update();
 }
 
 void Render() {
@@ -76,5 +81,6 @@ void Shutdown() {
 	Time::Get().Destroy();
 	Scene::Get().Destroy();
 	CollisionManager::Get().Destroy();
+	ParticleSystem::Get().Destroy();
 	Renderer::Get().Destroy();
 }

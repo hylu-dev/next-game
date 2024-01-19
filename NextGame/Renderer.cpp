@@ -7,7 +7,7 @@ void Renderer::Initialize() {
 }
 
 void Renderer::Update() {
-	
+
 }
 
 void Renderer::Render() {

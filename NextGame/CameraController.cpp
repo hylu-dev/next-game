@@ -11,13 +11,12 @@ void CameraController::Update() {
 	float speed = 70.0f * Time::Get().DeltaTime();
 
 	if (App::IsKeyPressed(VK_RETURN)) {
-		animator->Animate(camera->transform.position, float3(0, 0, -100.0f), 0.5f, new EaseInOut());
-		animator->Animate(camera->transform.rotation, 0, 0.5f, new EaseInOut());
+		animator->Animate(camera->transform.position, float3(0, 0, -100.0f), 0.5f, new ElasticEaseOut());
+		animator->Animate(camera->transform.rotation, 0, 0.5f, new ElasticEaseOut());
 	}
 	if (App::IsKeyPressed(VK_CONTROL)) {
 		speed *= 2;
 	}
-
 
 	// Movement
 	float3 movement = float3::Zero;

@@ -19,44 +19,41 @@
     <ClCompile Include="stb_image\stb_image.cpp">
       <Filter>NextAPI\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="NextGame.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Precompilation</Filter>
     </ClCompile>
     <ClCompile Include="float3.cpp">
-      <Filter>Game\Math</Filter>
+      <Filter>Engine\Math</Filter>
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
-      <Filter>Game\Rendering</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="float4x4.cpp">
-      <Filter>Game\Math</Filter>
+      <Filter>Engine\Math</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
-      <Filter>Game\Hierarchy</Filter>
+      <Filter>Engine\Hierarchy</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Game\Hierarchy</Filter>
+      <Filter>Engine\Hierarchy</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Game\Hierarchy</Filter>
+      <Filter>Engine\Hierarchy</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>Game\Utilities</Filter>
+      <Filter>Engine\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="MeshFilter.cpp">
-      <Filter>Game\Meshes</Filter>
+      <Filter>Engine\Meshes</Filter>
     </ClCompile>
     <ClCompile Include="CubeMesh.cpp">
-      <Filter>Game\Meshes</Filter>
+      <Filter>Engine\Meshes</Filter>
     </ClCompile>
     <ClCompile Include="PlaneMesh.cpp">
-      <Filter>Game\Meshes</Filter>
+      <Filter>Engine\Meshes</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Game\Rendering</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="CameraController.cpp">
       <Filter>Game\Game Elements</Filter>
@@ -65,22 +62,22 @@
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
     <ClCompile Include="Renderable.cpp">
-      <Filter>Game\Rendering</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>Game\Rendering</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>Game\Collisions</Filter>
+      <Filter>Engine\Collisions</Filter>
     </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
-      <Filter>Game\Collisions</Filter>
+      <Filter>Engine\Collisions</Filter>
     </ClCompile>
     <ClCompile Include="SphereCollider.cpp">
-      <Filter>Game\Collisions</Filter>
+      <Filter>Engine\Collisions</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
-      <Filter>Game\Utilities</Filter>
+      <Filter>Engine\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Game\Game Elements</Filter>
@@ -89,19 +86,31 @@
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>Game\Collisions</Filter>
+      <Filter>Engine\Collisions</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
-      <Filter>Game\Animation</Filter>
+      <Filter>Engine\Animation</Filter>
     </ClCompile>
     <ClCompile Include="Animator.cpp">
-      <Filter>Game\Animation</Filter>
+      <Filter>Engine\Animation</Filter>
     </ClCompile>
     <ClCompile Include="TimingFunction.cpp">
-      <Filter>Game\Animation</Filter>
+      <Filter>Engine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Engine\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEmitter.cpp">
+      <Filter>Engine\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Engine\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="NextGame.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,40 +142,40 @@
       <Filter>Precompilation</Filter>
     </ClInclude>
     <ClInclude Include="float3.h">
-      <Filter>Game\Math</Filter>
+      <Filter>Engine\Math</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
-      <Filter>Game\Rendering</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="float4x4.h">
-      <Filter>Game\Math</Filter>
+      <Filter>Engine\Math</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>Game\Hierarchy</Filter>
+      <Filter>Engine\Hierarchy</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Game\Hierarchy</Filter>
+      <Filter>Engine\Hierarchy</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Game\Hierarchy</Filter>
+      <Filter>Engine\Hierarchy</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>Game\Utilities</Filter>
+      <Filter>Engine\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="MeshFilter.h">
-      <Filter>Game\Meshes</Filter>
+      <Filter>Engine\Meshes</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>Game\Meshes</Filter>
+      <Filter>Engine\Meshes</Filter>
     </ClInclude>
     <ClInclude Include="CubeMesh.h">
-      <Filter>Game\Meshes</Filter>
+      <Filter>Engine\Meshes</Filter>
     </ClInclude>
     <ClInclude Include="PlaneMesh.h">
-      <Filter>Game\Meshes</Filter>
+      <Filter>Engine\Meshes</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Game\Rendering</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="CameraController.h">
       <Filter>Game\Game Elements</Filter>
@@ -178,28 +187,28 @@
       <Filter>Game\Game Elements</Filter>
     </ClInclude>
     <ClInclude Include="Renderable.h">
-      <Filter>Game\Rendering</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>Game\Rendering</Filter>
+      <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
-      <Filter>Game\Utilities</Filter>
+      <Filter>Engine\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Game\Utilities</Filter>
+      <Filter>Engine\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
-      <Filter>Game\Collisions</Filter>
+      <Filter>Engine\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="BoxCollider.h">
-      <Filter>Game\Collisions</Filter>
+      <Filter>Engine\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>Game\Collisions</Filter>
+      <Filter>Engine\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="SphereCollider.h">
-      <Filter>Game\Collisions</Filter>
+      <Filter>Engine\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>Game\Game Elements</Filter>
@@ -211,13 +220,22 @@
       <Filter>Game\Game Elements</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>Game\Animation</Filter>
+      <Filter>Engine\Animation</Filter>
     </ClInclude>
     <ClInclude Include="Animator.h">
-      <Filter>Game\Animation</Filter>
+      <Filter>Engine\Animation</Filter>
     </ClInclude>
     <ClInclude Include="TimingFunction.h">
-      <Filter>Game\Animation</Filter>
+      <Filter>Engine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Engine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEmitter.h">
+      <Filter>Engine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Engine\Particles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -233,32 +251,38 @@
     <Filter Include="NextAPI\stb_image">
       <UniqueIdentifier>{61cfc19b-c57e-4021-b530-bac172fcba86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game">
+    <Filter Include="Engine">
       <UniqueIdentifier>{a51b746f-5fdc-44ef-b279-90333a6c0a74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Math">
+    <Filter Include="Engine\Math">
       <UniqueIdentifier>{d4062325-63f0-4e19-a65a-686d7ef806c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Meshes">
+    <Filter Include="Engine\Meshes">
       <UniqueIdentifier>{ce64db94-8f51-40aa-9302-7618230c284b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Hierarchy">
+      <UniqueIdentifier>{50b31625-5d98-484f-a569-48e0ce12b1d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Collisions">
+      <UniqueIdentifier>{d3e6f5c3-c11d-440f-8270-1abd853a5362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utilities">
+      <UniqueIdentifier>{42d48d73-60f2-4de4-bc48-d91ddf965785}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Rendering">
+      <UniqueIdentifier>{333650b2-5d70-4bee-ba50-8dc87b857558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation">
+      <UniqueIdentifier>{cc3bc9f9-6446-4fc8-b103-d6da86e5233e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particles">
+      <UniqueIdentifier>{60a9339d-5298-4cea-97c6-f5ea5245e932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{6e727818-aee6-45cb-a471-ca14ced75337}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Game Elements">
       <UniqueIdentifier>{2602516c-e3ea-474e-863e-b802d97fd6b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Hierarchy">
-      <UniqueIdentifier>{50b31625-5d98-484f-a569-48e0ce12b1d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Collisions">
-      <UniqueIdentifier>{d3e6f5c3-c11d-440f-8270-1abd853a5362}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Utilities">
-      <UniqueIdentifier>{42d48d73-60f2-4de4-bc48-d91ddf965785}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Rendering">
-      <UniqueIdentifier>{333650b2-5d70-4bee-ba50-8dc87b857558}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Animation">
-      <UniqueIdentifier>{cc3bc9f9-6446-4fc8-b103-d6da86e5233e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

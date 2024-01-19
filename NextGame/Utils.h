@@ -11,6 +11,11 @@ namespace Utils {
 
 	float RandomFloat(float min, float max);
 
+	template <typename T>
+	T RandomInRange(T min, T max) {
+		return min + (max - min) * dis(gen);
+	}
+
 	float Clamp(float value, float minVal, float maxVal);
 
 	bool IsInRange(float value, float minVal, float maxVal);
