@@ -21,6 +21,18 @@ class EaseInOut : public TimingFunction {
 	float3 Interpolate(float3 start3, float3 end, float t) override;
 };
 
+
+class ElasticEaseOut : public TimingFunction {
+	float Interpolate(float start, float end, float t) override;
+	float3 Interpolate(float3 start3, float3 end, float t) override;
+};
+
+
+class EaseInOutBack : public TimingFunction {
+	float Interpolate(float start, float end, float t) override;
+	float3 Interpolate(float3 start3, float3 end, float t) override;
+};
+
 class Linear : public TimingFunction {
 	float Interpolate(float start, float end, float t) override;
 	float3 Interpolate(float3 start3, float3 end, float t) override;
