@@ -4,6 +4,7 @@
 Renderer* Renderer::instance = nullptr;
 
 void Renderer::Initialize() {
+	depthBuffer = new float[APP_VIRTUAL_WIDTH * APP_VIRTUAL_HEIGHT];
 }
 
 void Renderer::Update() {
@@ -18,6 +19,7 @@ void Renderer::Render() {
 
 void Renderer::Destroy() {
 	renderables.clear();
+	delete depthBuffer;
 	delete instance;
 }
 

@@ -24,11 +24,11 @@ void PlayerController::Initialize() {
 		});
 	animator = parentEntity->AddComponent<Animator>();
 	emitter = parentEntity->AddComponent<ParticleEmitter>();
-	emitter->burstSize = 10;
-	emitter->frequency = 0.01f;
+	emitter->burstSize = 100;
+	emitter->active = false;
 	emitter->size = 3;
-	emitter->color = float3(1, 0.5f, 1);
-	emitter->shape = EmissionShape::CONE;
+	emitter->color = float3(0.3, 1, 0.6);
+	emitter->shape = EmissionShape::RADIAL;
 	emitter->speed = 50.0f;
 	emitter->coneWidth = 30.0f;
 }
@@ -46,6 +46,7 @@ void PlayerController::Update() {
 		if (!minusPressed) {
 			animator->Animate(rotation, rotation + float3(0, 0, -90.0f), 1.0f, new EaseInOutBack());
 			animator->Animate(scale, scale*0.75f, 1.0f, new EaseInOutBack());
+			emitter->Emit();
 		}
 		minusPressed = true;
 	}
@@ -56,6 +57,7 @@ void PlayerController::Update() {
 		if (!plusPressed) {
 			animator->Animate(rotation, rotation + float3(-180.0f, 180.0f, 0), 1.0f, new EaseInOutBack());
 			animator->Animate(scale, scale * 1.5f, 1.0f, new EaseInOutBack());
+			emitter->Emit();
 		}
 		plusPressed = true;
 	}
@@ -80,7 +82,6 @@ void PlayerController::Update() {
 		position.y -= speed;
 		direction = float3(0, 1.0f, 0);
 	}
-	emitter->direction = direction;
 }
 
 void PlayerController::Destroy() {

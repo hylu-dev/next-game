@@ -34,5 +34,12 @@ union Triangle
 
 	float3 CalcNormal();
 
+	// Returns the number of triangles created from clipping against a plane
+	// Purpose: After projection, if a triangle is partly clipped out of view, we mustn't draw the portion of
+	// the triangle outside of view. To do this, we need to create a flat edge against the plane where
+	// the triangle is clipped. Depending on how many points are clipped, we need to add more triangles
+	// to turn the clipped points into a flat edge (we want to avoid quads).
+	static int ClipAgainstPlane(float3 planePoint, float3 planeNormal, Triangle& in, Triangle& out1, Triangle& out2);
+
 };
 

@@ -34,6 +34,8 @@ union float3 {
 	float3 Normalized();
 	float Dot(const float3& rhs) const;
 	float3 Cross(const float3& rhs) const;
-
 	float Distance(const float3& rhs) const;
+
+	// The point where a line intersect a plane
+	static float3 PointOfPlaneIntersect(float3& planePoint, float3& planeNormal, float3& lineStart, float3& lineEnd);
 };

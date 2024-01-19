@@ -25,9 +25,6 @@
     <ClCompile Include="float3.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="float4x4.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
@@ -112,6 +109,9 @@
     <ClCompile Include="NextGame.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Engine\Meshes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -143,9 +143,6 @@
     </ClInclude>
     <ClInclude Include="float3.h">
       <Filter>Engine\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="float4x4.h">
       <Filter>Engine\Math</Filter>
@@ -236,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
       <Filter>Engine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Engine\Meshes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

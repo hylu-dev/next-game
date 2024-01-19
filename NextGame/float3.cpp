@@ -111,3 +111,14 @@ float3 float3::Cross(const float3& rhs) const {
 float float3::Distance(const float3& rhs) const {
     return (*this - rhs).Length();
 }
+
+float3 float3::PointOfPlaneIntersect(float3& planePoint, float3& planeNormal, float3& lineStart, float3& lineEnd) {
+    planeNormal.Normalize();
+    float planeDirection = -planeNormal.Dot(planePoint);
+    float ad = lineStart.Dot(planeNormal);
+    float bd = lineEnd.Dot(planeNormal);
+    float t = (-planeDirection - ad) / (bd - ad);
+    float3 lineVector = lineEnd - lineStart;
+    float3 lineIntersection = lineVector * t;
+    return lineStart + lineIntersection;
+}

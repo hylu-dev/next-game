@@ -41,24 +41,37 @@ void MeshFilter::Render() {
 		if (normal.Dot(triTransformed.p0 - Scene::Get().GetCamera()->transform.position) < 0) {
 			// World -> View
 			triTransformed.ApplyMatrix(Scene::Get().GetCamera()->GetView());
-			// Project 3D -> 2D 
-			triTransformed.ApplyMatrix(Scene::Get().GetCamera()->GetProjection());
+			
+			// Clipping
+			Triangle clipped[2];
+			int clippedTriangles = Triangle::ClipAgainstPlane(
+				{ 0.0f, 0.0f, Scene::Get().GetCamera()->nearPlane },
+				{ 0.0f, 0.0f, Scene::Get().GetCamera()->farPlane },
+				triTransformed,
+				clipped[0],
+				clipped[1]
+			);
 
-			triTransformed.p0 = triTransformed.p0 / triTransformed.p0.w;
-			triTransformed.p1 = triTransformed.p1 / triTransformed.p1.w;
-			triTransformed.p2 = triTransformed.p2 / triTransformed.p2.w;
+			for (int i = 0; i < clippedTriangles; i++) {
+				// Project 3D -> 2D 
+				clipped[i].ApplyMatrix(Scene::Get().GetCamera()->GetProjection());
+				triTransformed = clipped[i];
 
-			// Center origin and scale to screen resolution
-			triTransformed = (triTransformed + float3(1, 1, 0))*0.5f;
-			triTransformed.p0.x *= static_cast<float>(APP_VIRTUAL_WIDTH);
-			triTransformed.p0.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
-			triTransformed.p1.x *= static_cast<float>(APP_VIRTUAL_WIDTH);
-			triTransformed.p1.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
-			triTransformed.p2.x *= static_cast<float>(APP_VIRTUAL_WIDTH);
-			triTransformed.p2.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
+				triTransformed.p0 = triTransformed.p0 / triTransformed.p0.w;
+				triTransformed.p1 = triTransformed.p1 / triTransformed.p1.w;
+				triTransformed.p2 = triTransformed.p2 / triTransformed.p2.w;
 
-			triTransformed.color = color;
-			triTransformed.Draw();
+				// Center origin and scale to screen resolution
+				triTransformed = (triTransformed + float3(1, 1, 0)) * 0.5f;
+				triTransformed.p0.x *= static_cast<float>(APP_VIRTUAL_WIDTH);
+				triTransformed.p0.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
+				triTransformed.p1.x *= static_cast<float>(APP_VIRTUAL_WIDTH);
+				triTransformed.p1.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
+				triTransformed.p2.x *= static_cast<float>(APP_VIRTUAL_WIDTH);
+				triTransformed.p2.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
+				triTransformed.color = color;
+				triTransformed.Draw();
+			}
 		}
 	}
 }

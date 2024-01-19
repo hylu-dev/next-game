@@ -7,6 +7,7 @@ class Renderer {
 private:
 	friend Renderable;
 	std::list<Renderable*> renderables;
+	float* depthBuffer = nullptr;
 
 	static Renderer* instance;
 
@@ -17,6 +18,8 @@ public:
 		}
 		return *instance;
 	}
+
+	float* GetDepthBuffer() { return depthBuffer; }
 
 	void Initialize();
 

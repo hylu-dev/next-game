@@ -5,11 +5,12 @@ private:
 	float4x4 matView;
 	float4x4 matProj;
 	float3 target;
+
+public:
 	float fov = 120.0f;
 	float nearPlane = 0.1f;
 	float farPlane = 1000.0f;
 
-public:
 	Transform transform;
 
 	Camera() = default;
