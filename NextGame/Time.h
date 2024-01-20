@@ -12,7 +12,8 @@ public:
 		return instance;
 	}
 
-	float temp = 0;
+	float testFloat = 0.0f;
+	float3 testFloat3;
 	
 	float& TimeScale() { return timeScale; }
 	float DeltaTime() { return deltaTime; }

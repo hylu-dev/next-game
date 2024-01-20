@@ -8,7 +8,9 @@ void Entity::Initialize() {
 
 void Entity::Update() {
 	for (auto& component : components) {
-		component->Update();
+		if (component->active) {
+			component->Update();
+		}
 	}
 }
 

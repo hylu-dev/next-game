@@ -2,10 +2,11 @@
 #include "Camera.h"
 
 void Camera::Initialize() {
+	target += transform.position;
 	matView = float4x4::CreateView(
 		transform.position,
-		transform.position + float3(0, 0, 1.0f),
-		float3(0, 1.0f, 0)
+		target,
+		up
 	);
 
 	matProj = float4x4::CreateProjection(
@@ -23,6 +24,12 @@ void Camera::Update() {
 		target,
 		float3(0, 1.0f, 0)
 	);
+
+	forward = (target - transform.position).Normalized();
+	up = float3(0.0f, 1.0f, 0.0f);
+	up = up - forward * up.Dot(forward);
+	up.Normalize();
+	right = up.Cross(forward).Normalized();
 }
 
 void Camera::Destroy() {

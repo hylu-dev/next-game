@@ -17,15 +17,20 @@
 class Entity;
 
 namespace Prefabs {
+	
+	DEFINE_PREFAB(DarkStarSphere);
+	DEFINE_PREFAB(PlayerA);
+	DEFINE_PREFAB(CameraSystem);
+
+	/*
 	DEFINE_PREFAB(Player);
 	DEFINE_PREFAB(EnemyBox);
 	DEFINE_PREFAB(Wall);
-
 	DEFINE_PREFAB(RipplePlane);
 	DEFINE_PREFAB(Checker);
 	DEFINE_PREFAB(Pillar);
 	DEFINE_PREFAB(RippleCube);
 	DEFINE_PREFAB(PlayerCamera);
-	DEFINE_PREFAB(RipplePlane);
+	DEFINE_PREFAB(RipplePlane);*/
 };
 

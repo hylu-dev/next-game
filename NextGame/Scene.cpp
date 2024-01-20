@@ -15,7 +15,9 @@ void Scene::Initialize(float _fov, float _near, float _far) {
 void Scene::Update() {
 	camera->Update();
 	for (auto& entity : entities) {
-		entity->Update();
+		if (entity->active) {
+			entity->Update();
+		}
 	}
 
 	for (auto& entity : entitiesToDestroy) {

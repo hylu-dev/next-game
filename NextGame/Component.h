@@ -4,6 +4,7 @@
 
 class Component {
 public:
+	bool active = true;
 	Entity* parentEntity = nullptr;
 
 	virtual void Initialize() = 0;

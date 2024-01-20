@@ -11,12 +11,14 @@ void CollisionManager::Initialize() {
 
 void CollisionManager::Update() {
 	for (auto& collider : colliders) {
-		collider->Update();
+		if (collider->active) {
+			collider->Update();
+		}
 	}
 
 	for (auto& source : colliders) {
 		for (auto& target : colliders) {
-			if (source != target) {
+			if (source->active && target->active && source != target) {
 				source->Collide(target);
 			}
 		}

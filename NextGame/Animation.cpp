@@ -7,6 +7,9 @@ void Animation::Update() {
 		progress += Time::Get().DeltaTime()/duration;
 	}
 	else {
+		if (callback != nullptr) {
+			callback();
+		}
 		animator->RemoveAnimation(this);
 	}
 }

@@ -15,6 +15,7 @@ public:
 	EmissionShape shape = RADIAL;
 	float frequency = 0.1f;
 	float coneWidth = 30; // DEGREES
+	float radialOffset = 0.0f;
 	bool active = true;
 	short burstSize = 1;
 

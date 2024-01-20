@@ -23,6 +23,7 @@ void ParticleEmitter::Destroy() {
 void ParticleEmitter::Emit() {
 	for (int i = 0; i < burstSize; i++) {
 		float3 _direction = direction;
+		float3 spawnPosition = parentEntity->GetTransform().position;
 
 		if (shape == EmissionShape::RADIAL) {
 			_direction = float3(
@@ -30,6 +31,7 @@ void ParticleEmitter::Emit() {
 				Utils::RandomFloat(-1, 1),
 				Utils::RandomFloat(-1, 1)
 			).Normalized();
+			spawnPosition += _direction * radialOffset;
 		}
 		else if (shape == EmissionShape::CONE) {
 			float range = tanf(TO_RAD(coneWidth) * 0.5f);
@@ -41,7 +43,7 @@ void ParticleEmitter::Emit() {
 			_direction.Normalize();
 		}
 
-		Particle* part = ParticleSystem::Get().CreateParticle(parentEntity->GetTransform().position);
+		Particle* part = ParticleSystem::Get().CreateParticle(spawnPosition);
 		part->size = size;
 		part->speed = speed;
 		part->lifetime = lifetime;

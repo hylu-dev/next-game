@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "TimingFunction.h"
+#include <functional>
 
 class Animation;
 
@@ -19,6 +20,6 @@ public:
 
 	void Destroy() override;
 
-	void Animate(float3& start, float3 end, float duration, TimingFunction* interpolator);
+	void Animate(float3& start, float3 end, float duration, TimingFunction* interpolator, std::function<void()> callback = nullptr);
 };
 

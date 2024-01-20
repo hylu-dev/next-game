@@ -10,6 +10,7 @@ private:
 	friend Scene;
 
 	unsigned int id = 0;
+	bool active = true;
 	std::list<Component*> components;
 	Transform transform;
 	std::string name = "";

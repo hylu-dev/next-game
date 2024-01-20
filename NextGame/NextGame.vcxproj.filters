@@ -52,9 +52,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="CameraController.cpp">
-      <Filter>Game\Game Elements</Filter>
-    </ClCompile>
     <ClCompile Include="Prefabs.cpp">
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
@@ -76,17 +73,8 @@
     <ClCompile Include="Time.cpp">
       <Filter>Engine\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>Game\Game Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Game\Game Elements</Filter>
-    </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Engine\Collisions</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Game Elements</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\Animation</Filter>
@@ -111,6 +99,42 @@
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
       <Filter>Engine\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereMesh.cpp">
+      <Filter>Engine\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="ConeMesh.cpp">
+      <Filter>Engine\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="DarkStar.cpp">
+      <Filter>Game\Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="ShipA.cpp">
+      <Filter>Game\Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="ShipB.cpp">
+      <Filter>Game\Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Game\Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Game\Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Game\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>Game\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Game\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
+      <Filter>Game\Game Elements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,13 +198,7 @@
     <ClInclude Include="Camera.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="CameraController.h">
-      <Filter>Game\Game Elements</Filter>
-    </ClInclude>
     <ClInclude Include="Prefabs.h">
-      <Filter>Game\Game Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Shaders.h">
       <Filter>Game\Game Elements</Filter>
     </ClInclude>
     <ClInclude Include="Renderable.h">
@@ -207,15 +225,6 @@
     <ClInclude Include="SphereCollider.h">
       <Filter>Engine\Collisions</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerController.h">
-      <Filter>Game\Game Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Game\Game Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game\Game Elements</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Engine\Animation</Filter>
     </ClInclude>
@@ -236,6 +245,42 @@
     </ClInclude>
     <ClInclude Include="Triangle.h">
       <Filter>Engine\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereMesh.h">
+      <Filter>Engine\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="ConeMesh.h">
+      <Filter>Engine\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="DarkStar.h">
+      <Filter>Game\Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipA.h">
+      <Filter>Game\Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipB.h">
+      <Filter>Game\Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Game\Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Game\Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>Game\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Game\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Game\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUI.h">
+      <Filter>Game\Game Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +328,9 @@
     </Filter>
     <Filter Include="Game\Game Elements">
       <UniqueIdentifier>{2602516c-e3ea-474e-863e-b802d97fd6b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Old">
+      <UniqueIdentifier>{ad6ea09c-1975-4a0f-9f4e-7af8740be8e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

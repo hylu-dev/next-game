@@ -16,40 +16,23 @@
 
 std::vector<Entity*> actors;
 
-void Init() {
-	App::PlaySound("Assets/Music/bg-music.wav", true);
+void LoadGameObjects() {
+	//App::PlaySound("Assets/Music/bg-music.wav", true);
 
+	Prefabs::DarkStarSphere(Transform(0, 0, 500));
+	Prefabs::PlayerA(Transform({0,0,-600}, 0, {4, 2, 5}));
+	Prefabs::CameraSystem(Transform());
+}
+
+void Init() {
 	Time::Get().Initialize();
 	CollisionManager::Get().Initialize();
 	ParticleSystem::Get().Initialize();
 	Scene::Get().Initialize(90.0f, 0.1f, 1000.0f);
-	Scene::Get().GetCamera()->transform.position.z -= 80.0f;
+	Scene::Get().GetCamera()->transform.position.z -= 100.0f;
 	Renderer::Get().Initialize();
 
-	Prefabs::PlayerCamera(Transform());
-
-	Prefabs::Player(Transform(
-		0,
-		0,
-		float3(10.0f)
-	));
-
-	for (int i = 0; i < 10; i++) {
-		Prefabs::EnemyBox(Transform(
-			float3(
-				Utils::RandomFloat(-100.0f, 100.0f),
-				Utils::RandomFloat(-100.0f, 100.0f),
-				0.0f
-			), 0, float3(10.0f)
-		));
-		Prefabs::Wall(Transform(
-			float3(
-				Utils::RandomFloat(-100.0f, 100.0f),
-				Utils::RandomFloat(-100.0f, 100.0f),
-				0.0f
-			), 0, float3(10.0f)
-		));
-	}
+	LoadGameObjects();
 }
 
 void Update(float deltaTime) {
@@ -67,13 +50,7 @@ void Update(float deltaTime) {
 }
 
 void Render() {
-	App::Print(0.0f, 500.0f, std::to_string(Scene::Get().GetCamera()->transform.position.x).c_str());
-	App::Print(0.0f, 480.0f, std::to_string(Scene::Get().GetCamera()->transform.position.y).c_str());
-	App::Print(0.0f, 460.0f, std::to_string(Scene::Get().GetCamera()->transform.position.z).c_str());
-	
-	App::Print(0.0f, 600.0f, std::to_string(Time::Get().DeltaTime()).c_str());
-	App::Print(0.0f, 650.0f, std::to_string(Time::Get().Elapsed()).c_str());
-	App::Print(0.0f, 700.0f, std::to_string(Time::Get().temp).c_str());
+
 	Renderer::Get().Render();
 }
 
