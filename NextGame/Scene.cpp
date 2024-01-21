@@ -45,6 +45,7 @@ Entity* Scene::CreateEntity(std::string name) {
 	Entity* newEntity = new Entity();
 	newEntity->id = id_counter++;
 	newEntity->name = name;
+	newEntity->tag = name;
 	entities.push_back(newEntity);
 	newEntity->Initialize();
 	return newEntity;
@@ -70,6 +71,7 @@ Entity* Scene::GetEntityById(unsigned int _id)
 }
 
 void Scene::RemoveEntity(Entity* entity) {
+	entity->active = false;
 	entitiesToDestroy.push_back(entity);
 }
 

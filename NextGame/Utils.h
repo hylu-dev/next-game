@@ -18,6 +18,8 @@ namespace Utils {
 
 	float Clamp(float value, float minVal, float maxVal);
 
+	float Logistic(float value, float approachRate = 1);
+
 	bool IsInRange(float value, float minVal, float maxVal);
 
 }

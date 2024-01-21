@@ -109,13 +109,7 @@
     <ClCompile Include="DarkStar.cpp">
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
-    <ClCompile Include="ShipA.cpp">
-      <Filter>Game\Game Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="ShipB.cpp">
-      <Filter>Game\Game Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
+    <ClCompile Include="Ship.cpp">
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
@@ -133,8 +127,29 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Game\Old</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerUI.cpp">
+    <ClCompile Include="AsteroidMesh.cpp">
+      <Filter>Engine\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Game\Game Elements\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="AsteroidHandler.cpp">
+      <Filter>Game\Game Elements\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
       <Filter>Game\Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Scrap.cpp">
+      <Filter>Game\Game Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
+      <Filter>Game\Game Elements\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuUI.cpp">
+      <Filter>Game\Game Elements\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -255,13 +270,7 @@
     <ClInclude Include="DarkStar.h">
       <Filter>Game\Game Elements</Filter>
     </ClInclude>
-    <ClInclude Include="ShipA.h">
-      <Filter>Game\Game Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="ShipB.h">
-      <Filter>Game\Game Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraManager.h">
+    <ClInclude Include="Ship.h">
       <Filter>Game\Game Elements</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
@@ -279,8 +288,29 @@
     <ClInclude Include="Wall.h">
       <Filter>Game\Old</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerUI.h">
+    <ClInclude Include="AsteroidMesh.h">
+      <Filter>Engine\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Game\Game Elements\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="AsteroidHandler.h">
+      <Filter>Game\Game Elements\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroid.h">
       <Filter>Game\Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Scrap.h">
+      <Filter>Game\Game Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUI.h">
+      <Filter>Game\Game Elements\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuUI.h">
+      <Filter>Game\Game Elements\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +361,9 @@
     </Filter>
     <Filter Include="Game\Old">
       <UniqueIdentifier>{ad6ea09c-1975-4a0f-9f4e-7af8740be8e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Game Elements\Managers">
+      <UniqueIdentifier>{73bef306-09cb-4464-ae3f-c434c1f3c9b3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,10 @@ void Entity::Initialize() {
 }
 
 void Entity::Update() {
+	transform.rotation.x = fmod(transform.rotation.x, 360.0);
+	transform.rotation.y = fmod(transform.rotation.y, 360.0);
+	transform.rotation.z = fmod(transform.rotation.z, 360.0);
+
 	for (auto& component : components) {
 		if (component->active) {
 			component->Update();

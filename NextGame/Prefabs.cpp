@@ -4,25 +4,47 @@
 #include "MeshFilter.h"
 #include "PlaneMesh.h"
 #include "CubeMesh.h"
+#include "BoxCollider.h"
 // Custom Components
 #include "DarkStar.h"
-#include "ShipA.h"
+#include "Ship.h"
 #include "CameraManager.h"
 #include "PlayerUI.h"
-
+#include "Asteroid.h"
+#include "Wall.h"
 
 IMPLEMENT_PREFAB(DarkStarSphere, {
 	entity->AddComponent<DarkStar>();
 	});
 
 IMPLEMENT_PREFAB(PlayerA, {
-	entity->AddComponent<ShipA>();
+	Ship* ship = entity->AddComponent<Ship>();
+	ship->meshFilter->SetColor(float3(0, 1, 0));
 	entity->AddComponent<PlayerUI>();
 	});
 
-IMPLEMENT_PREFAB(CameraSystem, {
+IMPLEMENT_PREFAB(PlayerB, {
+	Ship* ship = entity->AddComponent<Ship>();
+	ship->meshFilter->SetColor(float3(1, 0, 0));
+	entity->AddComponent<PlayerUI>();
+	});
+
+
+IMPLEMENT_PREFAB(ViewManager, {
 	entity->AddComponent<CameraManager>();
 	})
+
+IMPLEMENT_PREFAB(AsteroidObject, {
+	entity->AddComponent<Asteroid>();
+	});
+
+IMPLEMENT_PREFAB(Wall, {
+	MeshFilter * meshFilter = entity->AddComponent<MeshFilter>();
+	meshFilter->LoadMesh(CubeMesh(1));
+	meshFilter->SetColor(float3(0.3f, 0.8f, 1.0f));
+	BoxCollider* collider = entity->AddComponent<BoxCollider>();
+	collider->dimensions = offset.scale;
+	});
 
 //IMPLEMENT_PREFAB(Player, {
 //	entity->AddComponent<PlayerController>();
@@ -32,13 +54,6 @@ IMPLEMENT_PREFAB(CameraSystem, {
 //	entity->AddComponent<Enemy>();
 //	});
 //
-//IMPLEMENT_PREFAB(Wall, {
-//	MeshFilter * meshFilter = entity->AddComponent<MeshFilter>();
-//	meshFilter->LoadMesh(CubeMesh(1));
-//	meshFilter->SetColor(float3(0.3f, 0.8f, 1.0f));
-//	BoxCollider* collider = entity->AddComponent<BoxCollider>();
-//	collider->dimensions = offset.scale;
-//	});
 //
 //
 //IMPLEMENT_PREFAB(RipplePlane, {

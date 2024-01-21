@@ -5,7 +5,7 @@
 void PlayerUI::Initialize() {
 	Renderable::Initialize();
 
-	ship = parentEntity->GetComponent<ShipA>();
+	ship = parentEntity->GetComponent<Ship>();
 }
 
 void PlayerUI::Update() {
@@ -19,20 +19,16 @@ void PlayerUI::Update() {
 		healthString += "o";
 	}
 
-	std::string fuelString = "FUEL: ";
-	for (int i = 0; i < health; i += 5) {
+	fuelString = "FUEL: ";
+	for (int i = 0; i < fuel; i += 5) {
 		fuelString += "|";
 	}
 
-	std::string bulletString = "WEAPON: ";
-	if (bulletLoaded) {
-		stringColor = { 0,1,0 };
-		bulletString += "LOADED";
-	}
-	else {
-		stringColor = { 1,0,0 };
-		bulletString += "EMPTY";
-	}
+	scrapString = "SCRAP: ";
+	scrapString += std::to_string(scrap);
+
+	bulletString = "WEAPON: ";
+	bulletString += bulletLoaded ? "LOADED" : "EMPTY";
 }
 
 void PlayerUI::Destroy() {
@@ -41,14 +37,14 @@ void PlayerUI::Destroy() {
 
 void PlayerUI::Render() {
 	if (ship->active) {
-
+		stringColor = float3::One;
 		App::Print(20, 740, healthString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
 
 		App::Print(20, 720, fuelString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
 
-		App::Print(20, 700, bulletString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
+		App::Print(20, 700, scrapString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
 
-		stringColor = float3::One;
-		App::Print(20, 680, scrapString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
+		stringColor = bulletLoaded ? stringColor = { 0,1,0 } : stringColor = { 1,0,0 };
+		App::Print(20, 680, bulletString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
 	}
 }

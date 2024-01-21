@@ -80,9 +80,17 @@ void Particle::Render() {
 	p2Transformed.x *= static_cast<float>(APP_VIRTUAL_WIDTH);
 	p2Transformed.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
 
-	App::DrawLine(
-		p1Transformed.x, p1Transformed.y,
-		p2Transformed.x, p2Transformed.y,
-		color.x, color.y, color.z
-	);
+	bool inBounds = p1Transformed.x < APP_VIRTUAL_WIDTH && p1Transformed.x > 0 &&
+		p1Transformed.y < APP_VIRTUAL_HEIGHT && p1Transformed.y > 0;
+
+	inBounds = inBounds && p2Transformed.x < APP_VIRTUAL_WIDTH && p2Transformed.x > 0 &&
+		p2Transformed.y < APP_VIRTUAL_HEIGHT && p2Transformed.y > 0;
+
+	if (inBounds) {
+		App::DrawLine(
+			p1Transformed.x, p1Transformed.y,
+			p2Transformed.x, p2Transformed.y,
+			color.x, color.y, color.z
+		);
+	}
 }

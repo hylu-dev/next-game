@@ -20,4 +20,7 @@ namespace Utils {
     bool IsInRange(float value, float minVal, float maxVal) {
         return value >= minVal && value <= maxVal;
     }
+    float Logistic(float value, float approachRate) {
+        return 1.0 / (1.0 + std::exp(-approachRate * value));
+    }
 }

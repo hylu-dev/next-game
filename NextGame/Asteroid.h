@@ -2,12 +2,8 @@
 #include "Component.h"
 #include "ParticleEmitter.h"
 
-class Bullet : public Component {
-public:
-	float3 color = { 1,0,1 };
-	float3 forward;
-	float speed = 5.0f;
-
+class Asteroid :public Component {
+	float3 rotateVec;
 	ParticleEmitter* emitter = nullptr;
 
 	void Initialize() override;
@@ -15,5 +11,7 @@ public:
 	void Update() override;
 
 	void Destroy() override;
+
+	void SpawnScrap();
 };
 

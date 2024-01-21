@@ -20,12 +20,16 @@ namespace Prefabs {
 	
 	DEFINE_PREFAB(DarkStarSphere);
 	DEFINE_PREFAB(PlayerA);
-	DEFINE_PREFAB(CameraSystem);
+	DEFINE_PREFAB(PlayerB);
+	DEFINE_PREFAB(ViewManager);
+	DEFINE_PREFAB(AsteroidObject);
+
+	DEFINE_PREFAB(Wall);
 
 	/*
 	DEFINE_PREFAB(Player);
 	DEFINE_PREFAB(EnemyBox);
-	DEFINE_PREFAB(Wall);
+	
 	DEFINE_PREFAB(RipplePlane);
 	DEFINE_PREFAB(Checker);
 	DEFINE_PREFAB(Pillar);

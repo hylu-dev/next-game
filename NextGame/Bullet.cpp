@@ -12,7 +12,8 @@ void Bullet::Initialize() {
 	BoxCollider* collider = parentEntity->AddComponent<BoxCollider>();
 	collider->dimensions = parentEntity->GetTransform().scale;
 	collider->SetCollisionHook([this](Collider* c1, Collider* c2) {
-
+		if (c2->parentEntity->Name() == "Asteroid") {
+		}
 		});
 }
 

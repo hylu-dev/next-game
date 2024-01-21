@@ -15,6 +15,7 @@ private:
 	float4x4 matScale = float4x4::CreateScale(float3::One);
 	float4x4 matRotate = float4x4::CreateRotation(float3::Zero);
 	float4x4 matTranslate = float4x4::CreateTranslation(float3::Zero);
+	Quaternion rotateQ;
 
 public:
 	void Initialize() override;

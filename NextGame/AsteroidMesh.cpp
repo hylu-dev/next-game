@@ -1,9 +1,7 @@
 #include "stdafx.h"
-#include "SphereMesh.h"
+#include "AsteroidMesh.h"
 
-// Courtesy of https://danielsieger.com/blog/2021/03/27/generating-spheres.html
-
-std::vector<Triangle> SphereMesh::GenerateMesh() {
+std::vector<Triangle> AsteroidMesh::GenerateMesh() {
     float phi = (1.0f + sqrt(5.0f)) * 0.5f; // golden ratio
     float a = 1.0f;
     float b = 1.0f / phi;
@@ -35,14 +33,14 @@ std::vector<Triangle> SphereMesh::GenerateMesh() {
     tris.push_back({ verts[5], verts[11], verts[4] });
     tris.push_back({ verts[10], verts[8], verts[4] });
 
-    auto midpoint = [](const float3& v1, const float3& v2) { return (v1+v2)*0.5f; };
+    auto midpoint = [](const float3& v1, const float3& v2) { return (v1 + v2) * 0.5f; };
 
     for (int i = 0; i < vertexDensity; ++i) {
         std::vector<Triangle> newTris;
         for (const auto& tri : tris) {
-            float3 m0 = midpoint(tri.p0, tri.p1).Normalized();
-            float3 m1 = midpoint(tri.p1, tri.p2).Normalized();
-            float3 m2 = midpoint(tri.p2, tri.p0).Normalized();
+            float3 m0 = midpoint(tri.p0, tri.p1);
+            float3 m1 = midpoint(tri.p1, tri.p2);
+            float3 m2 = midpoint(tri.p2, tri.p0);
 
             newTris.push_back({ tri.p0, m0, m2 });
             newTris.push_back({ tri.p1, m1, m0 });
@@ -50,6 +48,20 @@ std::vector<Triangle> SphereMesh::GenerateMesh() {
             newTris.push_back({ m0, m1, m2 });
         }
         tris = newTris;
+    }
+
+    float rand = Utils::RandomFloatUniform()*0.5f + 0.5f;
+    float rand1 = Utils::RandomFloat(-0.5, 0.5);
+    float rand2 = Utils::RandomFloat(-0.5, 0.5);
+    float rand3 = Utils::RandomFloat(-0.5, 0.5);
+
+    for (auto& tri : tris) {
+        for (auto& vert : tri.p) {
+            float3 displace = vert;
+            float dist = vert.Distance({rand1, rand2, rand3});
+            displace *= rand*0.1*std::round(sinf(20.0f*rand1 + 20.0f * dist));
+            vert += displace;
+        }
     }
 
     return tris;

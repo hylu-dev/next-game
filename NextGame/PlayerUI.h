@@ -1,10 +1,10 @@
 #pragma once
 #include "Renderable.h"
-#include "ShipA.h"
+#include "Ship.h"
 
 class PlayerUI : public Renderable {
 private:
-	ShipA* ship = nullptr;
+	Ship* ship = nullptr;
 
 	int health = 0;
 	int fuel = 0;

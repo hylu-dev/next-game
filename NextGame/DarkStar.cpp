@@ -52,8 +52,7 @@ void DarkStar::Update() {
 	float3& position = parentEntity->GetTransform().position;
 	float3& rotation = parentEntity->GetTransform().rotation;
 	float3& scale = parentEntity->GetTransform().scale;
-	float speed = 20.0f * Time::Get().DeltaTime();
-
+	float speed = 10.0f * Time::Get().DeltaTime();
 	rotation.x += speed;
 	rotation.y += speed;
 

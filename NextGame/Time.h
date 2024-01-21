@@ -11,7 +11,7 @@ public:
 		static Time instance;
 		return instance;
 	}
-
+	// Test Values
 	float testFloat = 0.0f;
 	float3 testFloat3;
 	

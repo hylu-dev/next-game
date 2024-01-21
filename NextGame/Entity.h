@@ -14,10 +14,12 @@ private:
 	std::list<Component*> components;
 	Transform transform;
 	std::string name = "";
+	std::string tag = "";
 
 public:
 	Transform& GetTransform() { return transform; }
 	std::string Name() { return name; }
+	std::string& Tag() { return tag; }
 	unsigned int Id() { return id; }
 
     template <typename T>

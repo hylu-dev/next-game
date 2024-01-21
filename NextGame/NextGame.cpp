@@ -13,6 +13,7 @@
 #include "ParticleSystem.h"
 
 #include <string>
+#include <iostream>
 
 std::vector<Entity*> actors;
 
@@ -21,7 +22,12 @@ void LoadGameObjects() {
 
 	Prefabs::DarkStarSphere(Transform(0, 0, 500));
 	Prefabs::PlayerA(Transform({0,0,-600}, 0, {4, 2, 5}));
-	Prefabs::CameraSystem(Transform());
+	Prefabs::PlayerB(Transform({ 0,0,600 }, { 0,180,0 }, {4, 2, 5}));
+	Prefabs::AsteroidObject(Transform({ 100,0,-600 }, 0, { 10 }));
+	Prefabs::AsteroidObject(Transform({ 150,0,-600 }, 0, { 10 }));
+	Prefabs::AsteroidObject(Transform({ 200,0,-600 }, 0, { 10 }));
+	Prefabs::AsteroidObject(Transform({ 250,0,-600 }, 0, { 10 }));
+	Prefabs::ViewManager(Transform());
 }
 
 void Init() {
@@ -50,8 +56,9 @@ void Update(float deltaTime) {
 }
 
 void Render() {
-
 	Renderer::Get().Render();
+
+	App::Print(20, 200, std::to_string(Time::Get().testFloat).c_str());
 }
 
 void Shutdown() {

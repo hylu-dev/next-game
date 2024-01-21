@@ -1,7 +1,5 @@
 #pragma once
 #include "Mesh.h"
-class ConeMesh :
-    public Mesh
-{
+class ConeMesh : public Mesh {
 };
 

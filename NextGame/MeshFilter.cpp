@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MeshFilter.h"
 #include <algorithm>
+#include "Quaternion.h"
 
 void MeshFilter::Initialize() {
 	Renderable::Initialize();
@@ -9,7 +10,9 @@ void MeshFilter::Initialize() {
 void MeshFilter::Update() {
 	if (this->parentEntity != nullptr) {
 		matScale = float4x4::CreateScale(parentEntity->GetTransform().scale);
-		matRotate = float4x4::CreateRotation(parentEntity->GetTransform().rotation);
+		//matRotate = float4x4::CreateRotation(parentEntity->GetTransform().rotation);
+		rotateQ = Quaternion::fromEulerAngles(parentEntity->GetTransform().rotation);
+		rotateQ.Normalize();
 		matTranslate = float4x4::CreateTranslation(parentEntity->GetTransform().position);
 	}
 }
@@ -24,7 +27,8 @@ void MeshFilter::LoadMesh(Mesh& mesh) {
 }
 
 void MeshFilter::Render() {
-	float4x4 transformationMatrix = matScale * matRotate * matTranslate;
+	//float4x4 transformationMatrix = matScale * matRotate * matTranslate;
+
 	for (auto& tri : tris) {
 		Triangle triTransformed = tri;
 		if (vertexShader != nullptr) {
@@ -34,7 +38,13 @@ void MeshFilter::Render() {
 		}
 
 		// Transform
-		triTransformed.ApplyMatrix(transformationMatrix);
+		triTransformed.ApplyMatrix(matScale);
+		rotateQ.RotateVector(triTransformed.p0);
+		rotateQ.RotateVector(triTransformed.p1);
+		rotateQ.RotateVector(triTransformed.p2);
+		//triTransformed.ApplyMatrix(matRotate);
+		triTransformed.ApplyMatrix(matTranslate);
+
 		// Backface culling
 		float3 normal = triTransformed.CalcNormal();
 

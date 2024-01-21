@@ -18,14 +18,13 @@ void Camera::Initialize() {
 }
 
 void Camera::Update() {
-	target = transform.position + float4x4::CreateRotation(transform.rotation) * float3(0.0f, 0.0f, 1.0f);
+	forward = transform.Forward();
+	target = transform.position + forward;
 	matView = float4x4::CreateView(
 		transform.position,
 		target,
 		float3(0, 1.0f, 0)
 	);
-
-	forward = (target - transform.position).Normalized();
 	up = float3(0.0f, 1.0f, 0.0f);
 	up = up - forward * up.Dot(forward);
 	up.Normalize();
