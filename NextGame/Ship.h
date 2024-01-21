@@ -9,9 +9,9 @@ public:
 	bool active = false;
 	int health = 100;
 	float fuel = 100;
+	int ammo = 5;
 	const float fuelDrain = 4.0f;
 	int scrap = 0;
-	bool bulletLoaded = true;
 
 	int multishot = 1;
 	float maxSpeed = 50.0f;
@@ -33,7 +33,10 @@ public:
 	ParticleEmitter* bulletEmitter = nullptr;
 	ParticleEmitter* hurtEmitter = nullptr;
 
-	bool isPressed = false;
+	bool keyFirePressed = false;
+	bool key1Pressed = false;
+	bool key2Pressed = false;
+	bool key3Pressed = false;
 
 private:
 	void Initialize() override;
@@ -53,7 +56,7 @@ public:
 
 	void FireWeapon();
 
-	void Reload() { bulletLoaded = true; }
+	void Reload() { ammo = 5; }
 
 	float3 GetOffsetCamera();
 };

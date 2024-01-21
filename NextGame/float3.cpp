@@ -122,3 +122,44 @@ float3 float3::PointOfPlaneIntersect(float3& planePoint, float3& planeNormal, fl
     float3 lineIntersection = lineVector * t;
     return lineStart + lineIntersection;
 }
+
+int float3::ClipAgainstPlane(float3 planePoint, float3 planeNormal, float3& in1, float3& in2, float3& out1, float3& out2) {
+    planeNormal.Normalize();
+
+    auto dist = [&](float3& point) {
+        float3 n = point.Normalized();
+        return (
+            planeNormal.x * point.x +
+            planeNormal.y * point.y +
+            planeNormal.z * point.z -
+            planeNormal.Dot(planePoint)
+            );
+        };
+
+    // Arrays to store points on either side of plane
+    float3* innerPoints[2]; int innerCount = 0;
+    float3* outerPoints[2]; int outerCount = 0;
+
+    // Find distance points are from plane and store as required
+    dist(in1) >= 0 ? innerPoints[innerCount++] = &in1 : outerPoints[outerCount++] = &in1;
+    dist(in2) >= 0 ? innerPoints[innerCount++] = &in2 : outerPoints[outerCount++] = &in2;
+
+    // No line in view
+    if (innerCount == 0) { return 0; }
+
+    // Full line in view, no clip
+    if (innerCount == 2) {
+        out1 = in1;
+        out2 = in2;
+        return 1;
+    }
+
+    // Two points clipped. Close the triangle against the plane
+    if (innerCount == 1 && outerCount == 1) {
+        out1 = *innerPoints[0];
+        out2 = float3::PointOfPlaneIntersect(planePoint, planeNormal, *innerPoints[0], *outerPoints[0]);
+        return 1;
+    }
+
+    return 0;
+}

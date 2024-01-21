@@ -64,10 +64,30 @@ void Particle::Render() {
 		matScale *
 		matRotate *
 		matTranslate *
-		Scene::Get().GetCamera()->GetView() * 
-		Scene::Get().GetCamera()->GetProjection();
+		Scene::Get().GetCamera()->GetView();
+
 	float3 p1Transformed = transformationMatrix*p1;
 	float3 p2Transformed = transformationMatrix*p2;
+
+	// Clipping
+	float3 clipped[2] = { 0, 0 };
+
+	float3::ClipAgainstPlane(
+		{ 0.0f, 0.0f, Scene::Get().GetCamera()->nearPlane },
+		{ 0.0f, 0.0f, Scene::Get().GetCamera()->farPlane },
+		p1Transformed,
+		p2Transformed,
+		clipped[0],
+		clipped[1]
+	);
+
+	if (clipped[0] == 0) { return; }
+
+	p1Transformed = clipped[0];
+	p2Transformed = clipped[1];
+
+	p1Transformed = Scene::Get().GetCamera()->GetProjection() * p1Transformed;
+	p2Transformed = Scene::Get().GetCamera()->GetProjection() * p2Transformed;
 
 	p1Transformed /= p1Transformed.w;
 	p2Transformed /= p2Transformed.w;
@@ -80,17 +100,9 @@ void Particle::Render() {
 	p2Transformed.x *= static_cast<float>(APP_VIRTUAL_WIDTH);
 	p2Transformed.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
 
-	bool inBounds = p1Transformed.x < APP_VIRTUAL_WIDTH && p1Transformed.x > 0 &&
-		p1Transformed.y < APP_VIRTUAL_HEIGHT && p1Transformed.y > 0;
-
-	inBounds = inBounds && p2Transformed.x < APP_VIRTUAL_WIDTH && p2Transformed.x > 0 &&
-		p2Transformed.y < APP_VIRTUAL_HEIGHT && p2Transformed.y > 0;
-
-	if (inBounds) {
-		App::DrawLine(
-			p1Transformed.x, p1Transformed.y,
-			p2Transformed.x, p2Transformed.y,
-			color.x, color.y, color.z
-		);
-	}
+	App::DrawLine(
+		p1Transformed.x, p1Transformed.y,
+		p2Transformed.x, p2Transformed.y,
+		color.x, color.y, color.z
+	);
 }

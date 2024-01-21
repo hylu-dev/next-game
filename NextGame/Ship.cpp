@@ -78,15 +78,15 @@ void Ship::Update() {
 	trailEmitter->direction = forward * -1;
 
 	this->MovementHandler();
-	if (App::IsKeyPressed('F')) {
-		if (!isPressed) {
-			this->FireWeapon();
-		}
-		isPressed = true;
+
+	if (App::IsKeyPressed('F') && !keyFirePressed) {
+		this->FireWeapon();
+		keyFirePressed = true;
 	}
-	else {
-		isPressed = false;
+	else if (!App::IsKeyPressed('F')){
+		keyFirePressed = false;
 	}
+
 	if (scrap >= 100) {
 		this->Upgrade();
 	}
@@ -142,7 +142,6 @@ void Ship::MovementHandler() {
 	rotationSpeed *= Utils::Logistic(distanceFromMaxRotation, 0.1);
 	rotation += rotationSpeed *= deltaFriction;
 	rotation.x = Utils::Clamp(rotation.x, -85, 85);
-	Time::Get().testFloat = rotationSpeed.x;
 
 	camera->transform.rotation = rotation;
 	camera->transform.position = GetOffsetCamera();
@@ -166,36 +165,36 @@ void Ship::SetColor(float3 color) {
 }
 
 void Ship::Upgrade() {
-	if (isPressed) {
-		return;
-	}
-	if (App::IsKeyPressed('1')) {
+	if (App::IsKeyPressed('1') && !key1Pressed) {
+		App::PlaySoundW("Assets/SoundEffects/Alert.wav");
 		scrap -= 100;
 		multishot++;
-		isPressed = true;
-	} 
-	else if (App::IsKeyPressed('2')) {
+		key1Pressed = true;
+	}
+	else if (!App::IsKeyPressed('1')) { key1Pressed = false; }
+
+	if (App::IsKeyPressed('2') && !key2Pressed) {
+		App::PlaySoundW("Assets/SoundEffects/Alert.wav");
 		scrap -= 100;
 		speed += 0.5f;
-		isPressed = true;
+		key2Pressed = true;
 	}
-	else if (App::IsKeyPressed('3')) {
+	else if (!App::IsKeyPressed('2')) { key2Pressed = false; }
+
+	if (App::IsKeyPressed('3') && !key3Pressed) {
+		App::PlaySoundW("Assets/SoundEffects/Alert.wav");
 		scrap -= 100;
 		health += 10;
-		isPressed = true;
-	}
-	else {
-		isPressed = false;
-	}
+		key3Pressed = true;
+	} else if (!App::IsKeyPressed('3')) { key3Pressed = false; }
 }
 
 void Ship::FireWeapon() {
-	if (!bulletLoaded) {
+	if (ammo <= 0) {
 		App::PlaySoundW("Assets/SoundEffects/Crack_3.wav");
 		return;
 	}
-	bulletLoaded = false;
-
+	ammo--;
 	for (int i = 0; i < multishot; i++) {
 		App::PlaySoundW("Assets/SoundEffects/Fire_Laser.wav");
 		Entity* entity = Scene::Get().CreateEntity(parentEntity->Name() + "_Bullet");

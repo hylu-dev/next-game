@@ -38,4 +38,7 @@ union float3 {
 
 	// The point where a line intersect a plane
 	static float3 PointOfPlaneIntersect(float3& planePoint, float3& planeNormal, float3& lineStart, float3& lineEnd);
+
+	// Look at the version in Triangle.h, same idea but with a line instead of a tri
+	static int float3::ClipAgainstPlane(float3 planePoint, float3 planeNormal, float3& in1, float3& in2, float3& out1, float3& out2);
 };

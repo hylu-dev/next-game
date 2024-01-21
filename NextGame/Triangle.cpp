@@ -96,12 +96,9 @@ int Triangle::ClipAgainstPlane(float3 planePoint, float3 planeNormal, Triangle& 
 	float3* innerPoints[3]; int innerCount = 0;
 	float3* outerPoints[3]; int outerCount = 0;
 	// Find distance points are from plane and store as required
-	float d0 = dist(in.p0);
-	float d1 = dist(in.p1);
-	float d2 = dist(in.p2);
-	d0 >= 0 ? innerPoints[innerCount++] = &in.p0 : outerPoints[outerCount++] = &in.p1;
-	d1 >= 0 ? innerPoints[innerCount++] = &in.p1 : outerPoints[outerCount++] = &in.p1;
-	d2 >= 0 ? innerPoints[innerCount++] = &in.p2 : outerPoints[outerCount++] = &in.p2;
+	dist(in.p0) >= 0 ? innerPoints[innerCount++] = &in.p0 : outerPoints[outerCount++] = &in.p0;
+	dist(in.p1) >= 0 ? innerPoints[innerCount++] = &in.p1 : outerPoints[outerCount++] = &in.p1;
+	dist(in.p2) >= 0 ? innerPoints[innerCount++] = &in.p2 : outerPoints[outerCount++] = &in.p2;
 
 	// The following conditions will cover all possible clipping cases for a triangles
 

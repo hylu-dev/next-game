@@ -29,7 +29,6 @@ namespace Prefabs {
 	/*
 	DEFINE_PREFAB(Player);
 	DEFINE_PREFAB(EnemyBox);
-	
 	DEFINE_PREFAB(RipplePlane);
 	DEFINE_PREFAB(Checker);
 	DEFINE_PREFAB(Pillar);

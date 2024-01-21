@@ -47,7 +47,15 @@ void MenuUI::Render() {
 		text = "Press ENTER to restart";
 		App::Print(435, 80, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 	}
-	if (!isStart && !isWin) {
+	if (isDraw) {
+		stringColor = float3::One;
+		text = "Both pilots have perished within the supernova";
+		App::Print(350, 680, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		stringColor = { 1, 1, 0 };
+		text = "Press ENTER to restart";
+		App::Print(435, 80, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+	}
+	if (!isStart && !isWin && !isDraw) {
 		stringColor = { 1, 1, 0 };
 		text = "Press ENTER to end turn";
 		App::Print(435, 80, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
@@ -86,16 +94,11 @@ void MenuUI::Render() {
 	}
 }
 
-void MenuUI::ClearMenu() {
-	isStart = false;
-	isWin = false;
-	isTurn = false;
-}
-
 void MenuUI::StartMenu() {
 	isStart = true;
 	isWin = false;
 	isTurn = false;
+	isDraw = false;
 }
 
 void MenuUI::WinMenu(std::string name) {
@@ -103,17 +106,20 @@ void MenuUI::WinMenu(std::string name) {
 	isStart = false;
 	isWin = true;
 	isTurn = false;
+	isDraw = false;
+}
+
+void MenuUI::DrawMenu() {
+	isStart = false;
+	isWin = false;
+	isTurn = false;
+	isDraw = true;
 }
 
 void MenuUI::TurnMenu(Ship* ship) {
 	isStart = false;
 	isWin = false;
 	isTurn = true;
-}
-
-
-void MenuUI::Restart() {
-	isStart = true;
-	isWin = false;
+	isDraw = false;
 }
 

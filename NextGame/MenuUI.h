@@ -10,6 +10,7 @@ public:
 	bool isStart = true;
 	bool isWin = false;
 	bool isTurn = false;
+	bool isDraw = false;
 
 	std::string winner;
 
@@ -24,13 +25,11 @@ public:
 
 	void Render() override;
 
-	void ClearMenu();
-
 	void StartMenu();
 
 	void WinMenu(std::string name);
 
-	void TurnMenu(Ship* ship);
+	void DrawMenu();
 
-	void Restart();
+	void TurnMenu(Ship* ship);
 };

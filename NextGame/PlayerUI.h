@@ -9,7 +9,7 @@ private:
 	int health = 0;
 	int fuel = 0;
 	int scrap = 0;
-	bool bulletLoaded = 0;
+	int ammo = 0;
 
 	float3 stringColor = float3::One;
 	std::string healthString;

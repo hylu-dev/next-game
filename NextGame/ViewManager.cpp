@@ -32,11 +32,10 @@ void ViewManager::Update() {
 				menuUI->isStart = false;
 				PlayerAView();
 			}
-			else if (menuUI->isWin) {
-
+			else if (menuUI->isWin || menuUI->isDraw) {
+				Restart();
 			}
 			else {
-				menuUI->ClearMenu();
 				CycleTurn();
 			}
 			App::PlaySoundW("Assets/SoundEffects/Beep.wav");
@@ -60,7 +59,7 @@ void ViewManager::Update() {
 	else if (App::IsKeyPressed('V')) {
 		playerA->scrap = 1000;
 		playerA->fuel = 100;
-		playerA->bulletLoaded = true;
+		playerA->ammo = 5;
 	}
 
 	playerA->active = activePlayer == playerA;
@@ -135,6 +134,8 @@ void ViewManager::OnNotify(const Entity* entity, GameEvent event) {
 		WideView();
 		break;
 	case SUPERNOVA:
+		App::PlaySoundW("Assets/SoundEffects/Carrot.wav");
+		menuUI->DrawMenu();
 		WideView();
 	default:
 		break;

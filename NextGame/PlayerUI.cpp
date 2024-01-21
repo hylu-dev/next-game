@@ -6,11 +6,12 @@ void PlayerUI::Initialize() {
 	Renderable::Initialize();
 
 	ship = parentEntity->GetComponent<Ship>();
+	assert(ship != nullptr);
 }
 
 void PlayerUI::Update() {
 	health = ship->health;
-	bulletLoaded = ship->bulletLoaded;
+	ammo = ship->ammo;
 	fuel = ship->fuel;
 	scrap = ship->scrap;
 
@@ -24,11 +25,11 @@ void PlayerUI::Update() {
 		fuelString += "|";
 	}
 
+	bulletString = "AMMO: ";
+	bulletString += std::to_string(ammo);
+
 	scrapString = "SCRAP: ";
 	scrapString += std::to_string(scrap);
-
-	bulletString = "WEAPON: ";
-	bulletString += bulletLoaded ? "LOADED" : "EMPTY";
 }
 
 void PlayerUI::Destroy() {
@@ -42,9 +43,9 @@ void PlayerUI::Render() {
 
 		App::Print(20, 720, fuelString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
 
-		App::Print(20, 700, scrapString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
-
-		stringColor = bulletLoaded ? stringColor = { 0,1,0 } : stringColor = { 1,0,0 };
-		App::Print(20, 680, bulletString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
+		stringColor = ammo > 0 ? stringColor = { 0,1,0 } : stringColor = { 1,0,0 };
+		App::Print(20, 700, bulletString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
+		stringColor = float3::One;
+		App::Print(20, 680, scrapString.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_9_BY_15);
 	}
 }
