@@ -2,6 +2,7 @@
 #include "MeshFilter.h"
 #include <algorithm>
 #include "Quaternion.h"
+#include "Renderer.h"
 
 void MeshFilter::Initialize() {
 	Renderable::Initialize();
@@ -79,6 +80,7 @@ void MeshFilter::Render() {
 				triTransformed.p1.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
 				triTransformed.p2.x *= static_cast<float>(APP_VIRTUAL_WIDTH);
 				triTransformed.p2.y *= static_cast<float>(APP_VIRTUAL_HEIGHT);
+
 				triTransformed.color = color;
 				triTransformed.Draw();
 			}

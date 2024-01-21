@@ -16,7 +16,7 @@ void PlayerUI::Update() {
 	scrap = ship->scrap;
 
 	healthString = "HEALTH: ";
-	for (int i = 0; i < health; i += 5) {
+	for (int i = 0; i < health; i += 10) {
 		healthString += "o";
 	}
 

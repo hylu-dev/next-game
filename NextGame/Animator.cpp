@@ -27,6 +27,12 @@ void Animator::Destroy() {
 	animationsToDelete.clear();
 }
 
+void Animator::ClearAnimations() {
+	for (auto& ani : animations) {
+		ani->Cancel();
+	}
+}
+
 void Animator::Animate(float3& start, float3 end, float duration, TimingFunction* interpolator, std::function<void()> callback) {
 	animations.push_back(new Animation(start, end, duration, interpolator, this, callback));
 }

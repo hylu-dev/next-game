@@ -5,6 +5,7 @@
 class MenuUI : public Renderable {
 public:
 	float3 stringColor = float3::One;
+
 	std::string text;
 
 	bool isStart = true;
@@ -15,6 +16,7 @@ public:
 	std::string winner;
 
 	int pulsesLeft = 0;
+	int turnsUntilPulse = 0;
 
 public:
 	void Initialize();
@@ -31,5 +33,5 @@ public:
 
 	void DrawMenu();
 
-	void TurnMenu(Ship* ship);
+	void TurnMenu();
 };

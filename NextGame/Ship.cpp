@@ -6,6 +6,7 @@
 #include "TimingFunction.h"
 #include "Bullet.h"
 #include "Animator.h"
+#include "DarkStar.h"
 
 void Ship::Initialize() {
 	parentEntity->Tag() = "Ship";
@@ -18,17 +19,16 @@ void Ship::Initialize() {
 	collider->SetCollisionHook([this](Collider* c1, Collider* c2) {
 		float3& p1 = c1->parentEntity->GetTransform().position;
 		float3& p2 = c2->parentEntity->GetTransform().position;
-		if (c2->parentEntity->Name() == "AsteroidObject") {
-			health -= 10;
-		}
-		if (c2->parentEntity->Name() == "DarkStar") {
-			health -= 10;
+		if (c2->parentEntity->Name() == "DarkStarSphere") {
 			float3 direction = (p1 - p2).Normalized();
 			p1 += direction * 20.0f * Time::Get().DeltaTime();
 			animator->Animate(
 				parentEntity->GetTransform().position,
-				parentEntity->GetTransform().position + direction * 30.0f,
+				parentEntity->GetTransform().position + direction * 100.0f,
 				1.0f, new EaseOut);
+			DarkStar* darkStar = c2->parentEntity->GetComponent<DarkStar>();
+			darkStar->Pulse();
+			Hurt(60);
 		}
 		if (c2->parentEntity->Name() == "Scrap") {
 			if (p1.Distance(p2) < 5.0f) {
@@ -38,7 +38,7 @@ void Ship::Initialize() {
 			}
 		}
 		if (c2->parentEntity->Tag() == "Bullet" && c2->parentEntity->Name() != parentEntity->Name() + "_Bullet") {
-			Hurt();
+			Hurt(20);
 			Scene::Get().RemoveEntity(c2->parentEntity);
 		}
 		});
@@ -63,12 +63,12 @@ void Ship::Initialize() {
 	bulletEmitter->shape = EmissionShape::CONE;
 	bulletEmitter->direction = parentEntity->GetTransform().rotation;
 
-	hurtEmitter = parentEntity->AddComponent<ParticleEmitter>();
-	hurtEmitter->burstSize = 100;
-	hurtEmitter->size = 2;
-	hurtEmitter->lifetime = 0.5f;
-	hurtEmitter->active = false;
-	hurtEmitter->speed = 50.0f;
+	radialEmitter = parentEntity->AddComponent<ParticleEmitter>();
+	radialEmitter->burstSize = 100;
+	radialEmitter->size = 2;
+	radialEmitter->lifetime = 0.5f;
+	radialEmitter->active = false;
+	radialEmitter->speed = 50.0f;
 	// Member Variables
 	camera = Scene::Get().GetCamera();
 }
@@ -139,19 +139,19 @@ void Ship::MovementHandler() {
 	// Some rendering issues with >= |90|deg x-rotations, slow down rotation and clamp near these values
 	// Actually, it kinda feels better this way!
 	float distanceFromMaxRotation = 90 - std::abs(rotation.x);
-	rotationSpeed *= Utils::Logistic(distanceFromMaxRotation, 0.1);
+	rotationSpeed *= Utils::Logistic(distanceFromMaxRotation, 0.3);
 	rotation += rotationSpeed *= deltaFriction;
-	rotation.x = Utils::Clamp(rotation.x, -85, 85);
+	rotation.x = Utils::Clamp(rotation.x, -86, 86);
 
 	camera->transform.rotation = rotation;
 	camera->transform.position = GetOffsetCamera();
 	forward = parentEntity->GetTransform().Forward();
 }
 
-void Ship::Hurt() {
-	health -= 20;
+void Ship::Hurt(int damage) {
+	health -= damage;
 	App::PlaySoundW("Assets/SoundEffects/Swoosh.wav");
-	hurtEmitter->Emit();
+	radialEmitter->Emit();
 	if (health <= 0) {
 		parentEntity->Name() == "PlayerA" ? Notify(GameEvent::PLAYERB_WIN) : Notify(GameEvent::PLAYERA_WIN);
 		meshFilter->active = false;
@@ -161,12 +161,13 @@ void Ship::Hurt() {
 void Ship::SetColor(float3 color) {
 	meshFilter->SetColor(color);
 	bulletEmitter->color = color;
-	hurtEmitter->color = color;
+	radialEmitter->color = color;
 }
 
 void Ship::Upgrade() {
 	if (App::IsKeyPressed('1') && !key1Pressed) {
-		App::PlaySoundW("Assets/SoundEffects/Alert.wav");
+		App::PlaySoundW("Assets/SoundEffects/Random_7.wav");
+		radialEmitter->Emit();
 		scrap -= 100;
 		multishot++;
 		key1Pressed = true;
@@ -174,7 +175,8 @@ void Ship::Upgrade() {
 	else if (!App::IsKeyPressed('1')) { key1Pressed = false; }
 
 	if (App::IsKeyPressed('2') && !key2Pressed) {
-		App::PlaySoundW("Assets/SoundEffects/Alert.wav");
+		App::PlaySoundW("Assets/SoundEffects/Random_7.wav");
+		radialEmitter->Emit();
 		scrap -= 100;
 		speed += 0.5f;
 		key2Pressed = true;
@@ -182,11 +184,31 @@ void Ship::Upgrade() {
 	else if (!App::IsKeyPressed('2')) { key2Pressed = false; }
 
 	if (App::IsKeyPressed('3') && !key3Pressed) {
-		App::PlaySoundW("Assets/SoundEffects/Alert.wav");
-		scrap -= 100;
-		health += 10;
+		if (health < 100) {
+			App::PlaySoundW("Assets/SoundEffects/Random_7.wav");
+			radialEmitter->Emit();
+			scrap -= 100;
+			health += 10;
+		}
+		else {
+			App::PlaySoundW("Assets/SoundEffects/Crack_3.wav");
+		}
 		key3Pressed = true;
 	} else if (!App::IsKeyPressed('3')) { key3Pressed = false; }
+
+	if (App::IsKeyPressed('4') && !key4Pressed) {
+		if (fuel < 100) {
+			App::PlaySoundW("Assets/SoundEffects/Random_7.wav");
+			radialEmitter->Emit();
+			scrap -= 100;
+			fuel += 10;
+		}
+		else {
+			App::PlaySoundW("Assets/SoundEffects/Crack_3.wav");
+		}
+		key4Pressed = true;
+	}
+	else if (!App::IsKeyPressed('4')) { key4Pressed = false; }
 }
 
 void Ship::FireWeapon() {

@@ -5,6 +5,7 @@
 
 class Animation {
 private:
+	bool pause = false;
 	float3& source;
 	float3 start;
 	float3 end;
@@ -20,5 +21,9 @@ public:
 	~Animation() { delete interpolator; }
 
 	void Update();
+
+	void Cancel() { progress = 1.0f; }
+	void Pause() { pause = true; }
+	void Resume() { pause = false; }
 };
 

@@ -69,7 +69,7 @@ void Particle::Render() {
 	float3 p1Transformed = transformationMatrix*p1;
 	float3 p2Transformed = transformationMatrix*p2;
 
-	// Clipping
+	// Clipping using a similar strategy to triangles but simplified for lines
 	float3 clipped[2] = { 0, 0 };
 
 	float3::ClipAgainstPlane(

@@ -5,6 +5,7 @@
 #include "SphereCollider.h"
 #include "ParticleEmitter.h"
 #include "Scrap.h"
+#include "Ship.h"
 
 void Asteroid::Initialize() {
 	parentEntity->GetTransform().scale *= Utils::RandomFloatUniform() + 0.5;
@@ -20,6 +21,10 @@ void Asteroid::Initialize() {
 			c1->active = false;
 			Scene::Get().RemoveEntity(c1->parentEntity);
 			App::PlaySoundW("Assets/SoundEffects/Cracking.wav");
+		}
+		if (c2->parentEntity->Tag() == "Ship") {
+			Ship* ship = c2->parentEntity->GetComponent<Ship>();
+			ship->Hurt(20);
 		}
 		});
 	rotateVec = {

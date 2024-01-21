@@ -31,12 +31,13 @@ public:
 	Animator* animator = nullptr;
 	ParticleEmitter* trailEmitter = nullptr;
 	ParticleEmitter* bulletEmitter = nullptr;
-	ParticleEmitter* hurtEmitter = nullptr;
+	ParticleEmitter* radialEmitter = nullptr;
 
 	bool keyFirePressed = false;
 	bool key1Pressed = false;
 	bool key2Pressed = false;
 	bool key3Pressed = false;
+	bool key4Pressed = false;
 
 private:
 	void Initialize() override;
@@ -48,7 +49,7 @@ private:
 	void MovementHandler();
 
 public:
-	void Hurt();
+	void Hurt(int damage);
 
 	void SetColor(float3 color);
 

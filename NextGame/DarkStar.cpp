@@ -89,6 +89,14 @@ void DarkStar::SpawnAsteroids() {
 }
 
 void DarkStar::Pulse() {
+	health--;
+	if (health == 0) {
+		Supernova();
+		return;
+	}
+	else {
+		pulseEmitter->Emit();
+	}
 	App::PlaySoundW("Assets/SoundEffects/Cracking.wav");
 	Notify(GameEvent::STAR_PULSE);
 	animator->Animate(parentEntity->GetTransform().scale, parentEntity->GetTransform().scale * 0.7, 0.5f, new ElasticEaseOut);
@@ -99,14 +107,6 @@ void DarkStar::Pulse() {
 	meshFilter->Color().y += 0.2;
 	pulseEmitter->color = meshFilter->Color();
 	constantEmitter->color = meshFilter->Color();
-
-	health--;
-	if (health == 0) {
-		Supernova();
-	}
-	else {
-		pulseEmitter->Emit();
-	}
 	this->PullOrbits();
 }
 

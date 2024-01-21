@@ -4,7 +4,6 @@
 Renderer* Renderer::instance = nullptr;
 
 void Renderer::Initialize() {
-	depthBuffer = new float[APP_VIRTUAL_WIDTH * APP_VIRTUAL_HEIGHT];
 }
 
 void Renderer::Update() {
@@ -12,16 +11,28 @@ void Renderer::Update() {
 }
 
 void Renderer::Render() {
+	bool topRenderableFound = false;
 	for (auto& renderable : renderables) {
 		if (renderable->active) {
-			renderable->Render();
+			if (topRenderable == renderable) {
+				topRenderableFound = true;
+			}
+			else {
+				renderable->Render();
+			}
 		}
+	}
+	if (topRenderableFound) {
+		topRenderable->Render(); 
+	}
+	else {
+		topRenderable = nullptr;
 	}
 }
 
 void Renderer::Destroy() {
+	topRenderable = nullptr;
 	renderables.clear();
-	delete depthBuffer;
 	delete instance;
 }
 

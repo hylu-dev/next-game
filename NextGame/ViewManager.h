@@ -17,8 +17,11 @@ class ViewManager : public Component, public Observer {
 	MenuUI* menuUI = nullptr;
 
 	bool enterPressed = false;
+	bool inAnimation = false;
 
 	int turns = 0;
+	int pulseFrequency = 4;
+	int turnsUntilPulse = pulseFrequency;
 
 	void Initialize() override;
 
@@ -33,10 +36,6 @@ class ViewManager : public Component, public Observer {
 	void PlayerBView();
 
 	void CycleTurn();
-
-	void Start();
-
-	void Restart();
 
 	void OnNotify(const Entity* entity, GameEvent event) override;
 };

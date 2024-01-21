@@ -20,6 +20,8 @@ public:
 
 	void Destroy() override;
 
+	void ClearAnimations();
+
 	void Animate(float3& start, float3 end, float duration, TimingFunction* interpolator, std::function<void()> callback = nullptr);
 };
 

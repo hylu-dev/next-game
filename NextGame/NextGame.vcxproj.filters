@@ -139,14 +139,14 @@
     <ClCompile Include="Scrap.cpp">
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerUI.cpp">
-      <Filter>Game\Game Elements\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Quaternion.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
     <ClCompile Include="MenuUI.cpp">
-      <Filter>Game\Game Elements\Managers</Filter>
+      <Filter>Game\Game Elements\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
+      <Filter>Game\Game Elements\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -297,20 +297,20 @@
     <ClInclude Include="Scrap.h">
       <Filter>Game\Game Elements</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerUI.h">
-      <Filter>Game\Game Elements\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Quaternion.h">
       <Filter>Engine\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuUI.h">
-      <Filter>Game\Game Elements\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
       <Filter>Game\Game Elements\Managers</Filter>
     </ClInclude>
     <ClInclude Include="ObservableComponent.h">
       <Filter>Game\Game Elements\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuUI.h">
+      <Filter>Game\Game Elements\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUI.h">
+      <Filter>Game\Game Elements\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -364,6 +364,9 @@
     </Filter>
     <Filter Include="Game\Test">
       <UniqueIdentifier>{ad6ea09c-1975-4a0f-9f4e-7af8740be8e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Game Elements\UI">
+      <UniqueIdentifier>{27a8c71a-753d-4d19-9fa3-af322598e8cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -36,6 +36,10 @@ void MenuUI::Render() {
 		stringColor = { 1, 1, 0 };
 		text = std::to_string(pulsesLeft);
 		text += " pulses until supernova";
+		App::Print(420, 700, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		stringColor = float3::One;
+		text = std::to_string(turnsUntilPulse);
+		text += " turns until next pulse";
 		App::Print(420, 680, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 	}
 	if (isWin) {
@@ -44,7 +48,7 @@ void MenuUI::Render() {
 		text += " has won!";
 		App::Print(420, 680, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 		stringColor = { 1, 1, 0 };
-		text = "Press ENTER to restart";
+		text = "Press BACK to restart";
 		App::Print(435, 80, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 	}
 	if (isDraw) {
@@ -52,7 +56,7 @@ void MenuUI::Render() {
 		text = "Both pilots have perished within the supernova";
 		App::Print(350, 680, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 		stringColor = { 1, 1, 0 };
-		text = "Press ENTER to restart";
+		text = "Press BACK to restart";
 		App::Print(435, 80, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 	}
 	if (!isStart && !isWin && !isDraw) {
@@ -116,7 +120,7 @@ void MenuUI::DrawMenu() {
 	isDraw = true;
 }
 
-void MenuUI::TurnMenu(Ship* ship) {
+void MenuUI::TurnMenu() {
 	isStart = false;
 	isWin = false;
 	isTurn = true;

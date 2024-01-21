@@ -7,7 +7,9 @@ class Renderer {
 private:
 	friend Renderable;
 	std::list<Renderable*> renderables;
-	float* depthBuffer = nullptr;
+
+	// To avoid depth buffering, we use this to draw current ship on top
+	Renderable* topRenderable = nullptr;
 
 	static Renderer* instance;
 
@@ -19,7 +21,7 @@ public:
 		return *instance;
 	}
 
-	float* GetDepthBuffer() { return depthBuffer; }
+	void SetTopRenderable(Renderable* _renderable) { topRenderable = _renderable; }
 
 	void Initialize();
 

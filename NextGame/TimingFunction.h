@@ -1,5 +1,14 @@
 #pragma once
 
+enum class Easing {
+	EaseIn,
+	EaseOut,
+	EaseInOut,
+	ElasticEaseOut,
+	EaseInOutBack,
+	Linear
+};
+
 class TimingFunction {
 public:
 	virtual float Interpolate(float start, float end, float t) = 0;
