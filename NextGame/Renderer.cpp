@@ -13,7 +13,9 @@ void Renderer::Update() {
 
 void Renderer::Render() {
 	for (auto& renderable : renderables) {
-		renderable->Render();
+		if (renderable->active) {
+			renderable->Render();
+		}
 	}
 }
 

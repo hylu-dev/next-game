@@ -6,9 +6,10 @@ enum GameEvent {
 	PLAYERA_WIN,
 	PLAYERB_WIN,
 	STAR_PULSE,
+	SUPERNOVA
 };
 
 class Observer {
 public:
-	virtual void onNotify(const Entity* entity, GameEvent event) = 0;
+	virtual void OnNotify(const Entity* entity, GameEvent event) = 0;
 };

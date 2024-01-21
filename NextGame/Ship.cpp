@@ -34,7 +34,12 @@ void Ship::Initialize() {
 			if (p1.Distance(p2) < 5.0f) {
 				scrap += 10.0f;
 				Scene::Get().RemoveEntity(c2->parentEntity);
+				App::PlaySoundW("Assets/SoundEffects/Collect.wav");
 			}
+		}
+		if (c2->parentEntity->Tag() == "Bullet" && c2->parentEntity->Name() != parentEntity->Name() + "_Bullet") {
+			Hurt();
+			Scene::Get().RemoveEntity(c2->parentEntity);
 		}
 		});
 	animator = parentEntity->AddComponent<Animator>();
@@ -57,16 +62,33 @@ void Ship::Initialize() {
 	bulletEmitter->coneWidth = 30.0f;
 	bulletEmitter->shape = EmissionShape::CONE;
 	bulletEmitter->direction = parentEntity->GetTransform().rotation;
+
+	hurtEmitter = parentEntity->AddComponent<ParticleEmitter>();
+	hurtEmitter->burstSize = 100;
+	hurtEmitter->size = 2;
+	hurtEmitter->lifetime = 0.5f;
+	hurtEmitter->active = false;
+	hurtEmitter->speed = 50.0f;
 	// Member Variables
 	camera = Scene::Get().GetCamera();
 }
 
 void Ship::Update() {
-	trailEmitter->direction = camera->Forward() * -1;
+	if (!active) { return; }
+	trailEmitter->direction = forward * -1;
 
-	if (active) {
-		this->MovementHandler();
-		this->FireWeapon();
+	this->MovementHandler();
+	if (App::IsKeyPressed('F')) {
+		if (!isPressed) {
+			this->FireWeapon();
+		}
+		isPressed = true;
+	}
+	else {
+		isPressed = false;
+	}
+	if (scrap >= 100) {
+		this->Upgrade();
 	}
 }
 
@@ -80,12 +102,11 @@ void Ship::MovementHandler() {
 	float3& position = parentEntity->GetTransform().position;
 	float3& rotation = parentEntity->GetTransform().rotation;
 	float3& scale = parentEntity->GetTransform().scale;
-	float velocity = speed * Time::Get().DeltaTime();
 
-	float deltaAcceleration = acceleration * Time::Get().DeltaTime();
+	float deltaAcceleration = speed * acceleration * Time::Get().DeltaTime();
 	float deltaFriction = 1.0 - friction * Time::Get().DeltaTime();
 
-	if (rotationSpeed.Length() <= speed) {
+	if (rotationSpeed.Length() <= maxSpeed) {
 		if (App::IsKeyPressed('A')) {
 			rotationSpeed += float3(0,1,0)*deltaAcceleration;
 		}
@@ -100,7 +121,7 @@ void Ship::MovementHandler() {
 		}
 	}
 	
-	if (movement.Length() <= speed && fuel > 0) {
+	if (movement.Length() <= maxSpeed && fuel > 0) {
 		if (App::IsKeyPressed('W')) {
 			trailEmitter->Emit();
 			fuel -= fuelDrain * Time::Get().DeltaTime();
@@ -120,7 +141,7 @@ void Ship::MovementHandler() {
 	float distanceFromMaxRotation = 90 - std::abs(rotation.x);
 	rotationSpeed *= Utils::Logistic(distanceFromMaxRotation, 0.1);
 	rotation += rotationSpeed *= deltaFriction;
-	rotation.x = Utils::Clamp(rotation.x, -89, 89);
+	rotation.x = Utils::Clamp(rotation.x, -85, 85);
 	Time::Get().testFloat = rotationSpeed.x;
 
 	camera->transform.rotation = rotation;
@@ -128,23 +149,64 @@ void Ship::MovementHandler() {
 	forward = parentEntity->GetTransform().Forward();
 }
 
+void Ship::Hurt() {
+	health -= 20;
+	App::PlaySoundW("Assets/SoundEffects/Swoosh.wav");
+	hurtEmitter->Emit();
+	if (health <= 0) {
+		parentEntity->Name() == "PlayerA" ? Notify(GameEvent::PLAYERB_WIN) : Notify(GameEvent::PLAYERA_WIN);
+		meshFilter->active = false;
+	}
+}
+
 void Ship::SetColor(float3 color) {
 	meshFilter->SetColor(color);
 	bulletEmitter->color = color;
+	hurtEmitter->color = color;
+}
+
+void Ship::Upgrade() {
+	if (isPressed) {
+		return;
+	}
+	if (App::IsKeyPressed('1')) {
+		scrap -= 100;
+		multishot++;
+		isPressed = true;
+	} 
+	else if (App::IsKeyPressed('2')) {
+		scrap -= 100;
+		speed += 0.5f;
+		isPressed = true;
+	}
+	else if (App::IsKeyPressed('3')) {
+		scrap -= 100;
+		health += 10;
+		isPressed = true;
+	}
+	else {
+		isPressed = false;
+	}
 }
 
 void Ship::FireWeapon() {
-	if (!App::IsKeyPressed('F') || !bulletLoaded) { return; }
+	if (!bulletLoaded) {
+		App::PlaySoundW("Assets/SoundEffects/Crack_3.wav");
+		return;
+	}
 	bulletLoaded = false;
+
 	for (int i = 0; i < multishot; i++) {
-		Entity* entity = Scene::Get().CreateEntity("Bullet");
+		App::PlaySoundW("Assets/SoundEffects/Fire_Laser.wav");
+		Entity* entity = Scene::Get().CreateEntity(parentEntity->Name() + "_Bullet");
 		entity->GetTransform().position = parentEntity->GetTransform().position;
 		entity->GetTransform().rotation = parentEntity->GetTransform().rotation;
+		entity->GetTransform().scale = 2.0f;
 		Bullet* bullet = entity->AddComponent<Bullet>();
-		bullet->forward = camera->Forward();
-		bulletEmitter->direction = camera->Forward();
-		bulletEmitter->Emit();
+		bullet->forward = forward + Utils::RandomFloat3(-.002f*multishot,.002f*multishot);
 	}
+	bulletEmitter->direction = forward;
+	bulletEmitter->Emit(); 
 }
 
 float3 Ship::GetOffsetCamera() {

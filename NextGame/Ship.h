@@ -14,7 +14,8 @@ public:
 	bool bulletLoaded = true;
 
 	int multishot = 1;
-	float speed = 50.0f;
+	float maxSpeed = 50.0f;
+	float speed = 1.0f;
 	float acceleration = 2.0f;
 	float3 movement = float3::Zero;
 	float3 rotationSpeed = float3::Zero;
@@ -30,6 +31,9 @@ public:
 	Animator* animator = nullptr;
 	ParticleEmitter* trailEmitter = nullptr;
 	ParticleEmitter* bulletEmitter = nullptr;
+	ParticleEmitter* hurtEmitter = nullptr;
+
+	bool isPressed = false;
 
 private:
 	void Initialize() override;
@@ -41,9 +45,15 @@ private:
 	void MovementHandler();
 
 public:
+	void Hurt();
+
 	void SetColor(float3 color);
 
+	void Upgrade();
+
 	void FireWeapon();
+
+	void Reload() { bulletLoaded = true; }
 
 	float3 GetOffsetCamera();
 };

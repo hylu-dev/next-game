@@ -2,6 +2,15 @@
 #include "Entity.h"
 #include "Component.h"
 
+void Entity::SetActive(bool state) {
+	active = state;
+	if (!active) {
+		for (auto& component : components) {
+			component->active = false;
+		}
+	}
+}
+
 void Entity::Initialize() {
 
 }

@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "Scrap.h"
 #include "MeshFilter.h"
-#include "SphereMesh.h"
+#include "CubeMesh.h"
 #include "SphereCollider.h"
 #include "ParticleEmitter.h"
 #include "Animator.h"
 
 void Scrap::Initialize() {
 	MeshFilter* meshFilter = parentEntity->AddComponent<MeshFilter>();
-	meshFilter->LoadMesh(SphereMesh(1));
+	meshFilter->LoadMesh(CubeMesh(1));
 	meshFilter->SetColor(float3({1, 1, 0}));
 	SphereCollider* collider = parentEntity->AddComponent<SphereCollider>();
 	collider->radius = parentEntity->GetTransform().scale.x + pickUpOffset;
@@ -17,9 +17,6 @@ void Scrap::Initialize() {
 			float3 direction = c2->parentEntity->GetTransform().position - c1->parentEntity->GetTransform().position;
 			float distance = direction.Length();
 			parentEntity->GetTransform().position += direction * (10.0f * Time::Get().DeltaTime());
-
-			
-
 		}
 	});
 	Animator* animator = parentEntity->AddComponent<Animator>();
@@ -30,7 +27,7 @@ void Scrap::Initialize() {
 			Utils::RandomFloat(-spawnRadius, spawnRadius),
 			Utils::RandomFloat(-spawnRadius, spawnRadius)
 			}),
-		0.5f,
+		0.3f,
 		new EaseOut()
 	);
 }

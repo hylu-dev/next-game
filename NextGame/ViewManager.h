@@ -34,6 +34,10 @@ class ViewManager : public Component, public Observer {
 
 	void CycleTurn();
 
-	void onNotify(const Entity* entity, GameEvent event) override;
+	void Start();
+
+	void Restart();
+
+	void OnNotify(const Entity* entity, GameEvent event) override;
 };
 

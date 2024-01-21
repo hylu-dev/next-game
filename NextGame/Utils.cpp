@@ -14,6 +14,14 @@ namespace Utils {
         return min + (max - min) * dis(gen);
     }
 
+    float3 RandomFloat3(float3 min, float3 max) {
+        return float3(
+            min.x + (max.x - min.x) * dis(gen),
+            min.y + (max.y - min.y) * dis(gen),
+            min.z + (max.z - min.z) * dis(gen)
+        );
+    }
+
     float Clamp(float value, float minVal, float maxVal) {
         return max(minVal, min(value, maxVal));
     }

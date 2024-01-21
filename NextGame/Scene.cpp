@@ -60,6 +60,28 @@ Entity* Scene::GetEntityByName(std::string name) {
 	return nullptr;
 }
 
+std::vector<Entity*> Scene::GetEntitiesByName(std::string name)
+{
+	std::vector<Entity*> result;
+	for (auto& entity : entities) {
+		if (entity->Name() == name) {
+			result.push_back(entity);
+		}
+	}
+	return result;
+}
+
+std::vector<Entity*> Scene::GetEntitiesByTag(std::string tag)
+{
+	std::vector<Entity*> result;
+	for (auto& entity : entities) {
+		if (entity->Tag() == tag) {
+			result.push_back(entity);
+		}
+	}
+	return result;
+}
+
 Entity* Scene::GetEntityById(unsigned int _id)
 {
 	for (auto& entity : entities) {
@@ -71,15 +93,24 @@ Entity* Scene::GetEntityById(unsigned int _id)
 }
 
 void Scene::RemoveEntity(Entity* entity) {
-	entity->active = false;
+	entity->SetActive(false);
 	entitiesToDestroy.push_back(entity);
 }
 
-void Scene::RemoveEntityById(unsigned int _id) {
+void Scene::RemoveEntitiesByName(std::string name) {
 	for (auto& entity : entities) {
-		if (entity->Id() == _id) {
+		if (entity->Name() == name) {
+			entity->SetActive(false);
 			entitiesToDestroy.push_back(entity);
-			break;
+		}
+	}
+}
+
+void Scene::RemoveEntitiesByTag(std::string tag) {
+	for (auto& entity : entities) {
+		if (entity->Tag() == tag) {
+			entity->SetActive(false);
+			entitiesToDestroy.push_back(entity);
 		}
 	}
 }

@@ -133,9 +133,6 @@
     <ClCompile Include="ViewManager.cpp">
       <Filter>Game\Game Elements\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="AsteroidHandler.cpp">
-      <Filter>Game\Game Elements\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Asteroid.cpp">
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
@@ -292,9 +289,6 @@
       <Filter>Engine\Meshes</Filter>
     </ClInclude>
     <ClInclude Include="ViewManager.h">
-      <Filter>Game\Game Elements\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="AsteroidHandler.h">
       <Filter>Game\Game Elements\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Asteroid.h">

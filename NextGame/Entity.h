@@ -22,6 +22,8 @@ public:
 	std::string& Tag() { return tag; }
 	unsigned int Id() { return id; }
 
+	void SetActive(bool state);
+
     template <typename T>
 	T* AddComponent() {
 		static_assert(std::is_base_of<Component, T>::value);

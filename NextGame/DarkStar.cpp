@@ -3,6 +3,7 @@
 #include "CubeMesh.h"
 #include "SphereMesh.h"
 #include "TimingFunction.h"
+#include "Ship.h"
 
 void DarkStar::Initialize() {
 	animator = parentEntity->AddComponent<Animator>();
@@ -21,19 +22,10 @@ void DarkStar::Initialize() {
 	collider = parentEntity->AddComponent<SphereCollider>();
 	collider->radius = parentEntity->GetTransform().scale.x;
 	collider->SetCollisionHook([this](Collider* c1, Collider* c2) {
-		if (c2->parentEntity->Name() == "Bullet") {
-			Scene::Get().RemoveEntity(c2->parentEntity);
-			animator->Animate(parentEntity->GetTransform().scale, parentEntity->GetTransform().scale * 0.9, 0.5f, new ElasticEaseOut);
-			animator->Animate(parentEntity->GetTransform().rotation, parentEntity->GetTransform().rotation + float3(0,180,0), 0.8, new EaseInOut);
-			SphereCollider* c = static_cast<SphereCollider*>(c1);
-			c->radius = parentEntity->GetTransform().scale.x*0.9;
-			pulseEmitter->Emit();
-			shaderStability += 0.04f;
-			shaderSpeed += 2.0f;
-			meshFilter->Color().y += 0.1;
-
-			notify(GameEvent::STAR_PULSE);
-		}
+		if (c2->parentEntity->Tag() == "Bullet") {
+			Scene::Get().RemoveEntitiesByTag("Bullet");
+			Pulse();
+			}
 		});
 
 	pulseEmitter = parentEntity->AddComponent<ParticleEmitter>();
@@ -46,6 +38,7 @@ void DarkStar::Initialize() {
 	pulseEmitter->speed = 200.0f;
 
 	constantEmitter = parentEntity->AddComponent<ParticleEmitter>();
+	constantEmitter->active = true;
 	constantEmitter->burstSize = 10;
 	constantEmitter->frequency = 0.05f;
 	constantEmitter->lifetime = 1.0f;
@@ -53,6 +46,8 @@ void DarkStar::Initialize() {
 	constantEmitter->color = color;
 	constantEmitter->shape = EmissionShape::RADIAL;
 	constantEmitter->speed = 50.0f;
+
+	SpawnAsteroids();
 }
 
 void DarkStar::Update() {
@@ -79,5 +74,83 @@ void DarkStar::Update() {
 }
 
 void DarkStar::Destroy() {
+}
 
+void DarkStar::SpawnAsteroids() {
+	for (int i = 0; i < 50; i++) {
+		Entity* entity = Scene::Get().CreateEntity("Asteroid");
+		float randomOffset = (collider->radius + Utils::RandomFloat(50, 100));
+		float3 randomLocation = parentEntity->GetTransform().position + Utils::RandomFloat3(-1, 1).Normalized() * randomOffset;
+		entity->GetTransform().position = randomLocation;
+		entity->GetTransform().scale = 10;
+		Asteroid* ast = entity->AddComponent<Asteroid>();
+	}
+
+}
+
+void DarkStar::Pulse() {
+	App::PlaySoundW("Assets/SoundEffects/Cracking.wav");
+	Notify(GameEvent::STAR_PULSE);
+	animator->Animate(parentEntity->GetTransform().scale, parentEntity->GetTransform().scale * 0.7, 0.5f, new ElasticEaseOut);
+	animator->Animate(parentEntity->GetTransform().rotation, parentEntity->GetTransform().rotation + float3(0, 180, 0), 0.8, new EaseInOut);
+	collider->radius = parentEntity->GetTransform().scale.x * 0.7;
+	shaderStability += 0.06f;
+	shaderSpeed += 2.0f;
+	meshFilter->Color().y += 0.2;
+	pulseEmitter->color = meshFilter->Color();
+	constantEmitter->color = meshFilter->Color();
+
+	health--;
+	if (health == 0) {
+		Supernova();
+	}
+	else {
+		pulseEmitter->Emit();
+	}
+	this->PullOrbits();
+}
+
+void DarkStar::PullOrbits() {
+	for (auto& entity : Scene::Get().GetEntitiesByName("Asteroid")) {
+		Transform& t1 = parentEntity->GetTransform();
+		Transform& t2 = entity->GetTransform();
+		Asteroid* ast = entity->GetComponent<Asteroid>();
+		float3 direction = (t1.position - t2.position).Normalized();
+		float dist = t1.position.Distance(t2.position) - t1.scale.x;
+		ast->animator->Animate(
+			t2.position,
+			t2.position + direction * dist,
+			3.0f,
+			new ElasticEaseOut
+		);
+	}
+	for (auto& entity : Scene::Get().GetEntitiesByTag("Ship")) {
+		Transform& t1 = parentEntity->GetTransform();
+		Transform& t2 = entity->GetTransform();
+		Ship* ship = entity->GetComponent<Ship>();
+		float3 direction = (t1.position - t2.position).Normalized();
+		float dist = t1.position.Distance(t2.position) - t1.scale.x;
+		ship->animator->Animate(
+			t2.position,
+			t2.position + direction * dist,
+			3.0f,
+			new ElasticEaseOut
+		);
+	}
+}
+
+void DarkStar::Supernova() {
+	App::PlaySoundW("Assets/SoundEffects/Explode.wav");
+	Notify(GameEvent::SUPERNOVA);
+	meshFilter->active = false;
+	constantEmitter->active = false;
+	pulseEmitter = parentEntity->AddComponent<ParticleEmitter>();
+	pulseEmitter->burstSize = 500;
+	pulseEmitter->active = false;
+	pulseEmitter->lifetime = 2.0f;
+	pulseEmitter->size = 30;
+	pulseEmitter->color = color;
+	pulseEmitter->shape = EmissionShape::RADIAL;
+	pulseEmitter->speed = 500.0f;
+	pulseEmitter->Emit();
 }

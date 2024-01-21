@@ -11,6 +11,8 @@ namespace Utils {
 
 	float RandomFloat(float min, float max);
 
+	float3 RandomFloat3(float3 min, float3 max);
+
 	template <typename T>
 	T RandomInRange(T min, T max) {
 		return min + (max - min) * dis(gen);

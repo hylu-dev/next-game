@@ -3,15 +3,16 @@
 #include "Scene.h"
 
 #define DEFINE_PREFAB(name) \
-	void name(Transform offset);
+	Entity* name(Transform offset);
 
 #define IMPLEMENT_PREFAB(name, implementation) \
-    void Prefabs::name(Transform offset) { \
+    Entity* Prefabs::name(Transform offset) { \
 		Entity* entity = Scene::Get().CreateEntity(#name); \
 		entity->GetTransform().position += offset.position; \
 		entity->GetTransform().rotation += offset.rotation; \
 		entity->GetTransform().scale *= offset.scale; \
         implementation \
+		return entity; \
     }
 
 class Entity;

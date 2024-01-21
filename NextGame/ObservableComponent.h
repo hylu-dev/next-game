@@ -10,9 +10,9 @@ private:
 	std::vector<Observer*> observers;
 
 protected:
-	void notify(GameEvent event) {
+	void Notify(GameEvent event) {
 		for (int i = 0; i < observers.size(); i++) {
-			observers[i]->onNotify(parentEntity, event);
+			observers[i]->OnNotify(parentEntity, event);
 		}
 	}
 
@@ -23,6 +23,6 @@ public:
 
 	virtual void Destroy() = 0;
 
-	void addObserver(Observer* observer) { observers.push_back(observer); }
+	void AddObserver(Observer* observer) { observers.push_back(observer); }
 };
 

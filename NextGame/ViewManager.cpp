@@ -1,20 +1,22 @@
 #include "stdafx.h"
 #include "ViewManager.h"
+#include "Prefabs.h"
 
 void ViewManager::Initialize() {
+	camera = Scene::Get().GetCamera();
 	menuUI = parentEntity->GetComponent<MenuUI>();
 	assert(menuUI != nullptr);
-	camera = Scene::Get().GetCamera();
+
 	playerA = Scene::Get().GetEntityByName("PlayerA")->GetComponent<Ship>();
 	assert(playerA != nullptr);
-	playerA->addObserver(this);
+	playerA->AddObserver(this);
 	playerB = Scene::Get().GetEntityByName("PlayerB")->GetComponent<Ship>();
-	assert(playerA != nullptr);
-	playerB->addObserver(this);
+	assert(playerB != nullptr);
+	playerB->AddObserver(this);
 
 	darkStar = Scene::Get().GetEntityByName("DarkStarSphere")->GetComponent<DarkStar>();
 	assert(darkStar != nullptr);
-	darkStar->addObserver(this);
+	darkStar->AddObserver(this);
 
 	animator = parentEntity->AddComponent<Animator>();
 
@@ -23,15 +25,21 @@ void ViewManager::Initialize() {
 }
 
 void ViewManager::Update() {
+	menuUI->pulsesLeft = darkStar->health;
 	if (App::IsKeyPressed(VK_RETURN)) {
 		if (!enterPressed) {
 			if (menuUI->isStart) {
 				menuUI->isStart = false;
 				PlayerAView();
 			}
+			else if (menuUI->isWin) {
+
+			}
 			else {
+				menuUI->ClearMenu();
 				CycleTurn();
 			}
+			App::PlaySoundW("Assets/SoundEffects/Beep.wav");
 		}
 		enterPressed = true;
 	}
@@ -40,14 +48,19 @@ void ViewManager::Update() {
 	}
 
 	// Helper Utilities
-	if (App::IsKeyPressed('1')) {
+	if (App::IsKeyPressed('Z')) {
 		WideView();
 	}
-	else if (App::IsKeyPressed('2')) {
+	else if (App::IsKeyPressed('X')) {
 		PlayerAView();
 	}
-	else if (App::IsKeyPressed('3')) {
+	else if (App::IsKeyPressed('C')) {
 		PlayerBView();
+	}
+	else if (App::IsKeyPressed('V')) {
+		playerA->scrap = 1000;
+		playerA->fuel = 100;
+		playerA->bulletLoaded = true;
 	}
 
 	playerA->active = activePlayer == playerA;
@@ -59,8 +72,8 @@ void ViewManager::Destroy() {
 
 void ViewManager::WideView() {
 	activePlayer = nullptr;
-	animator->Animate(camera->transform.position, float3(1000, 0, 0), 2.0f, new EaseInOut());
-	animator->Animate(camera->transform.rotation, float3(0, 90, 0), 2.0f, new EaseInOut());
+	animator->Animate(camera->transform.position, float3(1000, 0, 0), 1.0f, new EaseOut());
+	animator->Animate(camera->transform.rotation, float3(0, 90, 0), 1.0f, new EaseOut());
 }
 
 void ViewManager::PlayerAView() {
@@ -82,22 +95,47 @@ void ViewManager::PlayerBView() {
 }
 
 void ViewManager::CycleTurn() {
+	playerA->Reload();
+	playerB->Reload();
 	turns%2 == 0 ? PlayerBView() : PlayerAView();
 	turns++;
 }
 
-void ViewManager::onNotify(const Entity* entity, GameEvent event) {
+void ViewManager::Start() {
+	darkStar = (DarkStar*)Prefabs::DarkStarSphere(Transform(0, 0, 500));
+	darkStar->AddObserver(this);
+	playerA = (Ship*)Prefabs::PlayerA(Transform({ 0,0,-600 }, 0, { 3, 3, 6 }));
+	playerA->AddObserver(this);
+	playerB = (Ship*)Prefabs::PlayerB(Transform({ 0,0,-600 }, { 0,180,0 }, { 3, 2, 6 }));
+	playerB->AddObserver(this);
+}
+
+void ViewManager::Restart() {
+	Scene::Get().RemoveEntity(darkStar->parentEntity);
+	Scene::Get().RemoveEntity(playerA->parentEntity);
+	Scene::Get().RemoveEntity(playerB->parentEntity);
+}
+
+void ViewManager::OnNotify(const Entity* entity, GameEvent event) {
 	switch (event) {
 	case PLAYERA_WIN:
-		break;
-
-	case PLAYERB_WIN:
-		break;
-
-	case STAR_PULSE:
+		menuUI->WinMenu("Green");
 		WideView();
 		break;
 
+	case PLAYERB_WIN:
+		menuUI->WinMenu("Red");
+		WideView();
+		break;
+
+	case STAR_PULSE:
+		playerA->fuel = 100;
+		playerB->fuel = 100;
+		menuUI->TurnMenu(activePlayer);
+		WideView();
+		break;
+	case SUPERNOVA:
+		WideView();
 	default:
 		break;
 	}

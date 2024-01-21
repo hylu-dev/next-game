@@ -18,15 +18,11 @@
 std::vector<Entity*> actors;
 
 void LoadGameObjects() {
-	//App::PlaySound("Assets/Music/bg-music.wav", true);
+	App::PlaySoundW("Assets/Music/bg-music.wav", true);
 
 	Prefabs::DarkStarSphere(Transform(0, 0, 500));
-	Prefabs::AsteroidObject(Transform({ 100,0,-600 }, 0, { 10 }));
-	Prefabs::AsteroidObject(Transform({ 150,0,-600 }, 0, { 10 }));
-	Prefabs::AsteroidObject(Transform({ 200,0,-600 }, 0, { 10 }));
-	Prefabs::AsteroidObject(Transform({ 250,0,-600 }, 0, { 10 }));
-	Prefabs::PlayerA(Transform({ 0,0,-600 }, 0, { 4, 2, 5 }));
-	Prefabs::PlayerB(Transform({ 0,0,600 }, { 0,180,0 }, { 4, 2, 5 }));
+	Prefabs::PlayerA(Transform({ 0,0,-600 }, 0, { 4, 3, 6 }));
+	Prefabs::PlayerB(Transform({ 0,0,600 }, { 0,180,0 }, { 4, 3, 6 }));
 	Prefabs::GameManager(Transform());
 }
 

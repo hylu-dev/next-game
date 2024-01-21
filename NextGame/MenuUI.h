@@ -5,12 +5,15 @@
 class MenuUI : public Renderable {
 public:
 	float3 stringColor = float3::One;
+	std::string text;
 
 	bool isStart = true;
 	bool isWin = false;
 	bool isTurn = false;
 
-	Ship* activeShip;
+	std::string winner;
+
+	int pulsesLeft = 0;
 
 public:
 	void Initialize();
@@ -21,9 +24,11 @@ public:
 
 	void Render() override;
 
+	void ClearMenu();
+
 	void StartMenu();
 
-	void WinMenu();
+	void WinMenu(std::string name);
 
 	void TurnMenu(Ship* ship);
 

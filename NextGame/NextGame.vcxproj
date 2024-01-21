@@ -186,7 +186,6 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="Asteroid.h" />
-    <ClInclude Include="AsteroidHandler.h" />
     <ClInclude Include="AsteroidMesh.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
@@ -242,7 +241,6 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="Asteroid.cpp" />
-    <ClCompile Include="AsteroidHandler.cpp" />
     <ClCompile Include="AsteroidMesh.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />

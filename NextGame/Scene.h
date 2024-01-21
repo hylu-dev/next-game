@@ -36,11 +36,17 @@ public:
 
 	Entity* GetEntityByName(std::string name);
 
+	std::vector<Entity*> GetEntitiesByName(std::string name);
+
+	std::vector<Entity*> GetEntitiesByTag(std::string tag);
+
 	Entity* GetEntityById(unsigned int _id);
 
 	void RemoveEntity(Entity* entity);
 
-	void RemoveEntityById(unsigned int _id);
+	void RemoveEntitiesByName(std::string name);
+
+	void RemoveEntitiesByTag(std::string name);
 
 private:
 	Scene() = default;
