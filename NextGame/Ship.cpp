@@ -53,7 +53,6 @@ void Ship::Initialize() {
 	bulletEmitter->burstSize = 50;
 	bulletEmitter->size = 2;
 	bulletEmitter->active = false;
-	bulletEmitter->color = { 1,0,1 };
 	bulletEmitter->speed = 50.0f;
 	bulletEmitter->coneWidth = 30.0f;
 	bulletEmitter->shape = EmissionShape::CONE;
@@ -127,6 +126,11 @@ void Ship::MovementHandler() {
 	camera->transform.rotation = rotation;
 	camera->transform.position = GetOffsetCamera();
 	forward = parentEntity->GetTransform().Forward();
+}
+
+void Ship::SetColor(float3 color) {
+	meshFilter->SetColor(color);
+	bulletEmitter->color = color;
 }
 
 void Ship::FireWeapon() {

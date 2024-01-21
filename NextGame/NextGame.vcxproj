@@ -190,7 +190,9 @@
     <ClInclude Include="AsteroidMesh.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="ObservableComponent.h" />
+    <ClInclude Include="ViewManager.h" />
     <ClInclude Include="DarkStar.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraController.h" />
@@ -244,7 +246,7 @@
     <ClCompile Include="AsteroidMesh.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="ViewManager.cpp" />
     <ClCompile Include="DarkStar.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraController.cpp" />

@@ -17,11 +17,10 @@
 class Entity;
 
 namespace Prefabs {
-	
+	DEFINE_PREFAB(GameManager);
 	DEFINE_PREFAB(DarkStarSphere);
 	DEFINE_PREFAB(PlayerA);
 	DEFINE_PREFAB(PlayerB);
-	DEFINE_PREFAB(ViewManager);
 	DEFINE_PREFAB(AsteroidObject);
 
 	DEFINE_PREFAB(Wall);

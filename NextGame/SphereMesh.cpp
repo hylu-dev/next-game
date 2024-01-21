@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SphereMesh.h"
 
-// Courtesy of https://danielsieger.com/blog/2021/03/27/generating-spheres.html
+// Vertex order courtesy of https://danielsieger.com/blog/2021/03/27/generating-spheres.html
 
 std::vector<Triangle> SphereMesh::GenerateMesh() {
     float phi = (1.0f + sqrt(5.0f)) * 0.5f; // golden ratio

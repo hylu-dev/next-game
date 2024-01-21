@@ -8,8 +8,8 @@
 
 void Asteroid::Initialize() {
 	MeshFilter* meshFilter = parentEntity->AddComponent<MeshFilter>();
-	meshFilter->LoadMesh(AsteroidMesh(3));
-	meshFilter->SetColor(float3(0.5f));
+	meshFilter->LoadMesh(AsteroidMesh(2));
+	meshFilter->SetColor(float3(0.6f));
 	SphereCollider* collider = parentEntity->AddComponent<SphereCollider>();
 	collider->radius = parentEntity->GetTransform().scale.x;
 	collider->SetCollisionHook([this](Collider* c1, Collider* c2) {
@@ -29,7 +29,6 @@ void Asteroid::Initialize() {
 	emitter->burstSize = 100;
 	emitter->active = false;
 	emitter->size = 2;
-	emitter->color = float3(0.5f);
 	emitter->shape = EmissionShape::RADIAL;
 	emitter->radialOffset = collider->radius;
 	emitter->speed = 30.0f;

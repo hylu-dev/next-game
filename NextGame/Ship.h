@@ -1,10 +1,10 @@
 #pragma once
-#include "Component.h"
+#include "ObservableComponent.h"
 #include "Animator.h"
 #include "ParticleEmitter.h"
 #include "MeshFilter.h"
 
-class Ship : public Component {
+class Ship : public ObservableComponent {
 public:
 	bool active = false;
 	int health = 100;
@@ -41,6 +41,7 @@ private:
 	void MovementHandler();
 
 public:
+	void SetColor(float3 color);
 
 	void FireWeapon();
 

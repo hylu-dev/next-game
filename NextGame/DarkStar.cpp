@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "DarkStar.h"
-#include "SphereCollider.h"
-#include "MeshFilter.h"
 #include "CubeMesh.h"
 #include "SphereMesh.h"
 #include "TimingFunction.h"
@@ -9,9 +7,9 @@
 void DarkStar::Initialize() {
 	animator = parentEntity->AddComponent<Animator>();
 
-	MeshFilter* meshFilter = parentEntity->AddComponent<MeshFilter>();
+	meshFilter = parentEntity->AddComponent<MeshFilter>();
 	meshFilter->LoadMesh(SphereMesh(3));
-	meshFilter->SetColor(float3(0, 1.0f, 1.0f));
+	meshFilter->SetColor(color);
 	meshFilter->SetVertexShader([this](float3& vertex) {
 		float3 displace = vertex;
 		float dist = vertex.Distance(float3(0.05));
@@ -20,35 +18,47 @@ void DarkStar::Initialize() {
 		vertex += displace;
 		});
 
-	SphereCollider* collider = parentEntity->AddComponent<SphereCollider>();
+	collider = parentEntity->AddComponent<SphereCollider>();
 	collider->radius = parentEntity->GetTransform().scale.x;
 	collider->SetCollisionHook([this](Collider* c1, Collider* c2) {
 		if (c2->parentEntity->Name() == "Bullet") {
-			c2->active = false;
 			Scene::Get().RemoveEntity(c2->parentEntity);
 			animator->Animate(parentEntity->GetTransform().scale, parentEntity->GetTransform().scale * 0.9, 0.5f, new ElasticEaseOut);
 			animator->Animate(parentEntity->GetTransform().rotation, parentEntity->GetTransform().rotation + float3(0,180,0), 0.8, new EaseInOut);
 			SphereCollider* c = static_cast<SphereCollider*>(c1);
 			c->radius = parentEntity->GetTransform().scale.x*0.9;
-			emitter->radialOffset = c->radius;
-			emitter->Emit();
+			pulseEmitter->Emit();
 			shaderStability += 0.04f;
 			shaderSpeed += 2.0f;
+			meshFilter->Color().y += 0.1;
+
+			notify(GameEvent::STAR_PULSE);
 		}
 		});
 
-	emitter = parentEntity->AddComponent<ParticleEmitter>();
-	emitter->burstSize = 300;
-	emitter->radialOffset = parentEntity->GetTransform().scale.x;
-	emitter->active = false;
-	emitter->lifetime = 2.0f;
-	emitter->size = 20;
-	emitter->color = float3(0.0, 1.0f, 1.0f);
-	emitter->shape = EmissionShape::RADIAL;
-	emitter->speed = 200.0f;
+	pulseEmitter = parentEntity->AddComponent<ParticleEmitter>();
+	pulseEmitter->burstSize = 300;
+	pulseEmitter->active = false;
+	pulseEmitter->lifetime = 2.0f;
+	pulseEmitter->size = 30;
+	pulseEmitter->color = color;
+	pulseEmitter->shape = EmissionShape::RADIAL;
+	pulseEmitter->speed = 200.0f;
+
+	constantEmitter = parentEntity->AddComponent<ParticleEmitter>();
+	constantEmitter->burstSize = 10;
+	constantEmitter->frequency = 0.05f;
+	constantEmitter->lifetime = 1.0f;
+	constantEmitter->size = 20;
+	constantEmitter->color = color;
+	constantEmitter->shape = EmissionShape::RADIAL;
+	constantEmitter->speed = 50.0f;
 }
 
 void DarkStar::Update() {
+	pulseEmitter->radialOffset = collider->radius;
+	constantEmitter->radialOffset = collider->radius;
+
 	float3& position = parentEntity->GetTransform().position;
 	float3& rotation = parentEntity->GetTransform().rotation;
 	float3& scale = parentEntity->GetTransform().scale;
@@ -59,7 +69,7 @@ void DarkStar::Update() {
 	if (App::IsKeyPressed(VK_BACK)) {
 		if (!isPressed) {
 			animator->Animate(rotation, rotation + float3(0, 0, +360.0f), 2.0f, new EaseInOutBack());
-			emitter->Emit();
+			pulseEmitter->Emit();
 		}
 		isPressed = true;
 	}
@@ -69,4 +79,5 @@ void DarkStar::Update() {
 }
 
 void DarkStar::Destroy() {
+
 }

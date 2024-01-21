@@ -18,6 +18,8 @@ private:
 	Quaternion rotateQ;
 
 public:
+	float3& Color() { return color; }
+
 	void Initialize() override;
 
 	void Update() override;

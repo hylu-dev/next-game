@@ -8,10 +8,10 @@
 // Custom Components
 #include "DarkStar.h"
 #include "Ship.h"
-#include "CameraManager.h"
+#include "ViewManager.h"
 #include "PlayerUI.h"
 #include "Asteroid.h"
-#include "Wall.h"
+#include "MenuUI.h"
 
 IMPLEMENT_PREFAB(DarkStarSphere, {
 	entity->AddComponent<DarkStar>();
@@ -19,19 +19,20 @@ IMPLEMENT_PREFAB(DarkStarSphere, {
 
 IMPLEMENT_PREFAB(PlayerA, {
 	Ship* ship = entity->AddComponent<Ship>();
-	ship->meshFilter->SetColor(float3(0, 1, 0));
+	ship->SetColor(float3(0, 1, 0));
 	entity->AddComponent<PlayerUI>();
 	});
 
 IMPLEMENT_PREFAB(PlayerB, {
 	Ship* ship = entity->AddComponent<Ship>();
-	ship->meshFilter->SetColor(float3(1, 0, 0));
+	ship->SetColor(float3(1, 0, 0));
 	entity->AddComponent<PlayerUI>();
 	});
 
 
-IMPLEMENT_PREFAB(ViewManager, {
-	entity->AddComponent<CameraManager>();
+IMPLEMENT_PREFAB(GameManager, {
+	entity->AddComponent<MenuUI>();
+	entity->AddComponent<ViewManager>();
 	})
 
 IMPLEMENT_PREFAB(AsteroidObject, {

@@ -4,7 +4,7 @@
 
 class Bullet : public Component {
 public:
-	float3 color = { 1,0,1 };
+	float3 color = float3::One;
 	float3 forward;
 	float speed = 5.0f;
 

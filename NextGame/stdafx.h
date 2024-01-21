@@ -16,6 +16,7 @@
 #include <iostream>
 #include <limits>
 #include <cmath>
+#include <cassert>
 #include "float3.h"
 #include "float4x4.h"
 #include "Quaternion.h"

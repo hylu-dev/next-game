@@ -116,21 +116,21 @@
       <Filter>Game\Game Elements</Filter>
     </ClCompile>
     <ClCompile Include="Wall.cpp">
-      <Filter>Game\Old</Filter>
+      <Filter>Game\Test</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Old</Filter>
+      <Filter>Game\Test</Filter>
     </ClCompile>
     <ClCompile Include="CameraController.cpp">
-      <Filter>Game\Old</Filter>
+      <Filter>Game\Test</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
-      <Filter>Game\Old</Filter>
+      <Filter>Game\Test</Filter>
     </ClCompile>
     <ClCompile Include="AsteroidMesh.cpp">
       <Filter>Engine\Meshes</Filter>
     </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
+    <ClCompile Include="ViewManager.cpp">
       <Filter>Game\Game Elements\Managers</Filter>
     </ClCompile>
     <ClCompile Include="AsteroidHandler.cpp">
@@ -277,21 +277,21 @@
       <Filter>Game\Game Elements</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Game\Old</Filter>
+      <Filter>Game\Test</Filter>
     </ClInclude>
     <ClInclude Include="CameraController.h">
-      <Filter>Game\Old</Filter>
+      <Filter>Game\Test</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
-      <Filter>Game\Old</Filter>
+      <Filter>Game\Test</Filter>
     </ClInclude>
     <ClInclude Include="Wall.h">
-      <Filter>Game\Old</Filter>
+      <Filter>Game\Test</Filter>
     </ClInclude>
     <ClInclude Include="AsteroidMesh.h">
       <Filter>Engine\Meshes</Filter>
     </ClInclude>
-    <ClInclude Include="CameraManager.h">
+    <ClInclude Include="ViewManager.h">
       <Filter>Game\Game Elements\Managers</Filter>
     </ClInclude>
     <ClInclude Include="AsteroidHandler.h">
@@ -310,6 +310,12 @@
       <Filter>Engine\Math</Filter>
     </ClInclude>
     <ClInclude Include="MenuUI.h">
+      <Filter>Game\Game Elements\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Game\Game Elements\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ObservableComponent.h">
       <Filter>Game\Game Elements\Managers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -359,11 +365,11 @@
     <Filter Include="Game\Game Elements">
       <UniqueIdentifier>{2602516c-e3ea-474e-863e-b802d97fd6b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Old">
-      <UniqueIdentifier>{ad6ea09c-1975-4a0f-9f4e-7af8740be8e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Game Elements\Managers">
       <UniqueIdentifier>{73bef306-09cb-4464-ae3f-c434c1f3c9b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Test">
+      <UniqueIdentifier>{ad6ea09c-1975-4a0f-9f4e-7af8740be8e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
