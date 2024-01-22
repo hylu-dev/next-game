@@ -17,16 +17,19 @@
 
 std::vector<Entity*> actors;
 bool isRestart = false;
+bool isMute = false;
+const char* musicPath = "Assets/Music/bg-music.wav";
+
 
 void LoadGameObjects() {
 	Prefabs::DarkStarSphere(Transform(0, 0, 500));
-	Prefabs::PlayerA(Transform({ 0,0,-600 }, 0, { 4, 3, 6 }));
+	Prefabs::PlayerA(Transform({ 0,0,-600 }, 0, { 3, 3, 6 }));
 	Prefabs::PlayerB(Transform({ 0,0,600 }, { 0,180,0 }, { 4, 3, 6 }));
 	Prefabs::GameManager(Transform());
 }
 
 void Init() {
-	App::PlaySoundW("Assets/Music/bg-music.wav", true);
+	App::PlaySoundW(musicPath, true);
 
 	Time::Get().Initialize();
 	CollisionManager::Get().Initialize();
@@ -50,6 +53,12 @@ void Update(float deltaTime) {
 	ParticleSystem::Get().Update();
 	Scene::Get().Update();
 	Renderer::Get().Update();
+
+	if (App::IsKeyPressed('M') && !isMute) {
+		App::IsSoundPlaying(musicPath) ? App::StopSound(musicPath) : App::PlaySoundW(musicPath, true);
+		isMute = true;
+	}
+	else if (!App::IsKeyPressed('M')) { isMute = false; }
 
 	if (App::IsKeyPressed(VK_BACK) && !isRestart) {
 		Scene::Get().RemoveEntitiesByTag("Ship");

@@ -13,6 +13,8 @@ public:
 	bool isTurn = false;
 	bool isDraw = false;
 
+	bool isPulse = false;
+
 	std::string winner;
 
 	int pulsesLeft = 0;

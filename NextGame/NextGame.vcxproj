@@ -198,7 +198,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="ConeMesh.h" />
+    <ClInclude Include="PyramidMesh.h" />
     <ClInclude Include="CubeMesh.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
@@ -251,7 +251,7 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="ConeMesh.cpp" />
+    <ClCompile Include="PyramidMesh.cpp" />
     <ClCompile Include="CubeMesh.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />

@@ -17,8 +17,12 @@ void MenuUI::Destroy() {
 void MenuUI::Render() {
 	text.clear();
 	if (isStart) {
+		stringColor = { 1, 0, 1 };
+		App::Print(440, 680, "Dark Star", stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 		stringColor = float3::One;
-		App::Print(440, 680, "Dark Star: Showdown", stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		App::Print(440, 680, "         :", stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		stringColor = { 1, 1, 0 };
+		App::Print(440, 680, "          Showdown", stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 		stringColor = { 1, 1, 0 };
 		App::Print(435, 80, "Press ENTER to start", stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 		stringColor = float3::One;
@@ -45,8 +49,8 @@ void MenuUI::Render() {
 	if (isWin) {
 		stringColor = { 1, 1, 0 };
 		text = winner;
-		text += " has won!";
-		App::Print(420, 680, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		text += " wins";
+		App::Print(440, 680, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 		stringColor = { 1, 1, 0 };
 		text = "Press BACK to restart";
 		App::Print(435, 80, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
@@ -67,33 +71,50 @@ void MenuUI::Render() {
 
 
 	if (App::IsKeyPressed('H')) {
-		stringColor = float3::One;
-		text = "Movement";
-		App::Print(20, 640, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 		stringColor = { 1, 1, 0 };
+		text = "Ship Controls";
+		App::Print(20, 640, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		stringColor = float3::One;
 		text = "Yaw: A/D";
 		App::Print(20, 620, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 		text = "Thrust/Reverse: W/S";
 		App::Print(20, 600, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 		text = "Pitch: Space/Shift";
 		App::Print(20, 580, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		text = "Fire Weapon: F";
+		App::Print(20, 560, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 
-		stringColor = float3::One;
-		text = "Upgrade Systems for 100 Scrap";
-		App::Print(20, 540, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 		stringColor = { 1, 1, 0 };
-		text = "Upgrade Speed: 1";
+		text = "Spend resourcees: 100 Scrap each";
 		App::Print(20, 520, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
-		text = "Upgrade Speed: 2";
+		stringColor = float3::One;
+		text = "Upgrade Weapon: 1";
 		App::Print(20, 500, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
-		text = "Repair 10 points: 3";
+		text = "Upgrade Speed: 2";
 		App::Print(20, 480, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
-		text = "Replenish 10 Fuel: 4";
+		text = "Repair 20 points: 3";
 		App::Print(20, 460, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		text = "Replenish 20 Fuel: 4";
+		App::Print(20, 440, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+
+		stringColor = { 1, 1, 0 };
+		text = "Tips";
+		App::Print(20, 400, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		stringColor = float3::One;
+		text = "After a pulse, ALL players regain fuel and take 20 damage";
+		App::Print(20, 380, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		text = "A pulse will pull everything closer together";
+		App::Print(20, 360, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		text = "You can trigger a pulse by shooting the star but it ends your turn";
+		App::Print(20, 340, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		text = "Upgrade your ship before engaging the enemy";
+		App::Print(20, 320, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
+		text = "Flying into the star hurts...";
+		App::Print(20, 300, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 	}
 	else {
 		stringColor = { 1, 1, 0 };
-		std::string text = "Hold H for controls";
+		std::string text = "Hold H for help";
 		App::Print(20, 640, text.c_str(), stringColor.x, stringColor.y, stringColor.z, GLUT_BITMAP_8_BY_13);
 	}
 }

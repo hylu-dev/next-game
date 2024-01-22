@@ -103,7 +103,7 @@
     <ClCompile Include="SphereMesh.cpp">
       <Filter>Engine\Meshes</Filter>
     </ClCompile>
-    <ClCompile Include="ConeMesh.cpp">
+    <ClCompile Include="PyramidMesh.cpp">
       <Filter>Engine\Meshes</Filter>
     </ClCompile>
     <ClCompile Include="DarkStar.cpp">
@@ -261,7 +261,7 @@
     <ClInclude Include="SphereMesh.h">
       <Filter>Engine\Meshes</Filter>
     </ClInclude>
-    <ClInclude Include="ConeMesh.h">
+    <ClInclude Include="PyramidMesh.h">
       <Filter>Engine\Meshes</Filter>
     </ClInclude>
     <ClInclude Include="DarkStar.h">

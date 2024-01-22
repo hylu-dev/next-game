@@ -3,6 +3,7 @@
 #include "BoxCollider.h"
 #include "MeshFilter.h"
 #include "CubeMesh.h"
+#include "CubeMesh.h"
 #include "TimingFunction.h"
 #include "Bullet.h"
 #include "Animator.h"
@@ -13,7 +14,7 @@ void Ship::Initialize() {
 	// Ship Components
 	animator = parentEntity->AddComponent<Animator>();
 	meshFilter = parentEntity->AddComponent<MeshFilter>();
-	meshFilter->LoadMesh(CubeMesh(4));
+	meshFilter->LoadMesh(CubeMesh(5));
 	BoxCollider* collider = parentEntity->AddComponent<BoxCollider>();
 	collider->dimensions = parentEntity->GetTransform().scale;
 	collider->SetCollisionHook([this](Collider* c1, Collider* c2) {
@@ -28,7 +29,7 @@ void Ship::Initialize() {
 				1.0f, new EaseOut);
 			DarkStar* darkStar = c2->parentEntity->GetComponent<DarkStar>();
 			darkStar->Pulse();
-			Hurt(60);
+			Hurt(30);
 		}
 		if (c2->parentEntity->Name() == "Scrap") {
 			if (p1.Distance(p2) < 5.0f) {
@@ -38,7 +39,7 @@ void Ship::Initialize() {
 			}
 		}
 		if (c2->parentEntity->Tag() == "Bullet" && c2->parentEntity->Name() != parentEntity->Name() + "_Bullet") {
-			Hurt(20);
+			Hurt(10);
 			Scene::Get().RemoveEntity(c2->parentEntity);
 		}
 		});
@@ -188,7 +189,7 @@ void Ship::Upgrade() {
 			App::PlaySoundW("Assets/SoundEffects/Random_7.wav");
 			radialEmitter->Emit();
 			scrap -= 100;
-			health += 10;
+			health += 20;
 		}
 		else {
 			App::PlaySoundW("Assets/SoundEffects/Crack_3.wav");
@@ -201,7 +202,7 @@ void Ship::Upgrade() {
 			App::PlaySoundW("Assets/SoundEffects/Random_7.wav");
 			radialEmitter->Emit();
 			scrap -= 100;
-			fuel += 10;
+			fuel += 20;
 		}
 		else {
 			App::PlaySoundW("Assets/SoundEffects/Crack_3.wav");

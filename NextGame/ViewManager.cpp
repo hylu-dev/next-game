@@ -32,13 +32,19 @@ void ViewManager::Update() {
 				activePlayer = playerA;
 			}
 			CycleTurn();
-			App::PlaySoundW("Assets/SoundEffects/Beep.wav");
+			App::PlaySoundW("Assets/SoundEffects/Select_3.wav");
 		}
 		enterPressed = true;
 	}
 	else {
 		enterPressed = false;
 	}
+
+	if (App::IsKeyPressed('L')) {
+		playerA->health -= 1;
+		playerB->health -= 1;
+	}
+
 	// Update ui values and active player
 	menuUI->pulsesLeft = darkStar->health;
 	menuUI->turnsUntilPulse = turnsUntilPulse;
@@ -108,28 +114,31 @@ void ViewManager::CycleTurn() {
 void ViewManager::OnNotify(const Entity* entity, GameEvent event) {
 	switch (event) {
 	case PLAYERA_WIN:
-		menuUI->WinMenu("Green");
+		playerA->health > 0 ? menuUI->WinMenu("Player 1") : menuUI->WinMenu("No one");
 		WideView();
 		break;
 
 	case PLAYERB_WIN:
-		menuUI->WinMenu("Red");
+		playerB->health > 0 ? menuUI->WinMenu("Player 2") : menuUI->WinMenu("No one");
 		WideView();
 		break;
 	case STAR_PULSE:
 		if (menuUI->isWin) { return; }
 		playerA->fuel = 100;
 		playerB->fuel = 100;
-		playerA->Hurt(20);
-		playerB->Hurt(20);
+		playerA->Hurt(pulseDamage);
+		playerB->Hurt(pulseDamage);
 		turnsUntilPulse = pulseFrequency;
-		menuUI->TurnMenu();
+		if (!menuUI->isWin) {
+			menuUI->TurnMenu();
+		};
 		WideView();
 		break;
 	case SUPERNOVA:
 		App::PlaySoundW("Assets/SoundEffects/Carrot.wav");
 		menuUI->DrawMenu();
 		WideView();
+		break;
 	default:
 		break;
 	}

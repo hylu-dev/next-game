@@ -22,6 +22,7 @@ class ViewManager : public Component, public Observer {
 	int turns = 0;
 	int pulseFrequency = 4;
 	int turnsUntilPulse = pulseFrequency;
+	int pulseDamage = 20.0f;
 
 	void Initialize() override;
 

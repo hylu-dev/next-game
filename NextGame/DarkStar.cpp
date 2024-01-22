@@ -32,7 +32,6 @@ void DarkStar::Initialize() {
 	pulseEmitter->burstSize = 300;
 	pulseEmitter->active = false;
 	pulseEmitter->lifetime = 2.0f;
-	pulseEmitter->size = 30;
 	pulseEmitter->color = color;
 	pulseEmitter->shape = EmissionShape::RADIAL;
 	pulseEmitter->speed = 200.0f;
@@ -51,6 +50,7 @@ void DarkStar::Initialize() {
 }
 
 void DarkStar::Update() {
+	pulseEmitter->size = collider->radius*0.2f;
 	pulseEmitter->radialOffset = collider->radius;
 	constantEmitter->radialOffset = collider->radius;
 
@@ -97,10 +97,10 @@ void DarkStar::Pulse() {
 	else {
 		pulseEmitter->Emit();
 	}
-	App::PlaySoundW("Assets/SoundEffects/Cracking.wav");
+	App::PlaySoundW("Assets/SoundEffects/Explosion_2.wav");
 	Notify(GameEvent::STAR_PULSE);
 	animator->Animate(parentEntity->GetTransform().scale, parentEntity->GetTransform().scale * 0.7, 0.5f, new ElasticEaseOut);
-	animator->Animate(parentEntity->GetTransform().rotation, parentEntity->GetTransform().rotation + float3(0, 180, 0), 0.8, new EaseInOut);
+	animator->Animate(parentEntity->GetTransform().rotation, parentEntity->GetTransform().rotation + Utils::RandomFloat3(-360, 360), 3.0, new ElasticEaseOut);
 	collider->radius = parentEntity->GetTransform().scale.x * 0.7;
 	shaderStability += 0.06f;
 	shaderSpeed += 2.0f;
@@ -117,11 +117,13 @@ void DarkStar::PullOrbits() {
 		Asteroid* ast = entity->GetComponent<Asteroid>();
 		float3 direction = (t1.position - t2.position).Normalized();
 		float dist = t1.position.Distance(t2.position) - t1.scale.x;
+		// Random laterial movement
+		float3 randPerpendicular = direction.Cross(Utils::RandomFloat3(-1, 1)).Normalized();
 		ast->animator->Animate(
 			t2.position,
-			t2.position + direction * dist,
-			3.0f,
-			new ElasticEaseOut
+			t2.position + direction * dist + randPerpendicular * dist,
+			2.0f,
+			new EaseInOutBack
 		);
 	}
 	for (auto& entity : Scene::Get().GetEntitiesByTag("Ship")) {
@@ -130,11 +132,13 @@ void DarkStar::PullOrbits() {
 		Ship* ship = entity->GetComponent<Ship>();
 		float3 direction = (t1.position - t2.position).Normalized();
 		float dist = t1.position.Distance(t2.position) - t1.scale.x;
+		// Random laterial movement
+		float3 randPerpendicular = direction.Cross(Utils::RandomFloat3(-1, 1)).Normalized();
 		ship->animator->Animate(
 			t2.position,
-			t2.position + direction * dist,
-			3.0f,
-			new ElasticEaseOut
+			t2.position + direction * dist + randPerpendicular * dist,
+			2.0f,
+			new EaseInOutBack
 		);
 	}
 }
@@ -142,6 +146,7 @@ void DarkStar::PullOrbits() {
 void DarkStar::Supernova() {
 	App::PlaySoundW("Assets/SoundEffects/Explode.wav");
 	Notify(GameEvent::SUPERNOVA);
+	Scene::Get().RemoveEntitiesByTag("Asteroid");
 	meshFilter->active = false;
 	constantEmitter->active = false;
 	pulseEmitter = parentEntity->AddComponent<ParticleEmitter>();

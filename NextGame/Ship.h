@@ -9,7 +9,7 @@ public:
 	bool active = false;
 	int health = 100;
 	float fuel = 100;
-	int ammo = 5;
+	int ammo = 3;
 	const float fuelDrain = 4.0f;
 	int scrap = 0;
 
@@ -57,7 +57,7 @@ public:
 
 	void FireWeapon();
 
-	void Reload() { ammo = 5; }
+	void Reload() { ammo = 3; }
 
 	float3 GetOffsetCamera();
 };
