@@ -31,7 +31,7 @@ Spend **scrap** to upgrade and refurbish your ship to prepare for combat.
 
 #### Star Pulses
 
-As the game progresses, the star will weak and occasionally pulse having a few effects
+As the game progresses, the star will weaken and occasionally pulse having a few effects
 
 - Players will take a bit of damage but also have their fuel replenished
 - The star will shrink and pull players and asteroids closer
