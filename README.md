@@ -7,11 +7,13 @@ the concept of "firing projectiles".
 
 ## Dark Star: Showdown
 
-![DarkStar: Showdown](https://github.com/hylu-dev/NextGame/blob/master/darkstar_showdown_demo.gif)
+![demo](https://github.com/hylu-dev/NextGame/blob/master/darkstar_showdown_demo.gif)
 
 Welcome to Dark Star: Showdown. A 3D, turn based, strategy game that pits you 1v1 against another player amidst a dying star.
 
 ### Game Overview
+
+![demo](https://github.com/hylu-dev/NextGame/blob/master/darkstar_showdown_demo.gif)
 
 Meet Dark-52, a dwarf star rumored to be abundant with resources and scientific knowledge. In the pursuit of advancement, nations have sent legions of ships to the star only to meet their unexpected doom as the star begins dying lightyears ahead of schedule.
 
