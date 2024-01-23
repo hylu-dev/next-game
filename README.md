@@ -8,6 +8,7 @@ the concept of "firing projectiles".
 ## Dark Star: Showdown
 
 ![startscreen](https://github.com/hylu-dev/NextGame/blob/master/Documentation/startscreen.png)
+> [Submission Video](https://youtu.be/y0QDXadJF1U?si=1OvYeB-bcZMRMeBM)
 
 Dark Star: Showdown is a 3D, turn based, strategy game that pits you 1v1 against another player amidst a dying star.
 
