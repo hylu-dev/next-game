@@ -2,8 +2,8 @@
 
 ---
 
-This is my submission for Ubisoft NEXT 2024 where create a game in C++ using the provided graphics API. The topic for this year was to make a game that involves
-the concept of "firing projectiles".
+This is my submission for Ubisoft NEXT 2024 where we create a C++ game in 3 days, using the provided graphics API. The topic for this year was to make a game that involves
+the concept of _"firing projectiles"_.
 
 ## Dark Star: Showdown
 
@@ -30,7 +30,7 @@ Spend **scrap** to upgrade and refurbish your ship to prepare for combat.
 
 #### Star Pulses
 
-As the game progresses, the star will weaken and occasionally pulse having a few effects
+As the game progresses, the star will weaken and occasionally pulse having a few effects.
 
 - Players will take a bit of damage but also have their fuel replenished
 - The star will shrink and pull players and asteroids closer
