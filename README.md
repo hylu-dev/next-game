@@ -2,7 +2,7 @@
 
 ---
 
-This is my submission for Ubisoft NEXT 2024. The topic for this year was to make a game that involves
+This is my submission for Ubisoft NEXT 2024 where create a game in C++ using the provided graphics API. The topic for this year was to make a game that involves
 the concept of "firing projectiles".
 
 ## Dark Star: Showdown
