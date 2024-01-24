@@ -23,7 +23,7 @@ and shoot them down before the star implodes and kills everyone.
 
 #### Turn-Based
 
-Player's take turn making moves, being able to fly around and 3 bullets per. After each turn, those 3 bullets will be reloaded. Flying around costs fuel and will not normally replenish each turn so players must be careful not to run out of fuel early.
+Player's take turn making moves, being able to fly around and fire 3 bullets per turn. After each turn, those 3 bullets will be reloaded. Flying around costs fuel and will not normally replenish each turn so players must be careful not to run out of fuel early.
 
 Both ships start rather weak, but they can destroy surrounding asteroids to gather a resource called **scrap**.
 Spend **scrap** to upgrade and refurbish your ship to prepare for combat.
