@@ -33,6 +33,8 @@ void Animator::ClearAnimations() {
 	}
 }
 
-void Animator::Animate(float3& start, float3 end, float duration, TimingFunction* interpolator, std::function<void()> callback) {
-	animations.push_back(new Animation(start, end, duration, interpolator, this, callback));
+Animation* Animator::Animate(float3& start, float3 end, float duration, TimingFunction* interpolator, std::function<void()> callback, float delay) {
+	Animation* anim = new Animation(start, end, duration, interpolator, this, callback, delay);
+	animations.push_back(anim);
+	return anim;
 }

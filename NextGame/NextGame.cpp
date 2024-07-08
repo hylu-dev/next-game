@@ -22,10 +22,23 @@ const char* musicPath = "Assets/Music/bg-music.wav";
 
 
 void LoadGameObjects() {
-	Prefabs::DarkStarSphere(Transform(0, 0, 500));
+	/*Prefabs::DarkStarSphere(Transform(0, 0, 500));
 	Prefabs::PlayerA(Transform({ 0,0,-600 }, 0, { 3, 3, 6 }));
 	Prefabs::PlayerB(Transform({ 0,0,600 }, { 0,180,0 }, { 4, 3, 6 }));
-	Prefabs::GameManager(Transform());
+	Prefabs::GameManager(Transform());*/
+
+	// Primitives
+	/*Prefabs::RippleCube(Transform({0, 0, 0}, 0, 10));
+	Prefabs::Pillar(Transform({ 15, 0, 0}, 0, {10, 0.1, 10}));
+	Prefabs::Ball(Transform({ 0, 0, 15 }, 0, { 5, 5, 5 }));
+	Prefabs::Triangle(Transform({ 0, 0, -15 }, 0, { 5, 5, 5 }));
+	Prefabs::Checker(Transform({-15, 0, 0}, 0, { 10, 0.5, 10 }));
+	*/
+
+	//Prefabs::EasingBox(Transform({ -30, 0, 50 }, 0, 20));
+
+	Prefabs::MeshDensity(Transform({ 0, 0, 0 }, 0, 60));
+	Prefabs::PlayerCamera(Transform());
 }
 
 void Init() {
@@ -82,8 +95,6 @@ void Update(float deltaTime) {
 
 void Render() {
 	Renderer::Get().Render();
-
-	//App::Print(20, 200, std::to_string(Time::Get().testFloat).c_str());
 }
 
 void Shutdown() {

@@ -22,6 +22,6 @@ public:
 
 	void ClearAnimations();
 
-	void Animate(float3& start, float3 end, float duration, TimingFunction* interpolator, std::function<void()> callback = nullptr);
+	Animation* Animate(float3& start, float3 end, float duration, TimingFunction* interpolator, std::function<void()> callback = nullptr, float delay = 0);
 };
 

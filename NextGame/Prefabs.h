@@ -24,16 +24,19 @@ namespace Prefabs {
 	DEFINE_PREFAB(PlayerB);
 	DEFINE_PREFAB(AsteroidObject);
 
-	DEFINE_PREFAB(Wall);
-
-	/*
-	DEFINE_PREFAB(Player);
-	DEFINE_PREFAB(EnemyBox);
+	DEFINE_PREFAB(Wall)
 	DEFINE_PREFAB(RipplePlane);
 	DEFINE_PREFAB(Checker);
 	DEFINE_PREFAB(Pillar);
+	DEFINE_PREFAB(Ball);
+	DEFINE_PREFAB(Triangle);
 	DEFINE_PREFAB(RippleCube);
 	DEFINE_PREFAB(PlayerCamera);
-	DEFINE_PREFAB(RipplePlane);*/
+	DEFINE_PREFAB(RipplePlane);
+
+	DEFINE_PREFAB(EasingBox);
+
+	DEFINE_PREFAB(MeshDensity);
+
 };
 

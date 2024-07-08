@@ -9,6 +9,8 @@ void MeshFilter::Initialize() {
 }
 
 void MeshFilter::Update() {
+	if (liveUpdate) UpdateCubeMesh();
+
 	if (this->parentEntity != nullptr) {
 		matScale = float4x4::CreateScale(parentEntity->GetTransform().scale);
 		//matRotate = float4x4::CreateRotation(parentEntity->GetTransform().rotation);

@@ -8,7 +8,8 @@ void CameraController::Initialize() {
 
 void CameraController::Update() {
 	Camera* camera = Scene::Get().GetCamera();
-	float speed = 70.0f * Time::Get().DeltaTime();
+
+	float speed = 40.0f * Time::Get().DeltaTime();
 
 	if (App::IsKeyPressed(VK_RETURN)) {
 		animator->Animate(camera->transform.position, float3(0, 0, -100.0f), 1.0f, new EaseIn());
@@ -58,6 +59,12 @@ void CameraController::Update() {
 	if (App::IsKeyPressed(VK_DOWN)) {
 		camera->transform.rotation.x -= speed;
 	}
+
+	// RotateToOrigin
+	float3 direction = (float3(0) - camera->transform.position).Normalized();
+	float yaw = atan2f(direction.z, direction.x);
+	float pitch = atan2f(-direction.y, sqrt(direction.x * direction.x + direction.z * direction.z));
+	camera->transform.rotation = { -TO_DEG(pitch), TO_DEG(yaw)-90, 0};
 }
 
 void CameraController::Destroy() {

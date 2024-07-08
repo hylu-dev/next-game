@@ -5,12 +5,12 @@
 #include "Mesh.h"
 #include <functional>
 #include <vector>
+#include "CubeMesh.h"
 
 class MeshFilter : public Renderable {
 private:
 	std::vector<Triangle> tris;
 	std::function<void(float3&)> vertexShader = nullptr;
-	float3 color = float3::One;
 
 	float4x4 matScale = float4x4::CreateScale(float3::One);
 	float4x4 matRotate = float4x4::CreateRotation(float3::Zero);
@@ -18,6 +18,8 @@ private:
 	Quaternion rotateQ;
 
 public:
+	float3 color = float3::One;
+
 	float3& Color() { return color; }
 
 	void Initialize() override;
@@ -33,4 +35,11 @@ public:
 	void SetVertexShader(std::function<void(float3&)> shader) { vertexShader = shader; }
 
 	void Render() override;
+
+public:
+	float3 density = 1;
+	bool liveUpdate = true;
+	void UpdateCubeMesh() {
+		LoadMesh(CubeMesh(density.x));
+	}
 };
